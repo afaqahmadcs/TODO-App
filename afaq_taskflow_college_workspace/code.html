@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-fixed-variant": "#5516be",
+          "surface-bright": "#31394d",
+          "secondary": "#6bd8cb",
+          "surface-container-low": "#131b2e",
+          "on-primary-fixed": "#0f0069",
+          "on-tertiary": "#3c0091",
+          "on-primary-container": "#dad7ff",
+          "secondary-fixed-dim": "#6bd8cb",
+          "on-surface": "#dae2fd",
+          "inverse-on-surface": "#283044",
+          "secondary-container": "#29a195",
+          "primary": "#c3c0ff",
+          "inverse-primary": "#4d44e3",
+          "primary-fixed-dim": "#c3c0ff",
+          "error": "#ffb4ab",
+          "error-container": "#93000a",
+          "on-primary-fixed-variant": "#3323cc",
+          "on-secondary-container": "#00302b",
+          "on-surface-variant": "#c7c4d8",
+          "on-secondary-fixed": "#00201d",
+          "on-error-container": "#ffdad6",
+          "outline": "#918fa1",
+          "on-tertiary-container": "#e3d5ff",
+          "surface": "#0b1326",
+          "on-tertiary-fixed": "#23005c",
+          "background": "#0b1326",
+          "surface-tint": "#c3c0ff",
+          "outline-variant": "#464555",
+          "inverse-surface": "#dae2fd",
+          "on-secondary-fixed-variant": "#005049",
+          "on-secondary": "#003732",
+          "primary-container": "#4f46e5",
+          "secondary-fixed": "#89f5e7",
+          "primary-fixed": "#e2dfff",
+          "on-error": "#690005",
+          "on-primary": "#1d00a5",
+          "on-background": "#dae2fd",
+          "surface-container-high": "#222a3d",
+          "tertiary": "#d0bcff",
+          "surface-container": "#171f33",
+          "tertiary-fixed": "#e9ddff",
+          "tertiary-fixed-dim": "#d0bcff",
+          "surface-container-lowest": "#060e20",
+          "surface-variant": "#2d3449",
+          "surface-container-highest": "#2d3449",
+          "surface-dim": "#0b1326",
+          "tertiary-container": "#6f3dd9"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "gutter-lg": "2rem",
+          "margin-md": "1.5rem",
+          "space-xs": "0.25rem",
+          "gutter": "1rem",
+          "space-lg": "1.25rem",
+          "space-md": "0.75rem",
+          "margin-lg": "2.5rem",
+          "space-sm": "0.5rem",
+          "margin": "1rem",
+          "gutter-md": "1.5rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-xl": [
+            "Plus Jakarta Sans"
+          ],
+          "mono-code": [
+            "JetBrains Mono"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "headline-xl-mobile": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-xl": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            }
+          ],
+          "mono-code": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0em",
+              "fontWeight": "500"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.03em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-xl-mobile": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-sm": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.005em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      }
+    }
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto px-space-md py-space-lg gap-space-lg"><div class="flex items-center gap-space-sm px-space-xs"><img alt="Modern minimalist geometric monogram logo for Afaq TaskFlow productivity app featuring an interlocking geometric 'A' and task flow chevron in indigo and slate. Brand logo. - Primary color: #4f46e5
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UlFO8CtzGaaTTSgFuXvp0FNnDkaygbohp3jwKv69AtRS8vEAZn4IeFOw-Uijw10mVi8q4_SQBf5ZcHqzzoZC9qIMRmdxVM-lqSBWMzUjkExZD6JGHDy1BBQRTVKpMIPz8bYO6lUCKXiH8pBkW4_Q7wYNWNHzznssg81cKjYc-LP7AzeZLbSd1mSZ3Ul9tFfJJgUJlYndCHQ3hiDH5TfwwuuhD3bNXBjRKHmXI6PphtqhavzJ2Czupl9PMS"/><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">TaskFlow</span></div><div><div class="px-space-xs mb-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">Main Views</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center justify-between px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">space_dashboard</span><span class="font-body-sm text-body-sm">Dashboard</span></div></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="my-tasks" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">check_circle</span><span class="font-body-sm text-body-sm">My Tasks</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container-highest font-mono-code text-mono-code text-on-surface">12</span></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendar" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-sm text-body-sm">Calendar</span></div></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="recurring-tasks" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">event_repeat</span><span class="font-body-sm text-body-sm">Recurring Tasks</span></div></a><a class="flex items-center justify-between px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="analytics" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">insert_chart</span><span class="font-body-sm text-body-sm">Analytics</span></div></a></nav></div><div><div class="flex items-center justify-between px-space-xs mb-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Workspaces</span><span class="material-symbols-outlined text-[16px] text-outline cursor-pointer hover:text-on-surface">add</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="office-workspace" href="#"><span class="w-2 h-2 rounded-full bg-primary"></span><span class="font-body-sm text-body-sm">Office</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="personal-workspace" href="#"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-body-sm text-body-sm">Personal</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="college-workspace" href="#"><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="font-body-sm text-body-sm">College</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="web-development-workspace" href="#"><span class="w-2 h-2 rounded-full bg-secondary-fixed"></span><span class="font-body-sm text-body-sm">Web Development</span></a></nav></div><div><div class="px-space-xs mb-space-xs font-label-sm text-label-sm text-outline uppercase tracking-wider">Workspace Tools</div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="projects" href="#"><span class="material-symbols-outlined text-[18px]">folder_open</span><span class="font-body-sm text-body-sm">Projects</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="notes-and-docs" href="#"><span class="material-symbols-outlined text-[18px]">description</span><span class="font-body-sm text-body-sm">Notes &amp; Docs</span></a></nav></div></div><div class="p-space-md bg-surface-container flex items-center justify-between"><div class="flex items-center gap-space-sm overflow-hidden"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/><div class="flex flex-col truncate"><span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Afaq Ahmad</span><span class="font-label-sm text-label-sm text-outline truncate">afaq@taskflow.dev</span></div></div><a class="text-outline hover:text-on-surface transition-colors p-1 rounded-lg hover:bg-surface-container-high flex items-center justify-center" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span></a></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="hover:text-on-surface cursor-pointer transition-colors">Workspaces</span><span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span><span class="text-on-surface font-semibold">Overview</span></div><div class="flex items-center gap-space-md"><div class="relative flex items-center"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-xs rounded-lg w-72 text-outline cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm flex-1 text-left">Search tasks, notes...</span><kbd class="bg-surface-container-highest px-1.5 py-0.5 rounded font-mono-code text-mono-code text-on-surface-variant">⌘K</kbd></div></div><div class="flex items-center gap-space-sm"><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button><button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">dark_mode</span></button></div><button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-primary-container text-on-primary-container hover:bg-inverse-primary hover:text-on-primary transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="font-label-md text-label-md font-medium">New Task</span></button></div></header><main class="w-full pt-16 bg-background min-h-screen px-space-lg py-space-xl"><div class="flex flex-col w-full gap-space-xl">
+<!-- Dynamic Ambient Glow Backdrop (Contained) -->
+<div class="relative w-full">
+<div class="absolute -top-12 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-24 right-1/3 w-80 h-80 bg-primary-container/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Top Academic Workspace Header -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold">College Workspace</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold tracking-wide">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            Academics &amp; CS Degree
+          </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest font-mono-code text-mono-code text-on-surface-variant">
+            FALL 2024 • SEMESTER 5
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Coursework tracking, lecture schedules, lab submissions, and exam preparation with unified GPA telemetry.
+        </p>
+</div>
+<!-- Action Suite -->
+<div class="flex items-center gap-space-sm flex-wrap shrink-0">
+<button class="flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm group" id="pomodoroBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary group-hover:rotate-45 transition-transform">timer</span>
+<span>Study Timer <span class="font-mono-code text-mono-code text-secondary font-semibold ml-0.5" id="timerDisplay">25:00</span></span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">grid_view</span>
+<span>Syllabus Matrix</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-secondary text-on-secondary hover:bg-secondary-fixed transition-all font-label-md text-label-md font-semibold shadow-md" type="button">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>+ New Assignment</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TOP DASHBOARD STATS (5 Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- Stat 1: Today's Classes -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex items-start justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Today's Classes</span>
+<span class="p-1 rounded-md bg-secondary/10 text-secondary material-symbols-outlined text-[18px]">school</span>
+</div>
+<div class="mt-space-md">
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold">2 Lectures</div>
+<div class="mt-1 flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5 font-mono-code text-mono-code text-on-surface-variant truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> CS301 (08:00 AM)
+          </div>
+<div class="flex items-center gap-1.5 font-mono-code text-mono-code text-on-surface-variant truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> CS340 (11:30 AM)
+          </div>
+</div>
+</div>
+</div>
+<!-- Stat 2: Active Assignments -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex items-start justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Assignments</span>
+<span class="p-1 rounded-md bg-error-container/40 text-error material-symbols-outlined text-[18px]">assignment_late</span>
+</div>
+<div class="mt-space-md">
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold">4 Active</div>
+<div class="mt-1 flex items-center justify-between text-mono-code font-mono-code text-on-surface-variant">
+<span class="text-error font-semibold">1 due today</span>
+<span class="text-outline">•</span>
+<span>2 this week</span>
+</div>
+</div>
+</div>
+<!-- Stat 3: Exams -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex items-start justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Upcoming Exams</span>
+<span class="p-1 rounded-md bg-tertiary-container/30 text-tertiary material-symbols-outlined text-[18px]">event_note</span>
+</div>
+<div class="mt-space-md">
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold">2 Upcoming</div>
+<div class="mt-1 flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="text-tertiary font-semibold">Midterms</span> in 6 days (CS301, MATH)
+        </div>
+</div>
+</div>
+<!-- Stat 4: Pending Work -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex items-start justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Pending Work</span>
+<span class="p-1 rounded-md bg-surface-container-highest text-secondary-fixed-dim material-symbols-outlined text-[18px]">pending_actions</span>
+</div>
+<div class="mt-space-md">
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold">3 Tasks</div>
+<div class="mt-2 w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 80%"></div>
+</div>
+<div class="mt-1 flex justify-between font-mono-code text-mono-code text-outline">
+<span>Lab Report 80%</span>
+<span>P-Set Pending</span>
+</div>
+</div>
+</div>
+<!-- Stat 5: Completed Work & GPA -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex items-start justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Semester Track</span>
+<span class="p-1 rounded-md bg-secondary/15 text-secondary material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="mt-space-md">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">3.82</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">GPA</span>
+<span class="font-mono-code text-mono-code text-outline ml-auto">18 Done</span>
+</div>
+<div class="mt-1 font-body-sm text-body-sm text-secondary-fixed-dim flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>94% On-time delivery rate</span>
+</div>
+</div>
+</div>
+</div>
+<!-- WORKSPACE NAVIGATION / SECTION TABS -->
+<div class="flex items-center justify-between gap-space-md overflow-x-auto pb-1">
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1.5 rounded-xl">
+<button class="tab-btn px- space-md py-1.5 rounded-lg bg-surface-container-high text-secondary font-label-md text-label-md font-semibold transition-all" data-tab="all" type="button">
+        All Overview
+      </button>
+<button class="tab-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all font-label-md text-label-md" data-tab="classes" type="button">
+        Classes
+      </button>
+<button class="tab-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all font-label-md text-label-md" data-tab="assignments" type="button">
+        Assignments
+      </button>
+<button class="tab-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all font-label-md text-label-md" data-tab="projects" type="button">
+        Projects
+      </button>
+<button class="tab-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all font-label-md text-label-md" data-tab="exams" type="button">
+        Exams
+      </button>
+<button class="tab-btn px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all font-label-md text-label-md" data-tab="notes" type="button">
+        Notes &amp; Docs
+      </button>
+</div>
+<!-- Quick filter chips / status summary -->
+<div class="hidden xl:flex items-center gap-space-sm text-mono-code font-mono-code text-on-surface-variant">
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-low">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> 3 Course Enrollments
+      </span>
+<span class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-low">
+<span class="w-2 h-2 rounded-full bg-primary"></span> 18 Credit Units
+      </span>
+</div>
+</div>
+<!-- SECTION 1: CLASSES (Today's Lecture & Lab Schedule) -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-1.5 h-5 bg-secondary rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Today's Lecture &amp; Lab Schedule</h2>
+<span class="font-mono-code text-mono-code text-outline px-2 py-0.5 rounded bg-surface-container-high">Wednesday</span>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" href="#">
+        Full Weekly Timetable <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Lecture 1: CS301 (Attended) -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-secondary"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-code text-mono-code text-secondary font-semibold bg-secondary/10 px-2 py-0.5 rounded">08:00 AM - 09:30 AM</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Attended
+            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+            CS301: Advanced Data Structures &amp; Algorithms
+          </h3>
+<div class="mt-space-xs flex items-center gap-space-md text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">meeting_room</span> Room 402</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Prof. Vance</span>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-low rounded-lg text-body-sm font-body-sm text-on-surface-variant">
+<span class="text-on-surface font-medium">Topic:</span> Graph Traversal &amp; Dijkstra's Shortest Path Algorithm
+          </div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-1.5 text-secondary text-mono-code font-mono-code">
+<span class="material-symbols-outlined text-[16px]">sync_saved_locally</span>
+<span>Lecture Notes Synced</span>
+</div>
+<button class="text-outline hover:text-on-surface font-label-sm text-label-sm underline" type="button">View Deck</button>
+</div>
+</div>
+<!-- Lecture 2: CS340 (Upcoming Today) -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-primary"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-code text-mono-code text-primary font-semibold bg-primary-container/30 px-2 py-0.5 rounded">11:30 AM - 01:00 PM</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-container/20 text-primary text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> Upcoming Today
+            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+            CS340: Database Architecture &amp; SQL
+          </h3>
+<div class="mt-space-xs flex items-center gap-space-md text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">computer</span> Lab 3B</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Prof. Reynolds</span>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-low rounded-lg text-body-sm font-body-sm text-on-surface-variant">
+<span class="text-on-surface font-medium">Topic:</span> Indexing B-Trees &amp; PostgreSQL Query Execution Plans
+          </div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-1.5 text-on-surface-variant text-mono-code font-mono-code">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Docker cluster ready</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-colors" type="button">Join Lab</button>
+</div>
+</div>
+<!-- Upcoming Day: MATH204 (Friday Preview) -->
+<div class="bg-surface-container/60 p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-tertiary"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-mono-code text-mono-code text-tertiary font-semibold bg-tertiary-container/30 px-2 py-0.5 rounded">Friday • 10:00 AM</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-highest text-outline text-label-sm font-label-sm">
+              Next Session
+            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-tertiary transition-colors">
+            MATH204: Discrete Mathematics
+          </h3>
+<div class="mt-space-xs flex items-center gap-space-md text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">corporate_fare</span> Hall B</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Dr. Cho</span>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-low rounded-lg text-body-sm font-body-sm text-on-surface-variant">
+<span class="text-on-surface font-medium">Topic:</span> Proof by Induction, Catalan Numbers &amp; Graph Coloring
+          </div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<span class="text-outline text-mono-code font-mono-code">Pre-reading Ch 5.2</span>
+<span class="material-symbols-outlined text-[18px] text-outline">bookmark_border</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: ASSIGNMENTS (Comprehensive Assignment Tracker) -->
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-1.5 h-5 bg-secondary rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Active Assignments Tracker</h2>
+<span class="bg-surface-container-high text-on-surface font-mono-code text-mono-code px-2 py-0.5 rounded">4 Tracked</span>
+</div>
+<div class="flex items-center gap-space-xs self-end">
+<span class="font-label-sm text-label-sm text-outline">Sort by:</span>
+<button class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm" type="button">Urgency</button>
+<button class="p-1 rounded bg-surface-container text-outline hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm">
+<!-- Assignments Table Header (Desktop) -->
+<div class="hidden lg:grid grid-cols-12 gap-space-md px-space-lg py-space-md bg-surface-container-low font-label-sm text-label-sm text-outline uppercase tracking-wider">
+<div class="col-span-4">Assignment Title &amp; Details</div>
+<div class="col-span-2">Subject</div>
+<div class="col-span-2">Due Date &amp; Est. Time</div>
+<div class="col-span-1">Priority</div>
+<div class="col-span-2">Status &amp; Progress</div>
+<div class="col-span-1 text-right">Actions</div>
+</div>
+<!-- Assignment Rows -->
+<div class="flex flex-col">
+<!-- Assignment 1 -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md p-space-lg bg-surface-container hover:bg-surface-container-high transition-colors items-center">
+<div class="col-span-1 lg:col-span-4 flex items-start gap-space-sm">
+<button class="task-checkbox mt-1 w-[18px] h-[18px] rounded flex items-center justify-center bg-surface-container-lowest transition-all hover:bg-secondary/20 shrink-0 text-secondary" type="button">
+<span class="material-symbols-outlined text-[14px] hidden">check</span>
+</button>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate hover:text-secondary cursor-pointer">
+                CS301 Algorithm Midterm: Graph Traversal Lab Report
+              </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">
+                Include complexity analysis proofs for BFS vs DFS and benchmark code on 10k nodes.
+              </p>
+</div>
+</div>
+<div class="col-span-1 lg:col-span-2 flex items-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> CS301 Algorithms
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col font-mono-code text-mono-code">
+<span class="text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">schedule</span> Today, 05:00 PM
+            </span>
+<span class="text-outline text-[11px] mt-0.5">Est. Time: 2h 30m</span>
+</div>
+<div class="col-span-1 flex items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error-container/30 text-error font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> High
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col gap-1.5">
+<div class="flex justify-between items-center text-mono-code font-mono-code text-[11px]">
+<span class="text-secondary font-medium">In Progress</span>
+<span class="text-on-surface font-bold">85%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 85%"></div>
+</div>
+</div>
+<div class="col-span-1 flex items-center justify-end gap-space-xs text-outline">
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" title="Attach file" type="button">
+<span class="material-symbols-outlined text-[18px]">attach_file</span>
+</button>
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" title="More options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-high"></div>
+<!-- Assignment 2 -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md p-space-lg bg-surface-container hover:bg-surface-container-high transition-colors items-center">
+<div class="col-span-1 lg:col-span-4 flex items-start gap-space-sm">
+<button class="task-checkbox mt-1 w-[18px] h-[18px] rounded flex items-center justify-center bg-surface-container-lowest transition-all hover:bg-secondary/20 shrink-0 text-secondary" type="button">
+<span class="material-symbols-outlined text-[14px] hidden">check</span>
+</button>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate hover:text-secondary cursor-pointer">
+                PostgreSQL B-Tree Index Benchmark Report
+              </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">
+                Use EXPLAIN ANALYZE on test dataset; generate latency plots.
+              </p>
+</div>
+</div>
+<div class="col-span-1 lg:col-span-2 flex items-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary"></span> CS340 Databases
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col font-mono-code text-mono-code">
+<span class="text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">event</span> Tomorrow, 11:59 PM
+            </span>
+<span class="text-outline text-[11px] mt-0.5">Est. Time: 3h 15m</span>
+</div>
+<div class="col-span-1 flex items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-highest text-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span> Medium
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col gap-1.5">
+<div class="flex justify-between items-center text-mono-code font-mono-code text-[11px]">
+<span class="text-outline font-medium">To Do</span>
+<span class="text-outline font-semibold">0%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 0%"></div>
+</div>
+</div>
+<div class="col-span-1 flex items-center justify-end gap-space-xs text-outline">
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-[18px]">attach_file</span>
+</button>
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-high"></div>
+<!-- Assignment 3 -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md p-space-lg bg-surface-container hover:bg-surface-container-high transition-colors items-center">
+<div class="col-span-1 lg:col-span-4 flex items-start gap-space-sm">
+<button class="task-checkbox mt-1 w-[18px] h-[18px] rounded flex items-center justify-center bg-surface-container-lowest transition-all hover:bg-secondary/20 shrink-0 text-secondary" type="button">
+<span class="material-symbols-outlined text-[14px] hidden">check</span>
+</button>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate hover:text-secondary cursor-pointer">
+                Discrete Probability &amp; Graph Theory Problem Set #4
+              </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">
+                Problems 4.1 to 4.18 in textbook Chapter 4.
+              </p>
+</div>
+</div>
+<div class="col-span-1 lg:col-span-2 flex items-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> MATH204
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col font-mono-code text-mono-code">
+<span class="text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">event</span> Oct 18, 02:00 PM
+            </span>
+<span class="text-outline text-[11px] mt-0.5">Est. Time: 4h 00m</span>
+</div>
+<div class="col-span-1 flex items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-highest text-outline font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Low
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col gap-1.5">
+<div class="flex justify-between items-center text-mono-code font-mono-code text-[11px]">
+<span class="text-outline font-medium">Planned</span>
+<span class="text-outline font-semibold">10%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 10%"></div>
+</div>
+</div>
+<div class="col-span-1 flex items-center justify-end gap-space-xs text-outline">
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-[18px]">attach_file</span>
+</button>
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-high"></div>
+<!-- Assignment 4 -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md p-space-lg bg-surface-container hover:bg-surface-container-high transition-colors items-center">
+<div class="col-span-1 lg:col-span-4 flex items-start gap-space-sm">
+<button class="task-checkbox mt-1 w-[18px] h-[18px] rounded flex items-center justify-center bg-surface-container-lowest transition-all hover:bg-secondary/20 shrink-0 text-secondary" type="button">
+<span class="material-symbols-outlined text-[14px] hidden">check</span>
+</button>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate hover:text-secondary cursor-pointer">
+                Software Engineering Agile Sprint Retrospective
+              </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">
+                Team sprint retro notes &amp; Jira burndown screenshot.
+              </p>
+</div>
+</div>
+<div class="col-span-1 lg:col-span-2 flex items-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span> CS380
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col font-mono-code text-mono-code">
+<span class="text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">event</span> Oct 20
+            </span>
+<span class="text-outline text-[11px] mt-0.5">Est. Time: 1h 45m</span>
+</div>
+<div class="col-span-1 flex items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-highest text-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span> Medium
+            </span>
+</div>
+<div class="col-span-1 lg:col-span-2 flex flex-col gap-1.5">
+<div class="flex justify-between items-center text-mono-code font-mono-code text-[11px]">
+<span class="text-secondary-fixed-dim font-medium">Researching</span>
+<span class="text-on-surface font-semibold">40%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<div class="col-span-1 flex items-center justify-end gap-space-xs text-outline">
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-[18px]">attach_file</span>
+</button>
+<button class="p-1 hover:text-on-surface rounded hover:bg-surface-container-highest" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: PROJECTS & EXAMS (2 Column Grid) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Column A: College Projects -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-1.5 h-5 bg-secondary rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Major Course Projects</h2>
+</div>
+<span class="font-mono-code text-mono-code text-secondary font-semibold">2 Active</span>
+</div>
+<!-- Project Card 1: Distributed Key-Value Store -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-1">
+<span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-mono-code text-mono-code font-semibold">CS301 Capstone</span>
+<span class="text-outline text-label-sm font-label-sm">• Due Nov 12</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Distributed Key-Value Store</h3>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded font-mono-code text-mono-code text-secondary">
+<span class="font-bold text-body-md">65%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 65%"></div>
+</div>
+<!-- Subtasks Checklist -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1">Milestones &amp; Subtasks</span>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="accent-secondary rounded cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through">Raft Consensus Algorithm Leader Election</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="accent-secondary rounded cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through">Write-Ahead Logging (WAL) &amp; Compaction</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="accent-secondary rounded cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-secondary transition-colors">gRPC Endpoints &amp; Client SDK Implementation</span>
+</label>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pt-1">
+<div class="flex items-center gap-2">
+<img alt="Afaq" class="w-6 h-6 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/>
+<span class="font-mono-code text-mono-code text-on-surface-variant">Solo Project (Lead)</span>
+</div>
+<button class="text-secondary font-label-md text-label-md hover:underline flex items-center gap-1" type="button">
+            Repo &amp; PRs <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Project Card 2: Hospital Management DB Schema -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-1">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary font-mono-code text-mono-code font-semibold">CS340 Course Project</span>
+<span class="text-outline text-label-sm font-label-sm">• Due Oct 24</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Hospital Management DB Schema &amp; Normalization</h3>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded font-mono-code text-mono-code text-primary">
+<span class="font-bold text-body-md">90%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 90%"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Status: Final Review &amp; ER Diagram Export</span>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1" type="button">
+            View Schema <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Column B: Upcoming Exams & Countdown -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-1.5 h-5 bg-tertiary rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Upcoming Exams &amp; Countdown</h2>
+</div>
+<span class="font-mono-code text-mono-code text-tertiary font-semibold">Midterm Season</span>
+</div>
+<!-- Exam Card 1: CS301 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div>
+<span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-mono-code text-mono-code font-semibold">CS301 Algorithms</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1">CS301 Midterm Examination</h3>
+<div class="mt-1 flex items-center gap-space-md text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> Oct 22</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">schedule</span> 09:00 AM - 11:00 AM</span>
+</div>
+</div>
+<!-- Countdown Badge -->
+<div class="shrink-0 bg-surface-container-high px-space-md py-space-xs rounded-lg flex flex-col items-center">
+<span class="font-headline-md text-headline-md text-secondary font-bold">6</span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Days Left</span>
+</div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-low rounded-lg text-body-sm font-body-sm text-on-surface-variant flex flex-col gap-1">
+<div class="text-on-surface font-medium">Coverage Scope:</div>
+<div>Chapters 1–6 (Balanced Trees, Graphs, Greedy, Dynamic Programming)</div>
+</div>
+<div class="mt-space-md flex items-center justify-between gap-space-md">
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between text-mono-code font-mono-code text-[11px]">
+<span class="text-outline">Prep Status</span>
+<span class="text-secondary font-bold">72% Reviewed</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 72%"></div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md shrink-0" type="button">
+            Study Guide
+          </button>
+</div>
+</div>
+<!-- Exam Card 2: MATH204 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div>
+<span class="px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-mono-code text-mono-code font-semibold">MATH204</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1">MATH204 Discrete Math Midterm</h3>
+<div class="mt-1 flex items-center gap-space-md text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> Oct 26</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">schedule</span> 02:00 PM - 04:00 PM</span>
+</div>
+</div>
+<!-- Countdown Badge -->
+<div class="shrink-0 bg-surface-container-high px-space-md py-space-xs rounded-lg flex flex-col items-center">
+<span class="font-headline-md text-headline-md text-tertiary font-bold">10</span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Days Left</span>
+</div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-container-low rounded-lg text-body-sm font-body-sm text-on-surface-variant flex flex-col gap-1">
+<div class="text-on-surface font-medium">Coverage Scope:</div>
+<div>Mathematical Proofs, Set Theory, Combinatorics &amp; Generating Functions</div>
+</div>
+<div class="mt-space-md flex items-center justify-between gap-space-md">
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between text-mono-code font-mono-code text-[11px]">
+<span class="text-outline">Prep Status</span>
+<span class="text-tertiary font-bold">45% Reviewed</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md shrink-0" type="button">
+            Formula Sheet
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 4: NOTES (Recent Lecture & Study Notes Quick Access) -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-1.5 h-5 bg-secondary rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Recent Lecture &amp; Study Notes</h2>
+</div>
+<button class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" type="button">
+        + Create New Note
+      </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Note Card 1: CS301 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer group">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm font-semibold">
+              CS301 Algorithms
+            </span>
+<span class="font-mono-code text-mono-code text-outline text-[11px]">Yesterday</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+            Dijkstra vs A* Shortest Path Derivation
+          </h3>
+<p class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Mathematical comparison of heuristic admissibility in weighted graphs, priority queue overhead, and Fibonacci heap amortized bounds.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-sm flex items-center justify-between font-mono-code text-mono-code text-outline text-[11px]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px]">description</span> 4 pages</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">Markdown + Diagrams</span>
+</div>
+</div>
+<!-- Note Card 2: CS340 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer group">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold">
+              CS340 Databases
+            </span>
+<span class="font-mono-code text-mono-code text-outline text-[11px]">3 days ago</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+            Relational Algebra &amp; Normal Forms Cheat Sheet
+          </h3>
+<p class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Step-by-step canonical decomposition from 1NF up to Boyce-Codd Normal Form (BCNF) with dependency preservation examples.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-sm flex items-center justify-between font-mono-code text-mono-code text-outline text-[11px]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px]">description</span> 6 pages</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">SQL + Relational</span>
+</div>
+</div>
+<!-- Note Card 3: MATH204 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer group">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm font-semibold">
+              MATH204
+            </span>
+<span class="font-mono-code text-mono-code text-outline text-[11px]">Last week</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-tertiary transition-colors">
+            Recurrence Relations &amp; Master Theorem Proofs
+          </h3>
+<p class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Detailed case breakdown for asymptotic time bounds: T(n) = aT(n/b) + f(n) with polynomial regularity checks and recurrence trees.
+          </p>
+</div>
+<div class="mt-space-lg pt-space-sm flex items-center justify-between font-mono-code text-mono-code text-outline text-[11px]">
+<span class="flex items-center gap-1 text-tertiary"><span class="material-symbols-outlined text-[15px]">picture_as_pdf</span> PDF attached</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">Lecture 14</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple Interactive Study Timer (Pomodoro micro-interaction)
+  (function() {
+    let timerRunning = false;
+    let secondsLeft = 25 * 60;
+    let timerInterval = null;
+    const display = document.getElementById('timerDisplay');
+    const pomodoroBtn = document.getElementById('pomodoroBtn');
+
+    function updateDisplay() {
+      const minutes = Math.floor(secondsLeft / 60);
+      const seconds = secondsLeft % 60;
+      if (display) {
+        display.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }
+    }
+
+    if (pomodoroBtn) {
+      pomodoroBtn.addEventListener('click', function() {
+        if (timerRunning) {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          pomodoroBtn.classList.remove('ring-1', 'ring-secondary');
+        } else {
+          timerRunning = true;
+          pomodoroBtn.classList.add('ring-1', 'ring-secondary');
+          timerInterval = setInterval(function() {
+            if (secondsLeft > 0) {
+              secondsLeft--;
+              updateDisplay();
+            } else {
+              clearInterval(timerInterval);
+              timerRunning = false;
+              alert('Pomodoro focus block completed! Take a 5-minute academic break.');
+              secondsLeft = 25 * 60;
+              updateDisplay();
+            }
+          }, 1000);
+        }
+      });
+    }
+
+    // Task Checkbox Toggle Micro-interaction
+    const checkboxes = document.querySelectorAll('.task-checkbox');
+    checkboxes.forEach(function(box) {
+      box.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const icon = this.querySelector('.material-symbols-outlined');
+        const parentRow = this.closest('.grid');
+        const title = parentRow ? parentRow.querySelector('.font-headline-sm') : null;
+
+        if (icon) {
+          if (icon.classList.contains('hidden')) {
+            icon.classList.remove('hidden');
+            this.classList.add('bg-secondary', 'text-on-secondary');
+            this.classList.remove('bg-surface-container-lowest', 'text-secondary');
+            if (title) {
+              title.classList.add('line-through', 'opacity-40');
+            }
+          } else {
+            icon.classList.add('hidden');
+            this.classList.remove('bg-secondary', 'text-on-secondary');
+            this.classList.add('bg-surface-container-lowest', 'text-secondary');
+            if (title) {
+              title.classList.remove('line-through', 'opacity-40');
+            }
+          }
+        }
+      });
+    });
+
+    // Tab button selection
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-surface-container-high', 'text-secondary', 'font-semibold');
+          b.classList.add('text-on-surface-variant');
+        });
+        this.classList.add('bg-surface-container-high', 'text-secondary', 'font-semibold');
+        this.classList.remove('text-on-surface-variant');
+      });
+    });
+  })();
+</script></main></div></body></html>

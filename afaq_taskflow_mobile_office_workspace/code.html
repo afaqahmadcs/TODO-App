@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-fixed": "#0f0069", "surface-variant": "#2d3449", "secondary-container": "#29a195", "inverse-surface": "#dae2fd", "tertiary-container": "#6f3dd9", "on-tertiary-fixed": "#23005c", "on-surface": "#dae2fd", "outline": "#918fa1", "tertiary-fixed": "#e9ddff", "on-secondary-fixed": "#00201d", "on-secondary": "#003732", "on-background": "#dae2fd", "surface-container": "#171f33", "primary-fixed": "#e2dfff", "inverse-primary": "#4d44e3", "on-tertiary-fixed-variant": "#5516be", "error-container": "#93000a", "on-tertiary": "#3c0091", "primary-fixed-dim": "#c3c0ff", "on-secondary-container": "#00302b", "surface-tint": "#c3c0ff", "on-tertiary-container": "#e3d5ff", "primary-container": "#4f46e5", "surface-container-highest": "#2d3449", "on-secondary-fixed-variant": "#005049", "tertiary-fixed-dim": "#d0bcff", "secondary-fixed": "#89f5e7", "primary": "#c3c0ff", "tertiary": "#d0bcff", "surface": "#0b1326", "surface-dim": "#0b1326", "secondary": "#6bd8cb", "outline-variant": "#464555", "on-primary": "#1d00a5", "on-error": "#690005", "on-primary-container": "#dad7ff", "error": "#ffb4ab", "surface-container-low": "#131b2e", "surface-container-lowest": "#060e20", "inverse-on-surface": "#283044", "secondary-fixed-dim": "#6bd8cb", "surface-container-high": "#222a3d", "on-surface-variant": "#c7c4d8", "background": "#0b1326", "on-primary-fixed-variant": "#3323cc", "surface-bright": "#31394d", "on-error-container": "#ffdad6" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "space-md": "0.75rem", "space-sm": "0.5rem", "margin-md": "1.5rem", "gutter-lg": "2rem", "margin": "1rem", "space-xl": "2rem", "margin-lg": "2.5rem", "space-lg": "1.25rem", "gutter-md": "1.5rem", "gutter": "1rem" }, fontFamily: { "headline-lg": ["Plus Jakarta Sans"], "label-sm": ["Inter"], "body-lg": ["Inter"], "body-md": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-md": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "mono-code": ["JetBrains Mono"] }, fontSize: { "headline-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }], "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.03em", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", letterSpacing: "-0.005em", fontWeight: "400" }], "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }], "headline-xl-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["16px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-md": ["13px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "500" }], "headline-xl": ["32px", { lineHeight: "40px", letterSpacing: "-0.025em", fontWeight: "700" }], "headline-md": ["20px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "body-sm": ["13px", { lineHeight: "18px", letterSpacing: "0.005em", fontWeight: "400" }], "mono-code": ["12px", { lineHeight: "16px", letterSpacing: "0em", fontWeight: "500" }] } } } }</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#0b1326;color:#dae2fd;-webkit-tap-highlight-color:transparent;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Modern minimalist geometric monogram logo for Afaq TaskFlow productivity app featuring an interlocking geometric 'A' and task flow chevron in indigo and slate. Brand logo. - Primary color: #4f46e5
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UlFO8CtzGaaTTSgFuXvp0FNnDkaygbohp3jwKv69AtRS8vEAZn4IeFOw-Uijw10mVi8q4_SQBf5ZcHqzzoZC9qIMRmdxVM-lqSBWMzUjkExZD6JGHDy1BBQRTVKpMIPz8bYO6lUCKXiH8pBkW4_Q7wYNWNHzznssg81cKjYc-LP7AzeZLbSd1mSZ3Ul9tFfJJgUJlYndCHQ3hiDH5TfwwuuhD3bNXBjRKHmXI6PphtqhavzJ2Czupl9PMS"/><div class="flex items-center gap-space-xs min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate">Workspaces</span><button class="flex items-center gap-1 bg-surface-container-high hover:bg-surface-container-highest px-2 py-0.5 rounded-full shrink-0 transition-colors h-6" type="button"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-secondary font-medium tracking-wide uppercase">Office</span><span class="material-symbols-outlined text-[14px] text-on-surface-variant leading-none">expand_more</span></button></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Search workspace" class="w-11 h-11 flex items-center justify-center rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button><button aria-label="User Profile" class="w-11 h-11 flex items-center justify-center" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/></button></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-lg pb-10">
+<!-- WORKSPACE HEADER & DOMAIN BADGE -->
+<section class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm tracking-wide">
+<span class="material-symbols-outlined text-[14px]">apartment</span>
+        Social Media &amp; Production
+      </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+        Live Pipeline
+      </span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface">Office Workspace</h1>
+<span class="font-mono-code text-mono-code text-on-surface-variant">Q3 · Sprint 08</span>
+</div>
+</section>
+<!-- 2x2 COMPACT METRIC GRID -->
+<section class="grid grid-cols-2 gap-space-sm">
+<!-- Metric 1: Total Today -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container shadow-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Today's Pool</span>
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface">18</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">tasks</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Metric 2: Done -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container shadow-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Completed</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-secondary">9</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-secondary-container/20 text-secondary">50%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 50%"></div>
+</div>
+</div>
+<!-- Metric 3: Pending -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container shadow-sm hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">In Flight</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">pending</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface">8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">running</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 44%"></div>
+</div>
+</div>
+<!-- Metric 4: Overdue -->
+<div class="flex flex-col p-space-md rounded-xl bg-surface-container shadow-sm hover:bg-surface-container-high transition-colors relative overflow-hidden">
+<div class="absolute -right-2 -bottom-2 w-12 h-12 rounded-full bg-error-container/20 blur-xl"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-error uppercase tracking-wider font-semibold">Overdue</span>
+<span class="material-symbols-outlined text-[18px] text-error">warning</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-error">1</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-error-container text-on-error font-medium">Urgent</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</section>
+<!-- DAILY CHECKLIST PROGRESS BAR & DRAWER -->
+<section class="flex flex-col p-space-md rounded-xl bg-surface-container-high shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Daily Publishing Progress</span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" id="toggleDrawerBtn" type="button">
+<span class="material-symbols-outlined text-[18px]" id="drawerIcon">keyboard_arrow_down</span>
+</button>
+</div>
+<!-- Progress stat line -->
+<div class="flex items-center justify-between">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="text-on-surface font-semibold">3 of 8 Pages</span> fully published today
+      </p>
+<span class="font-mono-code text-mono-code text-secondary font-semibold">38% Complete</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden flex gap-0.5 p-0.5">
+<div class="bg-secondary h-full rounded-l-full" style="width: 38%"></div>
+<div class="bg-primary h-full" style="width: 25%"></div>
+<div class="bg-surface-variant h-full rounded-r-full flex-1"></div>
+</div>
+<!-- Horizontal scrollable page status indicators -->
+<div class="overflow-x-auto -mx-space-md px-space-md py-1 flex items-center gap-space-xs no-scrollbar">
+<!-- 1: Shooting Page -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">check_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Shooting Page</span>
+</div>
+<!-- 2: Ismail Shahid -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">check_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Ismail Shahid</span>
+</div>
+<!-- 3: ZK Production -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">timelapse</span>
+<span class="font-label-sm text-label-sm text-on-surface">ZK Production</span>
+</div>
+<!-- 4: Jahangir Khan -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">radio_button_unchecked</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Jahangir Khan</span>
+</div>
+<!-- 5: Inaya Kailash -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">radio_button_unchecked</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Inaya Kailash</span>
+</div>
+<!-- 6: Political Affairs -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">check_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Political Affairs</span>
+</div>
+<!-- 7: Nazia Iqbal -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">radio_button_unchecked</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Nazia Iqbal</span>
+</div>
+<!-- 8: Suno Music -->
+<div class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-lowest shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">timelapse</span>
+<span class="font-label-sm text-label-sm text-on-surface">Suno Music</span>
+</div>
+</div>
+<!-- Expandable checklist drawer -->
+<div class="hidden flex-col pt-space-xs space-y-1" id="checklistDrawer">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+<span class="font-body-sm text-body-sm text-on-surface">Morning Batch Broadcast (4 Channels)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">10:00 AM Done</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary animate-spin">sync</span>
+<span class="font-body-sm text-body-sm text-on-surface">Afternoon Reels Queue (ZK &amp; Suno)</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Processing</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest opacity-75">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">schedule</span>
+<span class="font-body-sm text-body-sm text-on-surface">Night Prime Story Drops (Nazia &amp; Jahangir)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">08:00 PM</span>
+</div>
+</div>
+</section>
+<!-- HORIZONTAL PAGE FILTER TABS -->
+<section class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Filter Workspace</span>
+<span class="font-label-sm text-label-sm text-primary">8 Channels Active</span>
+</div>
+<div class="overflow-x-auto -mx-margin px-margin flex items-center gap-space-xs py-1 no-scrollbar">
+<button class="page-pill px-3 py-1.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shrink-0 shadow-sm transition-all" type="button">
+        All Pages
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Shooting Page
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        ZK Production
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Suno Music
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Ismail Shahid
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Jahangir Khan
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Inaya Kailash
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Political Affairs
+      </button>
+<button class="page-pill px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 transition-all" type="button">
+        Nazia Iqbal
+      </button>
+</div>
+</section>
+<!-- SUNO MUSIC SPECIALIZED CREATION COMPACT CARD -->
+<section class="flex flex-col p-space-md rounded-xl bg-surface-container-high relative overflow-hidden shadow-md">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Suno Music Visual Pipeline</span>
+</div>
+<span class="px-2 py-0.5 rounded-md bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm font-semibold uppercase tracking-wider">Design</span>
+</div>
+<!-- Pipeline stages breadcrumb strip -->
+<div class="flex items-center justify-between text-[11px] font-label-sm text-on-surface-variant py-1 overflow-x-auto no-scrollbar gap-1">
+<span class="text-secondary font-medium shrink-0">Brief ✓</span>
+<span class="text-outline shrink-0">→</span>
+<span class="text-secondary font-medium shrink-0">Assets ✓</span>
+<span class="text-outline shrink-0">→</span>
+<span class="text-tertiary font-bold shrink-0 bg-tertiary-container/30 px-1.5 py-0.5 rounded">Design ●</span>
+<span class="text-outline shrink-0">→</span>
+<span class="text-on-surface-variant shrink-0">Review</span>
+<span class="text-outline shrink-0">→</span>
+<span class="text-on-surface-variant shrink-0">Export</span>
+<span class="text-outline shrink-0">→</span>
+<span class="text-on-surface-variant shrink-0">Delivered</span>
+</div>
+<!-- Active Deliverable Card -->
+<div class="flex items-center gap-space-md mt-space-sm p-space-sm rounded-lg bg-surface-container-lowest">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-inner" data-alt="Vibrant synthwave album artwork preview featuring futuristic neon geometry in deep violet and cyan lighting for Suno Music production release, high detail graphic design composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0UZeGkhj78YnpJTAcXTV9nb7RtcexlzGt-z0sYlhd71TXZXMzStOEHGgvyPY6dEvH6wxYCqBg630MG4NL5uSJYFiOnBjoPjAJk4E_leVAz0ozrs2Cz8qGg9CSZxidzv-U397c_EJGdsNfbXC1DEblh_8dGxFDRZATLrkYWTmgAHpwyyULJM0YsG6aEe1stefZC_uCGYhJYj2lqlVhBxVjtHlOPG1yAWfftHiUbhfdaNVkwq7NoM3AAw"/>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Album Cover Art v3 &amp; Spotify Canvas</span>
+<div class="flex items-center gap-space-sm mt-1 text-on-surface-variant">
+<span class="flex items-center gap-0.5 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">palette</span> Figma
+          </span>
+<span class="flex items-center gap-0.5 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">timer</span> Due 4:00 PM
+          </span>
+</div>
+</div>
+<button aria-label="Review visual asset" class="w-9 h-9 flex items-center justify-center rounded-lg bg-primary text-on-primary shadow hover:bg-primary/90 shrink-0 transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- WORKFLOW STAGE TABS -->
+<section class="flex flex-col space-y-space-md">
+<div class="overflow-x-auto -mx-margin px-margin flex items-center gap-space-xs py-1 no-scrollbar">
+<button class="stage-tab px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 flex items-center gap-1.5 transition-colors" type="button">
+<span>IDEAS</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface-variant font-mono-code text-[11px]">3</span>
+</button>
+<button class="stage-tab px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 flex items-center gap-1.5 transition-colors" type="button">
+<span>TODO</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface-variant font-mono-code text-[11px]">4</span>
+</button>
+<button class="stage-tab px-3 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shrink-0 flex items-center gap-1.5 shadow-sm" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-semibold">IN PROGRESS</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary text-on-primary-fixed font-mono-code text-[11px] font-bold">3</span>
+</button>
+<button class="stage-tab px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 flex items-center gap-1.5 transition-colors" type="button">
+<span>REVIEW</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface-variant font-mono-code text-[11px]">2</span>
+</button>
+<button class="stage-tab px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 flex items-center gap-1.5 transition-colors" type="button">
+<span>READY</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface-variant font-mono-code text-[11px]">2</span>
+</button>
+<button class="stage-tab px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0 flex items-center gap-1.5 transition-colors" type="button">
+<span>PUBLISHED</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface-variant font-mono-code text-[11px]">4</span>
+</button>
+</div>
+<!-- STAGE CARDS CONTAINER (IN PROGRESS) -->
+<div class="flex flex-col space-y-space-md">
+<!-- CARD 1: Edit reel & add dynamic auto-captions (ZK Production) -->
+<article class="flex flex-col p-space-md rounded-xl bg-surface-container shadow-md transition-all">
+<!-- Top row: Meta & Channel -->
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-medium">
+              ZK Production
+            </span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-error-container/20 text-error font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+              02:30 PM
+            </span>
+</div>
+<button aria-label="Task options" class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<!-- Task Title -->
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-2">
+          Edit reel &amp; add dynamic auto-captions
+        </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-2">
+          Sync key cuts to high-energy beat, export 1080x1920 60fps for primary IG feed release.
+        </p>
+<!-- Subtask Progress Pill -->
+<div class="flex items-center justify-between mt-space-sm pt-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">checklist</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Subtasks Completion</span>
+</div>
+<span class="font-mono-code text-mono-code text-secondary font-semibold" id="subtaskProgressLabel">3/5 Complete</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-300" id="subtaskProgressBar" style="width: 60%"></div>
+</div>
+<!-- Interactive Checklist Rows -->
+<div class="flex flex-col mt-space-sm space-y-1.5">
+<!-- Item 1 Done -->
+<label class="task-checkbox-item flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high cursor-pointer transition-colors">
+<input checked="" class="task-check hidden" data-id="1" type="checkbox"/>
+<span class="custom-box w-5 h-5 rounded flex items-center justify-center bg-secondary text-on-secondary shrink-0 transition-all">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through select-none flex-1">Select reel clips</span>
+<span class="font-mono-code text-[11px] text-outline">✓ Done</span>
+</label>
+<!-- Item 2 Done -->
+<label class="task-checkbox-item flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high cursor-pointer transition-colors">
+<input checked="" class="task-check hidden" data-id="2" type="checkbox"/>
+<span class="custom-box w-5 h-5 rounded flex items-center justify-center bg-secondary text-on-secondary shrink-0 transition-all">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through select-none flex-1">Cut rough edit</span>
+<span class="font-mono-code text-[11px] text-outline">✓ Done</span>
+</label>
+<!-- Item 3 In Progress / Checked demo -->
+<label class="task-checkbox-item flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high cursor-pointer transition-colors">
+<input checked="" class="task-check hidden" data-id="3" type="checkbox"/>
+<span class="custom-box w-5 h-5 rounded flex items-center justify-center bg-primary-container text-on-primary shrink-0 transition-all">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface line-through select-none flex-1">Color grade LUT applied</span>
+<span class="font-mono-code text-[11px] text-primary">Rec.709</span>
+</label>
+<!-- Item 4 Unchecked -->
+<label class="task-checkbox-item flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high cursor-pointer transition-colors">
+<input class="task-check hidden" data-id="4" type="checkbox"/>
+<span class="custom-box w-5 h-5 rounded flex items-center justify-center bg-surface-container-high text-transparent shrink-0 transition-all">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface select-none flex-1">Add captions &amp; dynamic emoji</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">CapCut</span>
+</label>
+<!-- Item 5 Unchecked -->
+<label class="task-checkbox-item flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high cursor-pointer transition-colors">
+<input class="task-check hidden" data-id="5" type="checkbox"/>
+<span class="custom-box w-5 h-5 rounded flex items-center justify-center bg-surface-container-high text-transparent shrink-0 transition-all">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface select-none flex-1">Sound design &amp; whoosh effects</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Audio</span>
+</label>
+</div>
+<!-- Card Footer -->
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<div class="flex items-center -space-x-2">
+<img alt="Assignee" class="w-6 h-6 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/>
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-mono-code text-on-surface font-semibold">
+              +2
+            </div>
+</div>
+<button class="flex items-center gap-1 text-primary font-label-md text-label-md hover:underline" type="button">
+<span>Open Premiere Project</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</article>
+<!-- CARD 2: Select today's reel footage & audio sync (Jahangir Khan) -->
+<article class="flex flex-col p-space-md rounded-xl bg-surface-container shadow-md transition-all">
+<!-- Top row: Meta & Channel -->
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-medium">
+              Jahangir Khan
+            </span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] text-secondary">videocam</span>
+              DaVinci Resolve
+            </span>
+</div>
+<span class="font-mono-code text-mono-code text-secondary font-semibold">~20m est</span>
+</div>
+<!-- Task Title -->
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-2">
+          Select today's reel footage &amp; audio sync
+        </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          Ingest 4K footage from A7SIII, conform 24fps dialogue track and match external lav mic waveforms.
+        </p>
+<!-- Footage Snapshot Preview -->
+<div class="relative w-full h-28 rounded-lg overflow-hidden mt-space-sm bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Cinematic production studio monitor displaying high quality DaVinci Resolve video editor multi-camera timeline with synchronized audio waveforms and teal and orange graded footage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8mvXXvX7oMNUsZibMxfCdTtQlglWwyuCFRkTgmCo-epdFHYm72ZTVfuWNUebq2f5mvwZzQ-IUzcrMsINj8VtgoysIIlLp9trvShwRpBXFWkJU0xRm_OjBRPjAy_RktYmqvgWG4FyMUbSQmWYCTlKGmfHLjLx8tX-T_n7ZJSOrUFRemDrMm6N4U6akp4JXWFgBwpsscQZYFn6igLfKEMVpf4KSR26XK-sRO48Wd02Ast-rU6ZaxYQ_cA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-transparent flex items-end p-2 justify-between">
+<span class="font-mono-code text-[11px] text-on-surface bg-surface-container/80 px-2 py-0.5 rounded">Timeline: 00:04:12</span>
+<span class="flex items-center gap-1 text-secondary font-label-sm text-label-sm bg-surface-container/80 px-2 py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Ready to cut
+            </span>
+</div>
+</div>
+<!-- Card Action Toolbar -->
+<div class="flex items-center justify-between mt-space-sm pt-1">
+<div class="flex items-center gap-space-xs">
+<button class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">link</span>
+<span>Proxy Link</span>
+</button>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">mic</span>
+<span>WAV Sync</span>
+</button>
+</div>
+<button class="px-3 py-1 rounded-md bg-primary text-on-primary font-label-sm text-label-sm flex items-center gap-1 font-semibold hover:bg-primary/90 transition-transform active:scale-95" type="button">
+<span>Mark Ready</span>
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- QUICK ACTION FLOATING TOOLBAR (BOTTOM ANCHORED) -->
+<aside class="sticky bottom-20 z-40 flex items-center justify-between p-2 rounded-2xl bg-surface-container-highest/95 backdrop-blur-md shadow-2xl">
+<!-- Filter quick chip -->
+<div class="flex items-center gap-1 pl-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Priority View</span>
+</div>
+<!-- Quick filter pill toggles -->
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">
+        Assigned to Me
+      </button>
+<button class="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">
+        Urgent Only
+      </button>
+</div>
+<!-- Primary Add Office Task Button -->
+<button class="flex items-center gap-1 px-3.5 py-2 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-lg hover:bg-primary hover:text-on-primary-fixed transition-all active:scale-95 shrink-0" id="addOfficeTaskBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>Add Task</span>
+</button>
+</aside>
+</div>
+<script>
+  (function() {
+    // Drawer toggle interaction
+    const toggleDrawerBtn = document.getElementById('toggleDrawerBtn');
+    const drawer = document.getElementById('checklistDrawer');
+    const drawerIcon = document.getElementById('drawerIcon');
+
+    if (toggleDrawerBtn && drawer && drawerIcon) {
+      toggleDrawerBtn.addEventListener('click', () => {
+        const isHidden = drawer.classList.contains('hidden');
+        if (isHidden) {
+          drawer.classList.remove('hidden');
+          drawer.classList.add('flex');
+          drawerIcon.textContent = 'keyboard_arrow_up';
+        } else {
+          drawer.classList.add('hidden');
+          drawer.classList.remove('flex');
+          drawerIcon.textContent = 'keyboard_arrow_down';
+        }
+      });
+    }
+
+    // Page filter pills active switch
+    const pagePills = document.querySelectorAll('.page-pill');
+    pagePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pagePills.forEach(p => {
+          p.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+          p.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        pill.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+      });
+    });
+
+    // Workflow stage tab selection
+    const stageTabs = document.querySelectorAll('.stage-tab');
+    stageTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        stageTabs.forEach(t => {
+          t.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+          t.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        tab.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+      });
+    });
+
+    // Interactive Checkboxes logic for Card 1
+    const checkboxes = document.querySelectorAll('.task-check');
+    const progressLabel = document.getElementById('subtaskProgressLabel');
+    const progressBar = document.getElementById('subtaskProgressBar');
+
+    function updateProgress() {
+      if (!checkboxes.length || !progressLabel || !progressBar) return;
+      const total = checkboxes.length;
+      const completed = document.querySelectorAll('.task-check:checked').length;
+      progressLabel.textContent = `${completed}/${total} Complete`;
+      const pct = Math.round((completed / total) * 100);
+      progressBar.style.width = `${pct}%`;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        const item = e.target.closest('.task-checkbox-item');
+        const box = item.querySelector('.custom-box');
+        const text = item.querySelector('.select-none');
+
+        if (e.target.checked) {
+          box.classList.remove('bg-surface-container-high', 'text-transparent');
+          box.classList.add('bg-secondary', 'text-on-secondary');
+          text.classList.add('line-through', 'text-on-surface-variant');
+          text.classList.remove('text-on-surface');
+        } else {
+          box.classList.remove('bg-secondary', 'text-on-secondary', 'bg-primary-container', 'text-on-primary');
+          box.classList.add('bg-surface-container-high', 'text-transparent');
+          text.classList.remove('line-through', 'text-on-surface-variant');
+          text.classList.add('text-on-surface');
+        }
+        updateProgress();
+      });
+    });
+
+    // Quick add task button micro-feedback
+    const addBtn = document.getElementById('addOfficeTaskBtn');
+    if (addBtn) {
+      addBtn.addEventListener('click', () => {
+        addBtn.classList.add('scale-95');
+        setTimeout(() => addBtn.classList.remove('scale-95'), 150);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.35)]" data-active-classes="text-primary [&amp;&gt;span.material-symbols-outlined]:font-semibold [&amp;&gt;span.nav-label]:font-semibold"><div class="flex items-center justify-between h-16 px-space-sm relative max-w-lg mx-auto"><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="nav-label font-label-sm text-label-sm">Dashboard</span></a><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-tasks" href="#"><span class="material-symbols-outlined text-[22px]">check_circle</span><span class="nav-label font-label-sm text-label-sm">My Tasks</span></a><div class="flex-1 flex items-center justify-center relative"><a aria-label="Create New Task" class="w-12 h-12 -mt-4 rounded-full bg-primary-container text-on-primary shadow-[0_8px_16px_rgba(79,70,229,0.35)] hover:bg-primary hover:text-on-primary-fixed flex items-center justify-center transition-all active:scale-95" data-path="new-task" href="#"><span class="material-symbols-outlined text-[26px]">add</span></a></div><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" data-path="calendar" href="#"><span class="material-symbols-outlined text-[22px]">calendar_today</span><span class="nav-label font-label-sm text-label-sm">Calendar</span></a><a aria-current="page" class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 transition-colors text-primary [&amp;&gt;span.material-symbols-outlined]:font-semibold [&amp;&gt;span.nav-label]:font-semibold" data-path="workspaces" href="#"><span class="material-symbols-outlined text-[22px]">domain</span><span class="nav-label font-label-sm text-label-sm">Workspaces</span></a></div></nav></body></html>

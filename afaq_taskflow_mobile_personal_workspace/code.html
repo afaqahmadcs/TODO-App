@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#222a3d", "on-surface-variant": "#c7c4d8", "on-tertiary-fixed-variant": "#5516be", "surface-bright": "#31394d", "on-tertiary-fixed": "#23005c", "on-tertiary-container": "#e3d5ff", "inverse-primary": "#4d44e3", "secondary-fixed": "#89f5e7", "surface-dim": "#0b1326", "primary-fixed-dim": "#c3c0ff", "primary-fixed": "#e2dfff", "on-secondary-fixed-variant": "#005049", "outline-variant": "#464555", "inverse-on-surface": "#283044", "on-secondary-fixed": "#00201d", "surface": "#0b1326", "tertiary-container": "#6f3dd9", "surface-container-lowest": "#060e20", "surface-container": "#171f33", "surface-variant": "#2d3449", "primary-container": "#4f46e5", "secondary-container": "#29a195", "error": "#ffb4ab", "on-primary": "#1d00a5", "on-primary-fixed": "#0f0069", "surface-container-low": "#131b2e", "inverse-surface": "#dae2fd", "secondary-fixed-dim": "#6bd8cb", "tertiary-fixed": "#e9ddff", "secondary": "#6bd8cb", "on-secondary-container": "#00302b", "on-primary-fixed-variant": "#3323cc", "error-container": "#93000a", "surface-container-highest": "#2d3449", "background": "#0b1326", "on-primary-container": "#dad7ff", "on-error": "#690005", "primary": "#c3c0ff", "on-surface": "#dae2fd", "on-error-container": "#ffdad6", "tertiary-fixed-dim": "#d0bcff", "surface-tint": "#c3c0ff", "on-tertiary": "#3c0091", "outline": "#918fa1", "on-background": "#dae2fd", "tertiary": "#d0bcff", "on-secondary": "#003732" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2rem", "space-lg": "1.25rem", "margin": "1rem", "space-sm": "0.5rem", "space-md": "0.75rem", "gutter": "1rem", "space-xs": "0.25rem", "gutter-lg": "2rem", "gutter-md": "1.5rem", "margin-md": "1.5rem", "margin-lg": "2.5rem" }, "fontFamily": { "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-lg": ["Inter"], "label-sm": ["Inter"], "body-sm": ["Inter"], "label-md": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "mono-code": ["JetBrains Mono"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, "fontSize": { "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "mono-code": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Modern minimalist geometric monogram logo for Afaq TaskFlow productivity app featuring an interlocking geometric 'A' and task flow chevron in indigo and slate. Brand logo. - Primary color: #4f46e5
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UlFO8CtzGaaTTSgFuXvp0FNnDkaygbohp3jwKv69AtRS8vEAZn4IeFOw-Uijw10mVi8q4_SQBf5ZcHqzzoZC9qIMRmdxVM-lqSBWMzUjkExZD6JGHDy1BBQRTVKpMIPz8bYO6lUCKXiH8pBkW4_Q7wYNWNHzznssg81cKjYc-LP7AzeZLbSd1mSZ3Ul9tFfJJgUJlYndCHQ3hiDH5TfwwuuhD3bNXBjRKHmXI6PphtqhavzJ2Czupl9PMS"/><button aria-label="Switch Workspace" class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high text-tertiary min-h-[32px] max-w-[140px] truncate" type="button"><span class="text-tertiary text-xs leading-none">•</span><span class="font-label-sm text-label-sm tracking-wider uppercase truncate">PERSONAL</span><span class="material-symbols-outlined text-xs text-on-surface-variant shrink-0">expand_more</span></button></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Search workspace" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl">search</span></button><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface transition-colors relative" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-tertiary ring-2 ring-surface"></span></button><div class="flex items-center justify-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg select-none">
+<!-- Workspace Header & Quick Tone Indicator -->
+<div class="flex flex-col gap-space-xs pt-2">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider">Creator Studio</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">sync</span>
+<span class="font-mono-code text-mono-code">LIVE SYNC</span>
+</div>
+</div>
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface tracking-tight mt-1">Personal Workspace</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Vlog &amp; Social Content Pipeline</p>
+</div>
+<!-- 2x2 Metric Grid Bento -->
+<div class="grid grid-cols-2 gap-space-md">
+<!-- Metric 1: Vlog Progress -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-3 -top-3 w-16 h-16 rounded-full bg-tertiary/10 blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wide">Today's Vlog</span>
+<span class="material-symbols-outlined text-base text-tertiary">videocam</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">EP #42</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Recording</span>
+<span class="font-mono-code text-mono-code text-tertiary">67%</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full transition-all duration-500" style="width: 67%"></div>
+</div>
+</div>
+<!-- Metric 2: Timeline Status -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wide">Timeline</span>
+<span class="material-symbols-outlined text-base text-secondary">content_cut</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">18m Cut</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-secondary">A-Roll locked</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<!-- Metric 3: Multi-Platform Publishing -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wide">Publishing</span>
+<span class="material-symbols-outlined text-base text-primary">public</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">3 / 5 Live</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 truncate">IG, YT, TikTok ready</p>
+</div>
+<div class="flex items-center gap-1 mt-3">
+<div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+<div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+<div class="h-1.5 flex-1 rounded-full bg-tertiary"></div>
+<div class="h-1.5 flex-1 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 flex-1 rounded-full bg-surface-container-highest"></div>
+</div>
+</div>
+<!-- Metric 4: Target Cadence -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wide">Weekly Goal</span>
+<span class="material-symbols-outlined text-base text-tertiary-fixed-dim">verified</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">6 Videos</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Target: <span class="text-on-surface">7 uploads</span></p>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</div>
+<!-- Vlog Pipeline Carousel / Rail -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Pipeline Stages</span>
+<span class="font-mono-code text-mono-code text-tertiary">9 PHASES</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-margin px-margin py-1" id="pipeline-rail">
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Idea</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">3</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Planned</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">2</span>
+</button>
+<!-- Active Stage -->
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-tertiary-container text-on-tertiary-container shadow-sm active:scale-95 transition-transform flex items-center gap-1.5 ring-offset-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+<span class="font-semibold">Recording</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container-lowest text-tertiary">2</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Footage Ready</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">1</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Editing</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">2</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Thumbnail</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">1</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Caption</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">2</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Ready</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">1</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-label-md text-label-md whitespace-nowrap bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform flex items-center gap-1.5">
+<span>Published</span>
+<span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded-full bg-surface-container">8</span>
+</button>
+</div>
+</div>
+<!-- Special Section: "My Web Development Journey" Cross-Link Card -->
+<div class="relative bg-gradient-to-br from-surface-container to-surface-container-high rounded-xl p-space-md shadow-md overflow-hidden">
+<div class="absolute right-0 top-0 w-28 h-28 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-md bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">terminal</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wide">Connected Code Journey</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-mono-code text-[11px] bg-secondary/15 text-secondary">
+        DAY 12
+      </span>
+</div>
+<div class="bg-surface-container-lowest/80 rounded-lg p-space-sm flex flex-col gap-2">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span>Dev Task</span>
+<span>•</span>
+<span class="text-secondary font-mono-code">feat/nav-responsive</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface truncate mt-0.5">Build responsive navigation bar</p>
+</div>
+<span class="material-symbols-outlined text-tertiary text-lg shrink-0 mt-0.5">sync_alt</span>
+</div>
+<div class="flex items-center justify-between pt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="truncate">Vlog: "Building portfolio website — Day 12"</span>
+</div>
+</div>
+<!-- Live Sync Indicators -->
+<div class="flex items-center justify-between mt-3 text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">commit</span>
+<span>Synced with GitHub</span>
+</div>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm">smart_display</span>
+<span>4K Screen Ingested</span>
+</div>
+</div>
+</div>
+<!-- Detailed Vlog Entry Card (Interactive Expandable) -->
+<div class="flex flex-col bg-surface-container rounded-xl shadow-md overflow-hidden transition-all duration-300" id="vlog-inspection-card">
+<!-- Header of the Card -->
+<div class="p-space-md flex flex-col gap-2 cursor-pointer" id="toggle-card-btn">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md font-mono-code text-mono-code bg-tertiary-container text-on-tertiary-container">ACTIVE RECORDING</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today • Sep 15</span>
+</div>
+<button aria-label="Toggle details" class="text-on-surface-variant hover:text-on-surface transition-transform duration-300" id="card-caret" type="button">
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+</div>
+<div class="flex items-baseline justify-between gap-2">
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">EP #42: Building Website &amp; Office Sprint</h2>
+</div>
+<!-- Quick Media Asset Preview Strip -->
+<div class="grid grid-cols-2 gap-2 mt-1">
+<div class="relative h-20 rounded-lg overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Clean desk workstation with mechanical keyboard, curved monitor showing dark code editor, and soft violet LED rim lighting in a minimal creator studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuAD18i1Kcn7Tm6_c7Uz6YINFfoza0NhCVGgTpHMeT_Jkqsx4faZVZtz23El5iqQNBIhADMTfsFPG2wI5t-hvjePLz2YTtcdRgq0KOVfB3KJSFBWCSak1emvHFGz6_1A6cMvglnz_TU5UyA2xzpvc7W52hKhmPFuYXN9jmxigrwXE-fDH9wN80hqY4pOIAqP6wBIfo988OA37DRmvlpxKW0uusBRGbz6kZAmzCiZwGz2ODd_tTX80-bQ"/>
+<div class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded font-mono-code text-[10px] bg-surface-container-lowest/80 text-on-surface">B-ROLL A</div>
+</div>
+<div class="relative h-20 rounded-lg overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close up photography of camera lens and audio interface with glowing level meters in a moody slate tech office environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDarLXrh8IbM0woNIv_uq4xLlx_EGjNiGI-0zo0DNI4eG1NG7dq7Gc4iaFKUQ-E-60MhVhsMZTdVOTM64eOvq4_9bdD8Pblp1Y2xWEWVvl_Mdox8RSU3HK1_ZNJRzDhheFtQZaHFgI1LCzHatVwzb-kpTxw6_XpB3NyeltTPvcLneo8eN8pavOlDlA3uNNdKQaI1xehb8JSn4EpieFFZnHVpSunu8MnsUeWoL2AaiOPpvwVnOlyCNN2Ww"/>
+<div class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded font-mono-code text-[10px] bg-surface-container-lowest/80 text-secondary">AUDIO INGEST</div>
+</div>
+</div>
+</div>
+<!-- Expanded Content Area -->
+<div class="px-space-md pb-space-md flex flex-col gap-space-md" id="card-expanded-drawer">
+<!-- Recording Checklist Sub-panel -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Recording Checklist</span>
+<span class="font-mono-code text-mono-code text-tertiary" id="checklist-counter">3/4 Done</span>
+</div>
+<div class="flex flex-col gap-2 mt-1" id="recording-items">
+<!-- Checkbox Item 1 -->
+<label class="flex items-center gap-2.5 cursor-pointer py-0.5">
+<input checked="" class="task-checkbox hidden" type="checkbox"/>
+<div class="w-4 h-4 rounded bg-tertiary flex items-center justify-center text-on-tertiary shrink-0">
+<span class="material-symbols-outlined text-xs leading-none">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through opacity-70">Desk setup B-roll (Slider shots)</span>
+</label>
+<!-- Checkbox Item 2 -->
+<label class="flex items-center gap-2.5 cursor-pointer py-0.5">
+<input checked="" class="task-checkbox hidden" type="checkbox"/>
+<div class="w-4 h-4 rounded bg-tertiary flex items-center justify-center text-on-tertiary shrink-0">
+<span class="material-symbols-outlined text-xs leading-none">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through opacity-70">College lecture clip (Campus walk)</span>
+</label>
+<!-- Checkbox Item 3 -->
+<label class="flex items-center gap-2.5 cursor-pointer py-0.5">
+<input checked="" class="task-checkbox hidden" type="checkbox"/>
+<div class="w-4 h-4 rounded bg-tertiary flex items-center justify-center text-on-tertiary shrink-0">
+<span class="material-symbols-outlined text-xs leading-none">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through opacity-70">Screen capture 4K code terminal</span>
+</label>
+<!-- Checkbox Item 4 (Unchecked) -->
+<label class="flex items-center gap-2.5 cursor-pointer py-0.5">
+<input class="task-checkbox hidden" type="checkbox"/>
+<div class="w-4 h-4 rounded bg-surface-container-high flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-xs leading-none hidden">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">SM7B voiceover track &amp; outro notes</span>
+</label>
+</div>
+</div>
+<!-- Footage Notes & Hardware Status -->
+<div class="grid grid-cols-2 gap-space-sm text-body-sm">
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-secondary">sd_card</span>
+            Storage Ingest
+          </span>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">48GB SanDisk</p>
+<span class="font-mono-code text-[11px] text-secondary">ProRes Proxy Ready</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-tertiary">brush</span>
+            Thumbnail V1
+          </span>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">PSD Composition</p>
+<span class="font-mono-code text-[11px] text-tertiary">Export Draft v2</span>
+</div>
+</div>
+<!-- Multi-Platform Distribution Checklist -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Social Syndication Matrix</span>
+<span class="font-mono-code text-mono-code text-on-surface-variant">5 CHANNELS</span>
+</div>
+<div class="flex flex-col gap-1.5 mt-1 font-body-sm text-body-sm">
+<!-- YouTube -->
+<div class="flex items-center justify-between py-1 px-1.5 rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary">play_circle</span>
+<span class="text-on-surface">YouTube Longform</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span>
+              Scheduled 7:00 PM
+            </span>
+</div>
+<!-- Instagram -->
+<div class="flex items-center justify-between py-1 px-1.5 rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary">photo_camera</span>
+<span class="text-on-surface">Instagram Reel</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">done_all</span>
+              Published
+            </span>
+</div>
+<!-- TikTok -->
+<div class="flex items-center justify-between py-1 px-1.5 rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary">music_note</span>
+<span class="text-on-surface">TikTok Cut</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">hourglass_top</span>
+              Draft Ready
+            </span>
+</div>
+<!-- Facebook -->
+<div class="flex items-center justify-between py-1 px-1.5 rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">share</span>
+<span class="text-on-surface-variant">Facebook Page</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pending Export</span>
+</div>
+<!-- X (Twitter) -->
+<div class="flex items-center justify-between py-1 px-1.5 rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">tag</span>
+<span class="text-on-surface-variant">X / Twitter Thread</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary">Thread Staged</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Filter Matrix & New Vlog Action Bar -->
+<div class="flex flex-col gap-3">
+<!-- Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-tertiary text-on-tertiary active:scale-95 transition-all" type="button">
+        Active Ep (1)
+      </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+        Social Check
+      </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+        Dev Journey
+      </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">
+        Archive
+      </button>
+</div>
+<!-- Action Primary Button -->
+<button class="w-full py-3.5 px-4 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center gap-2 shadow-lg shadow-indigo-950/40 active:scale-[0.98] transition-transform" type="button">
+<span class="material-symbols-outlined text-xl">video_call</span>
+<span class="font-headline-sm text-headline-sm">+ New Vlog Episode</span>
+</button>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for expandable card and checkboxes
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggle-card-btn');
+    const drawer = document.getElementById('card-expanded-drawer');
+    const caret = document.getElementById('card-caret');
+
+    let expanded = true;
+    if (toggleBtn && drawer && caret) {
+      toggleBtn.addEventListener('click', () => {
+        expanded = !expanded;
+        if (expanded) {
+          drawer.classList.remove('hidden');
+          caret.style.transform = 'rotate(0deg)';
+        } else {
+          drawer.classList.add('hidden');
+          caret.style.transform = 'rotate(-90deg)';
+        }
+      });
+    }
+
+    // Interactive checklist toggle
+    const checkLabels = document.querySelectorAll('#recording-items label');
+    checkLabels.forEach(label => {
+      label.addEventListener('click', (e) => {
+        const checkbox = label.querySelector('.task-checkbox');
+        const boxVisual = label.querySelector('div');
+        const checkIcon = boxVisual.querySelector('span');
+        const textSpan = label.querySelector('span:last-child');
+
+        checkbox.checked = !checkbox.checked;
+        if (checkbox.checked) {
+          boxVisual.className = 'w-4 h-4 rounded bg-tertiary flex items-center justify-center text-on-tertiary shrink-0';
+          checkIcon.classList.remove('hidden');
+          textSpan.classList.add('line-through', 'opacity-70');
+          textSpan.classList.remove('text-on-surface');
+          textSpan.classList.add('text-on-surface-variant');
+        } else {
+          boxVisual.className = 'w-4 h-4 rounded bg-surface-container-high flex items-center justify-center text-tertiary shrink-0';
+          checkIcon.classList.add('hidden');
+          textSpan.classList.remove('line-through', 'opacity-70', 'text-on-surface-variant');
+          textSpan.classList.add('text-on-surface');
+        }
+      });
+    });
+
+    // Quick filter pill toggles
+    const filterPills = document.querySelectorAll('.filter-pill');
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => {
+          p.classList.remove('bg-tertiary', 'text-on-tertiary');
+          p.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+        });
+        pill.classList.add('bg-tertiary', 'text-on-tertiary');
+        pill.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      });
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_16px_rgba(0,0,0,0.25)]" data-active-classes="text-tertiary font-medium"><div class="h-16 px-space-xs flex items-center justify-around relative"><a aria-label="Dashboard" class="flex flex-col items-center justify-center min-w-[56px] h-14 gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="font-label-sm text-label-sm">Dashboard</span></a><a aria-label="My Tasks" class="flex flex-col items-center justify-center min-w-[56px] h-14 gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-tasks" href="#"><span class="material-symbols-outlined text-xl">check_circle</span><span class="font-label-sm text-label-sm">Tasks</span></a><div class="relative -top-5 flex items-center justify-center"><button aria-label="Create new task" class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container shadow-[0_8px_16px_rgba(79,70,229,0.35)] flex items-center justify-center active:scale-95 transition-transform" type="button"><span class="material-symbols-outlined text-2xl font-semibold">add</span></button></div><a aria-label="Calendar" class="flex flex-col items-center justify-center min-w-[56px] h-14 gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" data-path="calendar" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="font-label-sm text-label-sm">Calendar</span></a><a aria-current="page" aria-label="Workspaces" class="flex flex-col items-center justify-center min-w-[56px] h-14 gap-0.5 transition-colors text-tertiary font-medium" data-path="workspaces" href="#"><span class="material-symbols-outlined text-xl">domain</span><span class="font-label-sm text-label-sm">Workspaces</span></a></div></nav></body></html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed": "#0f0069", "surface-variant": "#2d3449", "secondary-container": "#29a195", "inverse-surface": "#dae2fd", "tertiary-container": "#6f3dd9", "on-tertiary-fixed": "#23005c", "on-surface": "#dae2fd", "outline": "#918fa1", "tertiary-fixed": "#e9ddff", "on-secondary-fixed": "#00201d", "on-secondary": "#003732", "on-background": "#dae2fd", "surface-container": "#171f33", "primary-fixed": "#e2dfff", "inverse-primary": "#4d44e3", "on-tertiary-fixed-variant": "#5516be", "error-container": "#93000a", "on-tertiary": "#3c0091", "primary-fixed-dim": "#c3c0ff", "on-secondary-container": "#00302b", "surface-tint": "#c3c0ff", "on-tertiary-container": "#e3d5ff", "primary-container": "#4f46e5", "surface-container-highest": "#2d3449", "on-secondary-fixed-variant": "#005049", "tertiary-fixed-dim": "#d0bcff", "secondary-fixed": "#89f5e7", "primary": "#c3c0ff", "tertiary": "#d0bcff", "surface": "#0b1326", "surface-dim": "#0b1326", "secondary": "#6bd8cb", "outline-variant": "#464555", "on-primary": "#1d00a5", "on-error": "#690005", "on-primary-container": "#dad7ff", "error": "#ffb4ab", "surface-container-low": "#131b2e", "surface-container-lowest": "#060e20", "inverse-on-surface": "#283044", "secondary-fixed-dim": "#6bd8cb", "surface-container-high": "#222a3d", "on-surface-variant": "#c7c4d8", "background": "#0b1326", "on-primary-fixed-variant": "#3323cc", "surface-bright": "#31394d", "on-error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "space-md": "0.75rem", "space-sm": "0.5rem", "margin-md": "1.5rem", "gutter-lg": "2rem", "margin": "1rem", "space-xl": "2rem", "margin-lg": "2.5rem", "space-lg": "1.25rem", "gutter-md": "1.5rem", "gutter": "1rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "label-md": [ "Inter" ], "headline-xl": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "mono-code": [ "JetBrains Mono" ] }, "fontSize": { "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" } ], "body-md": [ "14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-xl-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "mono-code": [ "12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-low z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="flex flex-col flex-1 overflow-y-auto px-4 pt-4 pb-2"><div class="flex items-center gap-3 px-2 mb-6"><img alt="Modern minimalist geometric monogram logo for Afaq TaskFlow productivity app featuring an interlocking geometric 'A' and task flow chevron in indigo and slate. Brand logo. - Primary color: #4f46e5
+- Font: plusJakartaSans
+- Mode: dark
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UlFO8CtzGaaTTSgFuXvp0FNnDkaygbohp3jwKv69AtRS8vEAZn4IeFOw-Uijw10mVi8q4_SQBf5ZcHqzzoZC9qIMRmdxVM-lqSBWMzUjkExZD6JGHDy1BBQRTVKpMIPz8bYO6lUCKXiH8pBkW4_Q7wYNWNHzznssg81cKjYc-LP7AzeZLbSd1mSZ3Ul9tFfJJgUJlYndCHQ3hiDH5TfwwuuhD3bNXBjRKHmXI6PphtqhavzJ2Czupl9PMS"/><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight">Afaq TaskFlow</span><span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container font-mono-code text-[10px] uppercase font-semibold leading-none">PRO</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Workspace Engine</span></div></div><div class="space-y-6"><section><span class="px-2 font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Overview &amp; Views</span><nav class="mt-2 space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px]">dashboard</span><span>Dashboard</span></div></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="my-tasks" href="#"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px]">task_alt</span><span>My Tasks</span></div><span class="px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface font-mono-code text-[10px] font-semibold">12</span></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="calendar" href="#"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span>Calendar</span></div></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="recurring-tasks" href="#"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px]">repeat</span><span>Recurring Tasks</span></div></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[18px]">insights</span><span>Analytics</span></div></a></nav></section><section><div class="flex items-center justify-between px-2"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Workspaces</span><span class="material-symbols-outlined text-[16px] text-outline cursor-pointer hover:text-on-surface">add</span></div><nav class="mt-2 space-y-1" data-active-classes="bg-surface-container-high text-on-surface font-medium rounded-lg shadow-[inset_2px_0_0_0_#4f46e5]"><a aria-current="page" class="group flex items-center justify-between px-2.5 py-2 bg-surface-container-high text-on-surface font-medium rounded-lg shadow-[inset_2px_0_0_0_#4f46e5]" data-path="workspace-office" href="#"><div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-primary-container ring-2 ring-primary/20"></span><span class="truncate">Office</span></div><span class="font-mono-code text-[11px] text-on-surface-variant">8 pgs</span></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="workspace-personal" href="#"><div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span class="truncate">Personal</span></div><span class="font-label-sm text-[11px] text-outline truncate max-w-[64px]">Vlog</span></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="workspace-college" href="#"><div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-secondary-container"></span><span class="truncate">College</span></div><span class="font-label-sm text-[11px] text-outline truncate max-w-[64px]">Academics</span></a><a class="group flex items-center justify-between px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="workspace-web-dev" href="#"><div class="flex items-center gap-2.5"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="truncate">Web Dev</span></div><span class="font-label-sm text-[11px] text-outline truncate max-w-[64px]">Tech</span></a></nav></section><section><span class="px-2 font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Workspace Tools</span><nav class="mt-2 space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><a class="group flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="tools-projects" href="#"><span class="material-symbols-outlined text-[18px]">folder_special</span><span>Projects</span></a><a class="group flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="tools-notes-docs" href="#"><span class="material-symbols-outlined text-[18px]">article</span><span>Notes &amp; Docs</span></a><a class="group flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="tools-media-library" href="#"><span class="material-symbols-outlined text-[18px]">perm_media</span><span>Media Library</span></a></nav></section></div></div><div class="p-3 bg-surface-container-lowest/80 mx-3 mb-4 rounded-xl flex items-center justify-between"><div class="flex items-center gap-2.5 min-w-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-semibold truncate">Afaq Ahmad</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Pro Creator</span></div></div><a class="p-1.5 text-on-surface-variant hover:text-on-surface rounded-lg hover:bg-surface-container-high transition-colors flex items-center justify-center" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span></a></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/85 backdrop-blur-xl z-30 shadow-[0_1px_8px_rgba(0,0,0,0.18)] flex items-center justify-between px-6"><div class="flex items-center gap-4"><div class="flex items-center gap-2 font-label-md text-label-md"><span class="text-on-surface-variant">Workspace</span><span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span><div class="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-surface-container-high"><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="font-semibold text-on-surface">Office</span><span class="hidden md:inline font-body-sm text-body-sm text-on-surface-variant">(Social Media &amp; Visual Production)</span></div></div></div><div class="flex-1 max-w-md mx-6"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-[18px] text-outline">search</span><input class="w-full pl-9 pr-14 py-1.5 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search tasks, docs, projects..." type="text"/><div class="absolute right-2.5 flex items-center gap-0.5 pointer-events-none"><kbd class="font-mono-code text-[10px] text-outline bg-surface-container-highest px-1.5 py-0.5 rounded">⌘K</kbd></div></div></div><div class="flex items-center gap-3"><button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">sync_alt</span></button><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span></button><button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">dark_mode</span></button><button class="flex items-center gap-1.5 px-3 py-1.5 bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-label-md text-label-md font-semibold rounded-lg shadow-sm transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span>Add Content Task</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant ml-1 cursor-pointer" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/></div></header><main class="w-full flex-1 pt-16 bg-surface px-8"><div class="flex flex-col w-full">
+<!-- Top Hub Navigation & Breadcrumb Meta -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-mono-code text-label-sm uppercase tracking-wider">Production Engine</span>
+<span class="text-outline text-label-sm">•</span>
+<span class="text-on-surface-variant font-label-sm">Updated 4 mins ago</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Office Workspace</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Daily social-media content production &amp; multi-channel campaign publishing pipeline.</p>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex items-center gap-2.5 flex-wrap">
+<div class="flex items-center bg-surface-container-low p-1 rounded-xl shadow-sm">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">view_kanban</span>
+<span>Board</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">format_list_bulleted</span>
+<span>List</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">checklist</span>
+<span>Daily Checklist</span>
+</button>
+</div>
+<button class="p-2 bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-xl transition-colors shadow-sm flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+<button class="px-3.5 py-2 bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-label-md text-label-md font-semibold rounded-xl flex items-center gap-2 shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>New Content Task</span>
+</button>
+</div>
+</div>
+<!-- KPI Summary Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3.5">
+<!-- KPI 1 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none group-hover:bg-primary/10 transition-all"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Today's Tasks</span>
+<span class="p-1.5 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">18 Active</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="font-mono-code text-[11px] text-secondary bg-secondary/10 px-1.5 py-0.5 rounded font-semibold">+3 scheduled</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">across 8 channels</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-secondary/5 rounded-full blur-xl pointer-events-none group-hover:bg-secondary/10 transition-all"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Completed</span>
+<span class="p-1.5 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">9 Done</span>
+</div>
+<div class="flex items-center gap-2 mt-1.5">
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 50%"></div>
+</div>
+<span class="font-mono-code text-[11px] text-secondary font-semibold">50%</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-tertiary/5 rounded-full blur-xl pointer-events-none group-hover:bg-tertiary/10 transition-all"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Pending Pipeline</span>
+<span class="p-1.5 rounded-lg bg-surface-container-high text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">hourglass_top</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">8 Remaining</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 in Review approval</span>
+</div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-error/5 rounded-full blur-xl pointer-events-none group-hover:bg-error/10 transition-all"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Overdue &amp; Urgent</span>
+<span class="p-1.5 rounded-lg bg-error-container/20 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">priority_high</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-error">1 Urgent</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="font-mono-code text-[11px] text-error bg-error/10 px-1.5 py-0.5 rounded font-medium">Needs export</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">Shooting Page</span>
+</div>
+</div>
+</div>
+<!-- KPI 5 -->
+<div class="p-4 rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary-container/10 rounded-full blur-xl pointer-events-none group-hover:bg-primary-container/20 transition-all"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Productivity Score</span>
+<span class="p-1.5 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-amber-400">local_fire_department</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">92%</span>
+<span class="font-mono-code text-[11px] text-secondary font-medium">Top 5%</span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant font-label-sm text-label-sm">
+<span>🔥 8-day publishing streak</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Status Drawer / Strip for 8 Office Pages -->
+<div class="p-3.5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="flex items-center justify-between mb-3 px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">hub</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Daily Publishing Matrix (8 Pages)</span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant font-mono-code text-[11px] rounded-full">4 / 8 Dispatched</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm flex items-center gap-1 transition-colors" type="button">
+<span>Expand Checklist Details</span>
+<span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-2">
+<!-- Page 1 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Shooting</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<span class="font-body-sm text-[11px] text-secondary line-clamp-1">Reel uploaded</span>
+</div>
+<!-- Page 2 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Ismail Fans</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<span class="font-body-sm text-[11px] text-secondary line-clamp-1">Daily clip live</span>
+</div>
+<!-- Page 3 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">ZK Production</span>
+<span class="material-symbols-outlined text-[16px] text-primary">timelapse</span>
+</div>
+<span class="font-body-sm text-[11px] text-primary line-clamp-1">Color grade</span>
+</div>
+<!-- Page 4 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Jahangir Khan</span>
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-clamp-1">Today 4:00 PM</span>
+</div>
+<!-- Page 5 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Inaya Kailash</span>
+<span class="material-symbols-outlined text-[16px] text-outline">pending</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-clamp-1">Media pending</span>
+</div>
+<!-- Page 6 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Political Affairs</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<span class="font-body-sm text-[11px] text-secondary line-clamp-1">Digest live</span>
+</div>
+<!-- Page 7 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Nazia Iqbal</span>
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant line-clamp-1">Evening 8:00 PM</span>
+</div>
+<!-- Page 8 -->
+<div class="p-2.5 rounded-xl bg-surface-container flex flex-col gap-1.5 transition-transform hover:-translate-y-0.5 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-tertiary truncate">Suno Music</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">palette</span>
+</div>
+<span class="font-body-sm text-[11px] text-tertiary line-clamp-1">Cover art rev</span>
+</div>
+</div>
+</div>
+<!-- Page Horizontal Interactive Filter Tab Bar -->
+<div class="flex items-center justify-between gap-4 overflow-x-auto pb-1 scrollbar-none">
+<div class="flex items-center gap-1.5 min-w-max">
+<!-- Tab All -->
+<button class="px-3 py-1.5 rounded-xl bg-primary-container text-on-primary-container font-label-md text-label-md font-semibold flex items-center gap-2 shadow-sm" type="button">
+<span>All Pages</span>
+<span class="px-1.5 py-0.2 rounded-full bg-on-primary-container text-primary-container font-mono-code text-[11px]">18</span>
+</button>
+<!-- Tab 1 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Shooting Page</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span>
+</button>
+<!-- Tab 2 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Ismail Shahid Fans</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span>
+</button>
+<!-- Tab 3 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>ZK Production</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest font-mono-code text-[10px]">In Prog</span>
+</button>
+<!-- Tab 4 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Jahangir Khan</span>
+</button>
+<!-- Tab 5 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Inaya Kailash</span>
+</button>
+<!-- Tab 6 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Political Affairs</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span>
+</button>
+<!-- Tab 7 -->
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Nazia Iqbal Fanz</span>
+</button>
+<!-- Tab 8 (Special Suno) -->
+<button class="px-3 py-1.5 rounded-xl bg-tertiary-container/20 text-tertiary font-label-md text-label-md font-semibold flex items-center gap-2 transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[14px]">graphic_eq</span>
+<span>Suno Music</span>
+<span class="px-1.5 py-0.2 rounded-full bg-tertiary-container text-on-tertiary font-mono-code text-[10px]">4 Assets</span>
+</button>
+</div>
+<!-- Platform filter chips -->
+<div class="flex items-center gap-1.5 shrink-0 pl-2">
+<span class="text-outline font-mono-code text-[11px] uppercase mr-1">Platform:</span>
+<button class="px-2 py-1 rounded-lg bg-surface-container text-on-surface font-mono-code text-[11px] hover:bg-surface-container-high transition-colors" type="button">Reels</button>
+<button class="px-2 py-1 rounded-lg bg-surface-container text-on-surface font-mono-code text-[11px] hover:bg-surface-container-high transition-colors" type="button">TikTok</button>
+<button class="px-2 py-1 rounded-lg bg-surface-container text-on-surface font-mono-code text-[11px] hover:bg-surface-container-high transition-colors" type="button">Shorts</button>
+</div>
+</div>
+</div>
+<!-- Suno Music Pipeline Spotlight Accordion Card -->
+<div class="mb-8 rounded-3xl bg-surface-container-low p-6 shadow-md relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 bg-tertiary-container/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 relative z-10">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container flex items-center justify-center text-on-tertiary-container shadow-md">
+<span class="material-symbols-outlined text-[28px]">graphic_eq</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Suno Music • Visual &amp; Audio Production Pipeline</h2>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary font-mono-code text-[11px] font-semibold">Priority Track</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Generative track mastering, 9:16 vertical canvas loop designs &amp; YouTube visualizers.</p>
+</div>
+</div>
+<!-- Pipeline stages flow pill -->
+<div class="flex items-center gap-1.5 bg-surface-container p-1.5 rounded-2xl overflow-x-auto shadow-inner">
+<span class="px-2.5 py-1 rounded-xl bg-surface-container-high text-on-surface-variant font-mono-code text-[11px]">Brief (1)</span>
+<span class="text-outline text-[12px]">→</span>
+<span class="px-2.5 py-1 rounded-xl bg-surface-container-high text-on-surface-variant font-mono-code text-[11px]">Assets (2)</span>
+<span class="text-outline text-[12px]">→</span>
+<span class="px-2.5 py-1 rounded-xl bg-tertiary-container text-on-tertiary-container font-mono-code text-[11px] font-semibold">Design (1)</span>
+<span class="text-outline text-[12px]">→</span>
+<span class="px-2.5 py-1 rounded-xl bg-surface-container-high text-on-surface-variant font-mono-code text-[11px]">Review (1)</span>
+<span class="text-outline text-[12px]">→</span>
+<span class="px-2.5 py-1 rounded-xl bg-surface-container-high text-on-surface-variant font-mono-code text-[11px]">Export (1)</span>
+<span class="text-outline text-[12px]">→</span>
+<span class="px-2.5 py-1 rounded-xl bg-secondary-container/20 text-secondary font-mono-code text-[11px]">Delivered (3)</span>
+</div>
+</div>
+<!-- 3 Dynamic Suno Asset Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+<!-- Suno Card 1 -->
+<div class="p-4 rounded-2xl bg-surface-container flex flex-col justify-between group hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex flex-col gap-3">
+<div class="relative w-full h-36 rounded-xl overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vibrant modern synthwave neon album cover art with retro-futuristic grid and purple glowing sun, designed for Suno digital music release" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ-fX_mwH9nHa1M65lohHFUErFIn_1trm8rfDMiUhwWYgFL-HZZFfSFsf00vab5UFF94xVfPFYROTX33voQXUa9tRPbR0d-cs-WSOTdect29RtkhtxBvpO9TOZtUzSST3wlfbJENsINeKoy12CeZavBYtLPLE5HqVfyU7RnzO40_HfSRldTUqufk71dJ6COf-jDITvbBEtANXBUism1TysLtAiwSFxQX5SgB329jmbF11m_9M4GsLTog"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-lg bg-surface/80 backdrop-blur-md text-tertiary font-mono-code text-[10px] uppercase font-semibold">Stage: In Design</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-lg bg-surface/80 backdrop-blur-md text-on-surface font-mono-code text-[11px]">v3 Final Cut</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-tertiary transition-colors">Album Cover Art v3 - Synthwave Track</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">High-contrast neon typography &amp; Spotify 3000x3000px artwork package.</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-4 pt-3 bg-surface-container-low/50 px-2 rounded-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary">format_paint</span>
+<span class="font-label-sm text-label-sm text-on-surface">Photoshop / Midjourney</span>
+</div>
+<span class="font-mono-code text-[11px] text-secondary font-medium">Due 03:00 PM</span>
+</div>
+</div>
+<!-- Suno Card 2 -->
+<div class="p-4 rounded-2xl bg-surface-container flex flex-col justify-between group hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex flex-col gap-3">
+<div class="relative w-full h-36 rounded-xl overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Seamless looping 9 to 16 digital motion canvas depicting fluid holographic waves and violet iridescent particles in dark space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ1pxruS1msxXaxqEpEF07bAUlp1VtUNFrt98xoFVKqxCeKhsfYXRl4JXDAc2avOlwgda7XxGx2dtx64_SxtSh43OJyr1ogXFPd2oaxNXdAfGn7oY1EXLxaag6OIh5PtVatWjOrO6LOjq5RxkSnQb0DY9N4YN83Jhqk-qxvz1ZhhITym5snQM4BEC6QNoWJQxtE-EO8-clG7K_zvtrlBbVjCJQ_cZf7nBOnbqd77WtDRj5uL0EPXnxcQ"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-lg bg-surface/80 backdrop-blur-md text-secondary font-mono-code text-[10px] uppercase font-semibold">Stage: In Review</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-lg bg-surface/80 backdrop-blur-md text-on-surface font-mono-code text-[11px]">9:16 Vertical</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-secondary transition-colors">Animated Canvas Loop (Spotify 9:16)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">8-second seamless fluid motion graphics for mobile streaming background.</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-4 pt-3 bg-surface-container-low/50 px-2 rounded-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">animation</span>
+<span class="font-label-sm text-label-sm text-on-surface">After Effects Loop</span>
+</div>
+<span class="font-mono-code text-[11px] text-outline font-medium">Pending Review</span>
+</div>
+</div>
+<!-- Suno Card 3 -->
+<div class="p-4 rounded-2xl bg-surface-container flex flex-col justify-between group hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex flex-col gap-3">
+<div class="relative w-full h-36 rounded-xl overflow-hidden bg-surface-container-lowest">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Audio visualizer spectrum interface glowing in cyan and ultraviolet across wide 4K dark studio monitor layout with reactive waveform spikes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNT13ttGKyfSvZJ66LkEDx2HIDS-LVCHsF-IAD1R9AGx1d1MIMMouMg1ncKi4BsvaTYZuYnQuaxkN9sWZINZE9PtV6qFdhhlRTWCE73S1XhjZX4W-BPGUksVNBg3SakowZqunwEKj28We56yVZCR9AEM0Op90vS9cjRW8Ua9AMqS1BAJQW9qvmuM-CG2mo1bKyVZmlAbkuvbEXP-SGnilMTaCSOg6xCD9OUyl5V4QiUBlZyu6tA2L0lA"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-lg bg-surface/80 backdrop-blur-md text-primary font-mono-code text-[10px] uppercase font-semibold">Stage: Queued Render</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-lg bg-surface/80 backdrop-blur-md text-on-surface font-mono-code text-[11px]">3840x2160 60fps</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary transition-colors">YouTube Audio Visualizer 4K</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Reactive audio waveform overlay with dynamic particle lighting for full song drop.</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-4 pt-3 bg-surface-container-low/50 px-2 rounded-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">play_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Premiere Media Encoder</span>
+</div>
+<span class="font-mono-code text-[11px] text-primary font-medium">Auto-dispatch</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 6-Stage Content Workflow Kanban Board -->
+<div class="flex flex-col gap-4 mb-12">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2.5">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Content Production Stages</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono-code text-[11px]">Active Board</span>
+</div>
+<div class="flex items-center gap-2 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+<span>Drag cards to transition status</span>
+</div>
+</div>
+<!-- Kanban Grid (6 Horizontal Columns on desktop, responsive reflow) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 items-start">
+<!-- COLUMN 1: IDEAS -->
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-container-low p-3.5 shadow-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">Ideas</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-code text-[11px] font-semibold">3</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 1.1 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-[11px] font-semibold">ZK Production</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Behind-the-scenes B-roll for ZK Production set</p>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">#reels</span>
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">#cinematic</span>
+</div>
+<div class="flex items-center justify-between pt-2 text-outline">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">videocam</span>
+<span class="font-label-sm text-[11px]">B-Roll 4K</span>
+</div>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+<!-- Card 1.2 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[11px] font-semibold">Ismail Shahid Fans</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Meme reel concept for Ismail Shahid Fans</p>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">#comedy</span>
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">#viral</span>
+</div>
+<div class="flex items-center justify-between pt-2 text-outline">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">smart_display</span>
+<span class="font-label-sm text-[11px]">Archive Ep. 42</span>
+</div>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+<!-- Card 1.3 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[11px] font-semibold">Political Affairs</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Weekly debate teaser audio snippet &amp; pull quotes</p>
+<div class="flex items-center justify-between pt-2 text-outline">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">mic</span>
+<span class="font-label-sm text-[11px]">Audio Clip</span>
+</div>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Idea</span>
+</button>
+</div>
+<!-- COLUMN 2: TODO -->
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-container-low p-3.5 shadow-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">To Do</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-code text-[11px] font-semibold">3</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 2.1 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-[11px] font-semibold">Jahangir Khan</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Select today's reel footage from interview card B</p>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-mono-code text-[10px]">Est 20m</span>
+<div class="flex items-center gap-1 text-on-surface font-label-sm text-[11px]">
+<span class="material-symbols-outlined text-[14px] text-primary">person</span>
+<span>Afaq</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1 text-outline">
+<span class="font-mono-code text-[10px] text-secondary">Slot: 04:00 PM</span>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+<!-- Card 2.2 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-[11px] font-semibold">Inaya Kailash</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Create thumbnail for Inaya Kailash poetry reel</p>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">1080x1920</span>
+<span class="font-mono-code text-[10px] text-tertiary bg-tertiary/10 px-1.5 py-0.5 rounded">Figma</span>
+</div>
+<div class="flex items-center justify-between pt-1 text-outline">
+<span class="font-mono-code text-[10px] text-outline">Needs raw asset</span>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+<!-- Card 2.3 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-[11px] font-semibold">Nazia Iqbal Fanz</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Write caption &amp; hashtags for vintage concert throwback</p>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">#pashto</span>
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">#music</span>
+</div>
+<div class="flex items-center justify-between pt-1 text-outline">
+<span class="font-mono-code text-[10px] text-outline">Due 06:30 PM</span>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Task</span>
+</button>
+</div>
+<!-- COLUMN 3: IN PROGRESS -->
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-container-low p-3.5 shadow-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">In Progress</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-mono-code text-[11px] font-semibold">2</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 3.1 (Detailed Subtask Checklist) -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-[11px] font-semibold">ZK Production</span>
+<span class="px-1.5 py-0.5 rounded bg-error-container/20 text-error font-mono-code text-[10px] font-semibold">02:30 PM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Edit reel &amp; add dynamic auto-captions with motion pop</p>
+<!-- Subtasks checklist micro-panel -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col gap-1.5 my-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-[11px] text-outline uppercase font-semibold">Subtasks</span>
+<span class="font-mono-code text-[10px] text-primary font-semibold">3 / 5 Done</span>
+</div>
+<div class="flex items-center gap-2 text-[12px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">check_box</span>
+<span class="line-through opacity-75">Select clips</span>
+</div>
+<div class="flex items-center gap-2 text-[12px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">check_box</span>
+<span class="line-through opacity-75">Cut timeline</span>
+</div>
+<div class="flex items-center gap-2 text-[12px] text-primary">
+<span class="material-symbols-outlined text-[14px]">radio_button_checked</span>
+<span class="font-medium">Color grade in progress</span>
+</div>
+<div class="flex items-center gap-2 text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-outline">check_box_outline_blank</span>
+<span>Add captions</span>
+</div>
+<div class="flex items-center gap-2 text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-outline">check_box_outline_blank</span>
+<span>Sound sync</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary font-mono-code text-[9px] flex items-center justify-center font-bold">AF</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">Assigned</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+<!-- Card 3.2 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[11px] font-semibold">Shooting Page</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Video color grade &amp; audio level balance</p>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-mono-code text-[10px] text-on-surface-variant bg-surface-container-highest px-1.5 py-0.5 rounded">4K 60fps</span>
+<span class="font-mono-code text-[10px] text-secondary bg-secondary/10 px-1.5 py-0.5 rounded">DaVinci Resolve</span>
+</div>
+<div class="flex items-center justify-between pt-1 text-outline">
+<span class="font-mono-code text-[10px] text-secondary">Render 85%</span>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Task</span>
+</button>
+</div>
+<!-- COLUMN 4: REVIEW -->
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-container-low p-3.5 shadow-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">Review</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-code text-[11px] font-semibold">2</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 4.1 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-[11px] font-semibold">ZK Production</span>
+<span class="px-1.5 py-0.5 rounded bg-amber-400/10 text-amber-400 font-mono-code text-[10px]">Due 03:30 PM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Client review of sponsored TikTok cut &amp; brand tag placement</p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-mono-code text-[11px]">
+<span class="material-symbols-outlined text-[15px] text-primary">chat_bubble</span>
+<span>2 comments</span>
+</div>
+<span class="font-label-sm text-[11px] text-outline">Awaiting OK</span>
+</div>
+</div>
+<!-- Card 4.2 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[11px] font-semibold">Political Affairs</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Review carousel layout text proofs &amp; headline accuracy</p>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-secondary font-label-sm text-[11px]">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Verified by Editor</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Review Item</span>
+</button>
+</div>
+<!-- COLUMN 5: READY -->
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-container-low p-3.5 shadow-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">Ready</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono-code text-[11px] font-semibold">2</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 5.1 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[11px] font-semibold">Ismail Shahid Fans</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Upload finalized 9:16 reel to Meta Business Scheduler</p>
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-md bg-secondary/15 text-secondary font-mono-code text-[10px] font-semibold">Peak 06:00 PM</span>
+</div>
+<div class="flex items-center justify-between pt-1 text-outline">
+<span class="font-label-sm text-[11px] text-on-surface-variant">Queued automatically</span>
+<span class="material-symbols-outlined text-[16px] hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+<!-- Card 5.2 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-[11px] font-semibold">Shooting Page</span>
+<span class="material-symbols-outlined text-outline text-[16px]">drag_handle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Add verified hashtags &amp; tag collaborators on Instagram reel</p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-mono-code text-[11px] text-secondary">Caption ready</span>
+<span class="material-symbols-outlined text-[16px] text-outline hover:text-on-surface">more_horiz</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Ready Item</span>
+</button>
+</div>
+<!-- COLUMN 6: PUBLISHED -->
+<div class="flex flex-col gap-3 rounded-2xl bg-surface-container-low p-3.5 shadow-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface uppercase tracking-wider">Published</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-mono-code text-[11px] font-semibold">4</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 6.1 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[11px] font-semibold">Shooting Page</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Verify published post &amp; check audio copyright clearance</p>
+<div class="flex items-center justify-between pt-1 text-on-surface-variant font-mono-code text-[11px]">
+<span>11:30 AM Out</span>
+<span class="text-secondary font-semibold">4.2k views</span>
+</div>
+</div>
+<!-- Card 6.2 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-[11px] font-semibold">Ismail Shahid Fans</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Classic Scene 4K Remaster Clip #108</p>
+<div class="flex items-center justify-between pt-1 text-on-surface-variant font-mono-code text-[11px]">
+<span>98% Positive</span>
+<span class="text-secondary font-semibold">12.8k views</span>
+</div>
+</div>
+<!-- Card 6.3 -->
+<div class="p-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm flex flex-col gap-2.5 cursor-grab active:cursor-grabbing">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[11px] font-semibold">Political Affairs</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">Morning Roundup Reel &amp; Policy Graphic Infographic</p>
+<div class="flex items-center justify-between pt-1 text-on-surface-variant font-mono-code text-[11px]">
+<span>Published</span>
+<span class="text-secondary font-semibold">8.1k views</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">analytics</span>
+<span>View Day Stats</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

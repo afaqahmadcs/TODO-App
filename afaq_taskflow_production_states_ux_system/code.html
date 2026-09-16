@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary": "#003732", "on-secondary-container": "#00302b", "on-primary": "#1d00a5", "error": "#ffb4ab", "on-background": "#dae2fd", "on-error": "#690005", "on-secondary-fixed-variant": "#005049", "surface": "#0b1326", "surface-container": "#171f33", "surface-container-low": "#131b2e", "primary-container": "#4f46e5", "surface-tint": "#c3c0ff", "surface-container-highest": "#2d3449", "secondary-fixed": "#89f5e7", "on-tertiary": "#3c0091", "inverse-primary": "#4d44e3", "secondary": "#6bd8cb", "on-primary-fixed": "#0f0069", "tertiary-fixed-dim": "#d0bcff", "outline-variant": "#464555", "on-error-container": "#ffdad6", "on-tertiary-fixed": "#23005c", "tertiary": "#d0bcff", "on-primary-fixed-variant": "#3323cc", "inverse-surface": "#dae2fd", "on-tertiary-container": "#e3d5ff", "surface-variant": "#2d3449", "primary-fixed-dim": "#c3c0ff", "tertiary-fixed": "#e9ddff", "surface-container-high": "#222a3d", "error-container": "#93000a", "outline": "#918fa1", "on-surface-variant": "#c7c4d8", "on-tertiary-fixed-variant": "#5516be", "primary-fixed": "#e2dfff", "surface-container-lowest": "#060e20", "inverse-on-surface": "#283044", "on-secondary-fixed": "#00201d", "tertiary-container": "#6f3dd9", "surface-dim": "#0b1326", "on-surface": "#dae2fd", "primary": "#c3c0ff", "on-primary-container": "#dad7ff", "surface-bright": "#31394d", "secondary-fixed-dim": "#6bd8cb", "background": "#0b1326", "secondary-container": "#29a195" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-lg": "2rem", "gutter": "1rem", "margin": "1rem", "margin-lg": "2.5rem", "space-xl": "2rem", "space-lg": "1.25rem", "margin-md": "1.5rem", "space-xs": "0.25rem", "gutter-md": "1.5rem", "space-md": "0.75rem", "space-sm": "0.5rem" }, "fontFamily": { "mono-code": ["JetBrains Mono"], "headline-lg": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "label-md": ["Inter"], "headline-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-sm": ["Inter"], "body-sm": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Inter"], "body-lg": ["Inter"] }, "fontSize": { "mono-code": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }] } } } }</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style></head><body class="bg-background text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Modern minimalist geometric monogram logo for Afaq TaskFlow productivity app featuring an interlocking geometric 'A' and task flow chevron in indigo and slate. Brand logo. - Primary color: #4f46e5 - Font: plusJakartaSans - Mode: dark - Roundness: rounded-md" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UlFO8CtzGaaTTSgFuXvp0FNnDkaygbohp3jwKv69AtRS8vEAZn4IeFOw-Uijw10mVi8q4_SQBf5ZcHqzzoZC9qIMRmdxVM-lqSBWMzUjkExZD6JGHDy1BBQRTVKpMIPz8bYO6lUCKXiH8pBkW4_Q7wYNWNHzznssg81cKjYc-LP7AzeZLbSd1mSZ3Ul9tFfJJgUJlYndCHQ3hiDH5TfwwuuhD3bNXBjRKHmXI6PphtqhavzJ2Czupl9PMS"/><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">TaskFlow</span><span class="hidden">Dashboard</span></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors relative"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button><a class="w-11 h-11 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary-container/40" data-path="profile-settings" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Wc52KbSVD83FIcvaI16peZaiD8nWW_esdd3PyUrmCn5BCkHCl7EQZ1Glr9-s36KYrEoRotZhC4fk5d1BLuNNyk1HKdjDrfzzC5RKf2jkQi2LBnRzoUW6CEK8KX5c1twC3L2dsF04SnGEzJoVL6dEusxxT_X99UG3CbBCkVm-_0uXl-NjJiXh3e-rvDMLhrepxRxXlbTLP_jblV5sECnwR17p-0SqrbOTXETZ4SpBk_g8CLycvLrrgXVSI"/></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full px-gutter md:px-margin-lg py-space-lg flex flex-col gap-space-xl max-w-7xl mx-auto">
+<!-- Top System Telemetry Bar & Controls -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg shadow-xl">
+<div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="inline-flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<span class="font-mono-code text-mono-code text-secondary uppercase tracking-wider">Production RC v2.4 • System Coherence 100%</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">Build #4819</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">
+            Live interactive preview hub for multi-workspace ergonomics, real-time skeleton shimmers, context-rich zero-data states, and error recovery resilience.
+          </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-2 px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-md hover:bg-primary-container/90 active:scale-95 transition-all" id="open-quick-modal-btn">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>+ Quick Task Modal</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-space-md py-space-sm rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-md text-label-md transition-colors" onclick="window.scrollTo({top: document.getElementById('spec-matrix').offsetTop - 80, behavior: 'smooth'})">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span>Jump to Matrix</span>
+</button>
+</div>
+</div>
+<!-- Segmented State Switcher Tabs -->
+<div class="mt-space-lg flex items-center gap-1 p-1 bg-surface-container-lowest rounded-lg overflow-x-auto" id="state-tabs">
+<button class="state-tab-btn px-space-md py-2 rounded font-label-md text-label-md text-on-primary bg-primary-container transition-all whitespace-nowrap" data-tab="all">
+          Overview &amp; Showcase
+        </button>
+<button class="state-tab-btn px-space-md py-2 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all whitespace-nowrap" data-tab="empty">
+          Empty States (6)
+        </button>
+<button class="state-tab-btn px-space-md py-2 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all whitespace-nowrap" data-tab="skeletons">
+          Loading Skeletons (4)
+        </button>
+<button class="state-tab-btn px-space-md py-2 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all whitespace-nowrap" data-tab="errors">
+          Error &amp; Offline Resilience
+        </button>
+<button class="state-tab-btn px-space-md py-2 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all whitespace-nowrap" data-tab="modal-demo">
+          Modal Overlay Sandbox
+        </button>
+</div>
+</div>
+<!-- Active High-Velocity Hero KPI Snapshot (Context Baseline) -->
+<div class="state-panel grid grid-cols-1 md:grid-cols-4 gap-space-md" data-section="all">
+<div class="bg-surface-container rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">System State Score</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">99.98%</span>
+<span class="font-label-sm text-label-sm text-secondary">+0.04%</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Telemetry sync active across 4 nodes</span>
+</div>
+<div class="bg-surface-container rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Empty State UX Fallbacks</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">grid_view</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">6 Scenarios</span>
+<span class="font-label-sm text-label-sm text-tertiary">All Actionable</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero dead-end screens across app</span>
+</div>
+<div class="bg-surface-container rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Async Skeleton Coverage</span>
+<span class="material-symbols-outlined text-primary text-[20px]">hourglass_top</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">100% Layout</span>
+<span class="font-label-sm text-label-sm text-primary">0 CLS Shift</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Exact geometry parity on load</span>
+</div>
+<div class="bg-surface-container rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Offline Cache Engine</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">wifi_tethering</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">IndexedDB 3.0</span>
+<span class="font-label-sm text-label-sm text-secondary">Ready</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Local queue auto-reconciliation</span>
+</div>
+</div>
+<!-- SECTION 1: EMPTY STATES MATRIX (6 Distinct Actionable Modules) -->
+<div class="state-panel flex flex-col gap-space-md" data-section="empty" id="spec-matrix">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs pb-1">
+<div>
+<span class="font-mono-code text-mono-code text-primary uppercase">Module 01 // Zero-Data Ergonomics</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Actionable Empty States Matrix</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zero dead-ends. Every zero-data canvas invites instant initiation or rapid template bootstrap.</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant self-start md:self-auto px-2.5 py-1 rounded bg-surface-container-high">6 Real-world production cases</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- 1. No Tasks -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center text-center shadow-md relative group hover:-translate-y-0.5 transition-all">
+<div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-space-md">
+<span class="material-symbols-outlined text-[32px]">task_alt</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm mb-2">My Tasks Hub</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">All caught up!</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-space-lg">
+            No active tasks scheduled in this workspace. Create an item or generate a verified routine.
+          </p>
+<div class="w-full flex flex-col gap-2 mt-auto">
+<button class="w-full py-2 px-3 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Create First Task</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">bolt</span>
+<span>⚡ Use Template Library</span>
+</button>
+</div>
+</div>
+<!-- 2. No Projects -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center text-center shadow-md relative group hover:-translate-y-0.5 transition-all">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-space-md">
+<span class="material-symbols-outlined text-[32px]">account_tree</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm mb-2">Projects &amp; Milestones</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">No active projects</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-space-lg">
+            Launch multi-track projects, tie Gantt timelines to engineering sprints, or sync repositories.
+          </p>
+<div class="w-full flex flex-col gap-2 mt-auto">
+<button class="w-full py-2 px-3 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">create_new_folder</span>
+<span>+ Start New Project</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">code</span>
+<span>Import from GitHub</span>
+</button>
+</div>
+</div>
+<!-- 3. No Recurring Tasks -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center text-center shadow-md relative group hover:-translate-y-0.5 transition-all">
+<div class="w-14 h-14 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-space-md">
+<span class="material-symbols-outlined text-[32px]">autorenew</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm mb-2">Recurring Engine</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Automate your routines</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-space-lg">
+            Set and forget daily standups, weekly sprint grooming, database backups, or bill reconciliations.
+          </p>
+<div class="w-full flex flex-col gap-2 mt-auto">
+<button class="w-full py-2 px-3 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span>+ Schedule Routine</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">auto_stories</span>
+<span>Load 5 Presets</span>
+</button>
+</div>
+</div>
+<!-- 4. No Calendar Events -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center text-center shadow-md relative group hover:-translate-y-0.5 transition-all">
+<div class="w-14 h-14 rounded-full bg-secondary-fixed-dim/10 flex items-center justify-center text-secondary-fixed-dim mb-space-md">
+<span class="material-symbols-outlined text-[32px]">calendar_month</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed-dim/10 text-secondary-fixed-dim font-label-sm text-label-sm mb-2">Calendar Timeline</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Clear timeline ahead</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-space-lg">
+            Your timeline is wide open. Guard this uninterrupted window for deep architectural focus work.
+          </p>
+<div class="w-full flex flex-col gap-2 mt-auto">
+<button class="w-full py-2 px-3 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span>+ Book Focus Block</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+<span>Sync Google / Outlook</span>
+</button>
+</div>
+</div>
+<!-- 5. No Notes State -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center text-center shadow-md relative group hover:-translate-y-0.5 transition-all">
+<div class="w-14 h-14 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary mb-space-md">
+<span class="material-symbols-outlined text-[32px]">edit_note</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm mb-2">Notes &amp; Docs</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Blank canvas ready</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-space-lg">
+            Capture whiteboard algorithms, lecture formulas, sprint retrospectives, or video scripting outlines.
+          </p>
+<div class="w-full flex flex-col gap-2 mt-auto">
+<button class="w-full py-2 px-3 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">post_add</span>
+<span>+ Create First Note</span>
+</button>
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">markdown</span>
+<span>Quick Paste Markdown</span>
+</button>
+</div>
+</div>
+<!-- 6. No Analytics Telemetry -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center text-center shadow-md relative group hover:-translate-y-0.5 transition-all">
+<div class="w-14 h-14 rounded-full bg-surface-bright flex items-center justify-center text-primary mb-space-md">
+<span class="material-symbols-outlined text-[32px]">query_stats</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm mb-2">Velocity Insights</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Collecting Telemetry</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-3">
+            Execute at least 3 tasks this week to unlock cycle-time charts, velocity distributions, and cognitive load heatmaps.
+          </p>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mb-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-700" style="width: 33%;"></div>
+</div>
+<div class="flex justify-between w-full font-label-sm text-label-sm text-on-surface-variant mb-space-md">
+<span>1 of 3 Completed</span>
+<span class="text-secondary font-semibold">33% to Unlock</span>
+</div>
+<div class="w-full flex flex-col gap-2 mt-auto">
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">save_as</span>
+<span>Load Synthetic Sample Data</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: LOADING SKELETON PREVIEWS (Dynamic 4-Part Real-time Shimmer Sandbox) -->
+<div class="state-panel flex flex-col gap-space-md" data-section="skeletons">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs pb-1">
+<div>
+<span class="font-mono-code text-mono-code text-secondary uppercase">Module 02 // Zero CLS Geometry</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Synchronous Skeleton Loaders</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time shimmering geometry masks that prevent Cumulative Layout Shift during hydrate &amp; fetch.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center gap-1.5" id="toggle-shimmer-btn">
+<span class="material-symbols-outlined text-[18px]">motion_photos_on</span>
+<span>Pause Shimmer Effect</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Skeleton 1: Dashboard KPI Cards (4 Col wide) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">KPI Metrics (Loading)</span>
+<span class="font-mono-code text-[11px] text-on-surface-variant">400ms</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-2">
+<div class="skeleton-box h-3 w-16 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-7 w-20 bg-surface-variant rounded mt-1"></div>
+<div class="skeleton-box h-2.5 w-24 bg-surface-variant rounded"></div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-2">
+<div class="skeleton-box h-3 w-14 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-7 w-16 bg-surface-variant rounded mt-1"></div>
+<div class="skeleton-box h-2.5 w-20 bg-surface-variant rounded"></div>
+</div>
+</div>
+<!-- Single large skeleton card -->
+<div class="p-space-md rounded-lg bg-surface-container-high flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="skeleton-box h-3 w-28 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-4 w-10 bg-surface-variant rounded-full"></div>
+</div>
+<div class="skeleton-box h-2 w-full bg-surface-variant rounded-full"></div>
+<div class="flex items-center justify-between pt-1">
+<div class="skeleton-box h-3 w-20 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-3 w-12 bg-surface-variant rounded"></div>
+</div>
+</div>
+</div>
+<!-- Skeleton 2: Velocity Chart Skeleton -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Weekly Velocity Chart</span>
+<div class="skeleton-box h-4 w-16 bg-surface-variant rounded-full"></div>
+</div>
+<!-- Simulated pulsed bar chart -->
+<div class="h-32 flex items-end justify-between gap-2 pt-4 px-2">
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-16 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-24 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-20 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-28 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-12 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-14 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+<div class="w-full flex flex-col items-center gap-1.5">
+<div class="skeleton-box w-full h-6 bg-surface-variant rounded-t"></div>
+<div class="skeleton-box w-6 h-2.5 bg-surface-variant rounded"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Skeleton 3: Task List Item Rows (8 Col wide) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-3 shadow-sm">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Task Item Rows (Hydrating List)</span>
+<div class="flex items-center gap-2">
+<div class="skeleton-box h-5 w-20 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-5 w-5 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+<!-- Task Skeleton Row 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-high flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<div class="skeleton-box w-4 h-4 bg-surface-variant rounded shrink-0"></div>
+<div class="flex flex-col gap-1.5 flex-1 min-w-0">
+<div class="skeleton-box h-4 w-3/5 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-2.5 w-2/5 bg-surface-variant rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="skeleton-box h-6 w-16 bg-surface-variant rounded-full hidden sm:block"></div>
+<div class="skeleton-box h-5 w-14 bg-surface-variant rounded hidden md:block"></div>
+<div class="skeleton-box w-6 h-6 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+<!-- Task Skeleton Row 2 -->
+<div class="p-space-md rounded-lg bg-surface-container-high flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<div class="skeleton-box w-4 h-4 bg-surface-variant rounded shrink-0"></div>
+<div class="flex flex-col gap-1.5 flex-1 min-w-0">
+<div class="skeleton-box h-4 w-4/6 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-2.5 w-1/4 bg-surface-variant rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="skeleton-box h-6 w-14 bg-surface-variant rounded-full hidden sm:block"></div>
+<div class="skeleton-box h-5 w-12 bg-surface-variant rounded hidden md:block"></div>
+<div class="skeleton-box w-6 h-6 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+<!-- Task Skeleton Row 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-high flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 flex-1 min-w-0">
+<div class="skeleton-box w-4 h-4 bg-surface-variant rounded shrink-0"></div>
+<div class="flex flex-col gap-1.5 flex-1 min-w-0">
+<div class="skeleton-box h-4 w-2/4 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-2.5 w-1/3 bg-surface-variant rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="skeleton-box h-6 w-16 bg-surface-variant rounded-full hidden sm:block"></div>
+<div class="skeleton-box h-5 w-14 bg-surface-variant rounded hidden md:block"></div>
+<div class="skeleton-box w-6 h-6 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+<!-- Skeleton 4: Calendar Grid Block Mockup -->
+<div class="mt-2 p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="skeleton-box h-3 w-32 bg-surface-variant rounded"></div>
+<div class="skeleton-box h-3 w-20 bg-surface-variant rounded"></div>
+</div>
+<div class="grid grid-cols-7 gap-2 pt-2">
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+<div class="skeleton-box h-12 bg-surface-container-high rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: ERROR & OFFLINE RECOVERY STATES -->
+<div class="state-panel flex flex-col gap-space-md" data-section="errors">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs pb-1">
+<div>
+<span class="font-mono-code text-mono-code text-error uppercase">Module 03 // Fault Tolerance &amp; Diagnostics</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Error Recovery &amp; Offline Resilience</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Empathetic, transparent failure modes that keep user mutations safe in memory and local storage.</p>
+</div>
+<span class="font-label-sm text-label-sm text-error bg-error/10 px-2.5 py-1 rounded">Telemetry Fallback Active</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md">
+<!-- Offline / Telemetry Disruption Card -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col justify-between gap-space-lg relative overflow-hidden">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-error-container/40 flex items-center justify-center text-error shrink-0">
+<span class="material-symbols-outlined text-[28px]">wifi_off</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Sync Disrupted — Telemetry Lost</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono-code bg-error-container text-on-error-container">ERR_CONN_TIMEOUT</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                We lost connection to the primary database server. Any changes you make right now will be queued safely in local IndexedDB storage and synced automatically once your link restores.
+              </p>
+</div>
+</div>
+<!-- Pending queue indicator -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">save</span>
+<span class="font-label-md text-label-md text-on-surface">Offline Queue: <strong class="text-secondary">4 Pending Actions Staged</strong></span>
+</div>
+<span class="font-mono-code text-mono-code text-on-surface-variant">Auto-retry in 8s</span>
+</div>
+<div class="flex items-center gap-3 flex-wrap">
+<button class="px-space-md py-2 rounded-lg bg-error-container text-on-error-container font-label-md text-label-md hover:bg-error-container/80 transition-all flex items-center gap-2 shadow-sm" id="simulate-retry-btn">
+<span class="material-symbols-outlined text-[18px] animate-spin hidden" id="retry-spinner">sync</span>
+<span class="material-symbols-outlined text-[18px]" id="retry-static-icon">replay</span>
+<span id="retry-btn-label">↺ Force Reconnect Now</span>
+</button>
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all">
+              Inspect Offline Cache
+            </button>
+</div>
+</div>
+<!-- Inline Form Validation Errors Showcase -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[20px]">error</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Inline Accessible Validation</h3>
+</div>
+<span class="font-mono-code text-[11px] text-on-surface-variant">WCAG 2.1 AAA Compliant</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Field 1: Title Empty Error -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface">Task Title</label>
+<span class="font-mono-code text-label-sm text-error">Required</span>
+</div>
+<div class="relative">
+<input class="w-full px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface text-body-md shadow-inner focus:outline-none placeholder:text-on-surface-variant/40 ring-1 ring-error/80 focus:ring-error" placeholder="e.g., Finalize Docker staging container" type="text" value=""/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-error text-[18px]">warning</span>
+</div>
+<span class="font-body-sm text-[12px] text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">cancel</span>
+                Task title cannot be blank or contain only whitespace characters.
+              </span>
+</div>
+<!-- Field 2: Invalid Date Format -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface">Milestone Due Date</label>
+<span class="font-mono-code text-label-sm text-error">Invalid Date</span>
+</div>
+<div class="relative">
+<input class="w-full px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface text-body-md shadow-inner focus:outline-none ring-1 ring-error/80 focus:ring-error" type="text" value="Yesterday at 23:59"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-error text-[18px]">event_busy</span>
+</div>
+<span class="font-body-sm text-[12px] text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                Due date cannot be set in the past for an active Sprint backlog item.
+              </span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Real-time keystroke debouncing: 180ms</span>
+<span class="text-secondary">Auto-recovering</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 4: UNIVERSAL FAST TASK CREATION MODAL OVERLAY (Static Sandbox Preview) -->
+<div class="state-panel flex flex-col gap-space-md" data-section="modal-demo">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs pb-1">
+<div>
+<span class="font-mono-code text-mono-code text-tertiary uppercase">Module 04 // Frictionless Capture</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Universal Quick Task Creation Modal</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">High-density ergonomic modal invoked across all workspaces via shortcut <kbd class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-mono-code text-[11px]">Cmd + K</kbd> or <kbd class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-mono-code text-[11px]">N</kbd>.</p>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 transition-all flex items-center gap-1.5 self-start md:self-auto" id="trigger-live-modal">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span>Open Full Interactive Modal</span>
+</button>
+</div>
+<!-- Live Inline Demonstration Card of the Modal Component -->
+<div class="w-full max-w-2xl mx-auto rounded-xl bg-surface-container-low p-space-lg shadow-2xl relative">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Quick Task Creation</span>
+</div>
+<span class="font-mono-code text-label-sm text-on-surface-variant px-2 py-0.5 rounded bg-surface-container-high">ESC to dismiss</span>
+</div>
+<div class="mt-space-md flex flex-col gap-space-md">
+<!-- Workspace Selection Pills -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Select Workspace Domain</label>
+<div class="flex items-center gap-2 flex-wrap" id="modal-pills">
+<button class="workspace-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-primary-container text-on-primary font-semibold transition-all" type="button">
+                WebDev
+              </button>
+<button class="workspace-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all" type="button">
+                Office
+              </button>
+<button class="workspace-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all" type="button">
+                College
+              </button>
+<button class="workspace-pill px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all" type="button">
+                Personal
+              </button>
+</div>
+</div>
+<!-- Task Title Input -->
+<div class="flex flex-col gap-1">
+<input class="w-full px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" id="demo-task-title" placeholder="What needs to be accomplished?" type="text" value="Refactor indexedDB state hydration worker"/>
+</div>
+<!-- Priority Toggle -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Priority Level</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="priority-btn py-1.5 px-3 rounded-lg bg-error-container text-on-error-container font-label-md text-label-md flex items-center justify-center gap-1.5" type="button">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>High</span>
+</button>
+<button class="priority-btn py-1.5 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-bright" type="button">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Medium</span>
+</button>
+<button class="priority-btn py-1.5 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-bright" type="button">
+<span class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+<span>Low</span>
+</button>
+</div>
+</div>
+<!-- Meta Grid: Due Date & Estimated Time -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Due Date</label>
+<div class="relative">
+<input class="w-full px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" type="text" value="Today, 18:00 (In 3 hrs)"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-[18px]">calendar_today</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Estimated Focus Block</label>
+<div class="relative">
+<input class="w-full px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" type="text" value="45 Minutes"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant text-[18px]">timer</span>
+</div>
+</div>
+</div>
+<!-- Modal Actions Footer -->
+<div class="pt-space-sm flex items-center justify-between">
+<span class="font-mono-code text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+              Instant auto-save
+            </span>
+<div class="flex items-center gap-2">
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-colors">
+                Cancel
+              </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-container/90 active:scale-95 transition-all shadow-md flex items-center gap-1.5" id="modal-save-toast-btn">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Create Task</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING INTERACTIVE MODAL (Hidden by default, triggered by buttons) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface-dim/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-200" id="interactive-modal">
+<div class="w-full max-w-lg rounded-xl bg-surface-container-low p-space-lg shadow-2xl relative transform scale-95 transition-transform duration-200" id="modal-box">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">add_task</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Universal Quick Task</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" id="close-modal-btn">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="mt-space-md flex flex-col gap-space-md">
+<!-- Workspace Pills -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Workspace Target</label>
+<div class="flex items-center gap-2 flex-wrap">
+<button class="px-3 py-1 rounded-full text-label-sm font-label-sm bg-primary-container text-on-primary font-semibold">WebDev</button>
+<button class="px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface">Office</button>
+<button class="px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface">College</button>
+<button class="px-3 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface">Personal</button>
+</div>
+</div>
+<input class="w-full px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" id="live-modal-input" placeholder="Task name..." type="text"/>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Priority</label>
+<select class="w-full px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option>🔴 High Priority</option>
+<option selected="">🟡 Medium</option>
+<option>⚪ Low</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Estimate</label>
+<input class="w-full px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none" type="text" value="30 mins"/>
+</div>
+</div>
+<div class="pt-space-sm flex items-center justify-end gap-2">
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md" id="cancel-live-modal">
+            Cancel
+          </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md" id="submit-live-modal">
+            Create Task
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Feedback Toast Notification -->
+<div class="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50 px-space-md py-2 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md shadow-2xl flex items-center gap-2 opacity-0 translate-y-4 pointer-events-none transition-all duration-300" id="status-toast">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span id="toast-message">Task created successfully in WebDev workspace!</span>
+</div>
+<script>
+    // Tab switching behavior
+    const tabs = document.querySelectorAll('.state-tab-btn');
+    const panels = document.querySelectorAll('.state-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary-container', 'text-on-primary');
+          t.classList.add('text-on-surface-variant');
+        });
+        tab.classList.add('bg-primary-container', 'text-on-primary');
+        tab.classList.remove('text-on-surface-variant');
+
+        panels.forEach(panel => {
+          if (target === 'all') {
+            panel.classList.remove('hidden');
+          } else {
+            if (panel.getAttribute('data-section') === target) {
+              panel.classList.remove('hidden');
+            } else {
+              panel.classList.add('hidden');
+            }
+          }
+        });
+      });
+    });
+
+    // Shimmer toggle animation
+    let shimmerActive = true;
+    const shimmerBtn = document.getElementById('toggle-shimmer-btn');
+    const skeletonBoxes = document.querySelectorAll('.skeleton-box');
+
+    // Add CSS shimmer via utility
+    skeletonBoxes.forEach(box => {
+      box.classList.add('animate-pulse');
+    });
+
+    if (shimmerBtn) {
+      shimmerBtn.addEventListener('click', () => {
+        shimmerActive = !shimmerActive;
+        skeletonBoxes.forEach(box => {
+          if (shimmerActive) {
+            box.classList.add('animate-pulse');
+          } else {
+            box.classList.remove('animate-pulse');
+          }
+        });
+        shimmerBtn.innerHTML = shimmerActive ? 
+          '<span class="material-symbols-outlined text-[18px]">motion_photos_on</span><span>Pause Shimmer Effect</span>' :
+          '<span class="material-symbols-outlined text-[18px]">play_circle</span><span>Resume Shimmer Effect</span>';
+      });
+    }
+
+    // Modal triggers & toast micro-interactions
+    const interactiveModal = document.getElementById('interactive-modal');
+    const modalBox = document.getElementById('modal-box');
+    const openModalBtn = document.getElementById('open-quick-modal-btn');
+    const triggerLiveModalBtn = document.getElementById('trigger-live-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const cancelLiveModalBtn = document.getElementById('cancel-live-modal');
+    const submitLiveModalBtn = document.getElementById('submit-live-modal');
+    const saveToastBtn = document.getElementById('modal-save-toast-btn');
+    const toast = document.getElementById('status-toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    function showToast(text) {
+      toastMsg.textContent = text;
+      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3000);
+    }
+
+    function openModal() {
+      interactiveModal.classList.remove('opacity-0', 'pointer-events-none');
+      interactiveModal.classList.add('opacity-100');
+      modalBox.classList.remove('scale-95');
+      modalBox.classList.add('scale-100');
+      document.getElementById('live-modal-input').focus();
+    }
+
+    function closeModal() {
+      interactiveModal.classList.add('opacity-0', 'pointer-events-none');
+      interactiveModal.classList.remove('opacity-100');
+      modalBox.classList.add('scale-95');
+      modalBox.classList.remove('scale-100');
+    }
+
+    if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+    if (triggerLiveModalBtn) triggerLiveModalBtn.addEventListener('click', openModal);
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (cancelLiveModalBtn) cancelLiveModalBtn.addEventListener('click', closeModal);
+    
+    if (submitLiveModalBtn) {
+      submitLiveModalBtn.addEventListener('click', () => {
+        closeModal();
+        showToast('Task dispatched to active workspace pipeline!');
+      });
+    }
+
+    if (saveToastBtn) {
+      saveToastBtn.addEventListener('click', () => {
+        showToast('Sandbox preview: Task captured into local IndexedDB buffer!');
+      });
+    }
+
+    // Network retry simulation
+    const retryBtn = document.getElementById('simulate-retry-btn');
+    const retrySpinner = document.getElementById('retry-spinner');
+    const retryIcon = document.getElementById('retry-static-icon');
+    const retryLabel = document.getElementById('retry-btn-label');
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => {
+        retryIcon.classList.add('hidden');
+        retrySpinner.classList.remove('hidden');
+        retryLabel.textContent = 'Contacting Telemetry Node...';
+        retryBtn.disabled = true;
+
+        setTimeout(() => {
+          retryIcon.classList.remove('hidden');
+          retrySpinner.classList.add('hidden');
+          retryLabel.textContent = '↺ Force Reconnect Now';
+          retryBtn.disabled = false;
+          showToast('Connection re-established. 4 queued mutations verified!');
+        }, 1400);
+      });
+    }
+
+    // Workspace interactive pill toggling in preview
+    const pills = document.querySelectorAll('.workspace-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => {
+          p.classList.remove('bg-primary-container', 'text-on-primary', 'font-semibold');
+          p.classList.add('bg-surface-container-high', 'text-on-surface');
+        });
+        pill.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold');
+        pill.classList.remove('bg-surface-container-high', 'text-on-surface');
+      });
+    });
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.35)]" data-active-classes="text-primary"><div class="h-16 px-space-xs flex items-center justify-around relative"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-11 transition-colors group text-primary" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">dashboard</span><span class="font-label-sm text-label-sm mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-on-surface transition-colors group" data-path="my-tasks" href="#"><span class="material-symbols-outlined text-[24px]">check_circle</span><span class="font-label-sm text-label-sm mt-0.5">My Tasks</span></a><div class="flex items-center justify-center -mt-6"><a aria-label="Quick Add" class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-[0_4px_14px_rgba(79,70,229,0.45)] hover:scale-105 active:scale-95 transition-all" data-path="create-task" href="#"><span class="material-symbols-outlined text-[26px] text-white">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-on-surface transition-colors group" data-path="calendar" href="#"><span class="material-symbols-outlined text-[24px]">calendar_today</span><span class="font-label-sm text-label-sm mt-0.5">Calendar</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 text-on-surface-variant hover:text-on-surface transition-colors group" data-path="workspaces" href="#"><span class="material-symbols-outlined text-[24px]">workspaces</span><span class="font-label-sm text-label-sm mt-0.5">Workspaces</span></a></div></nav></body></html>
