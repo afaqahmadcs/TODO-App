@@ -13,15 +13,23 @@ export interface QuickTaskModalProps {
   isOpen: boolean;
   onClose: () => void;
   onTaskCreated?: (createdTask: Task) => void;
+  defaultWorkspace?: WorkspaceType;
+  defaultPage?: OfficePageId | string;
+  defaultStage?: string;
 }
 
 export const QuickTaskModal: React.FC<QuickTaskModalProps> = ({
   isOpen,
   onClose,
   onTaskCreated,
+  defaultWorkspace = "office",
+  defaultPage = "",
+  defaultStage,
 }) => {
-  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceType>("office");
-  const [selectedOfficePage, setSelectedOfficePage] = useState<OfficePageId | "">("");
+  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceType>(defaultWorkspace);
+  const [selectedOfficePage, setSelectedOfficePage] = useState<OfficePageId | "">(
+    (defaultPage as OfficePageId) || ""
+  );
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<TaskPriority>("medium");
@@ -85,6 +93,7 @@ export const QuickTaskModal: React.FC<QuickTaskModalProps> = ({
         description: description.trim() || undefined,
         workspaceId: selectedWorkspace,
         officePageId: selectedWorkspace === "office" && selectedOfficePage ? selectedOfficePage : undefined,
+        stage: defaultStage,
         priority,
         dueDate,
         dueTime,

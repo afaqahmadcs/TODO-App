@@ -103,6 +103,13 @@ src/
 │   │   ├── TaskCard.tsx              # Card & row layouts with inline status dropdown
 │   │   ├── TaskDetailDrawer.tsx      # Stitch slide-over inspection & subtasks panel
 │   │   └── QuickTaskModal.tsx        # Comprehensive task creation modal (<kbd>N</kbd>)
+│   ├── office/                       # Office Workspace System (Phase 5)
+│   │   ├── OfficeKpiGrid.tsx         # 5 live database KPI cards (Today, Done, Pending, Urgent, Score)
+│   │   ├── DailyPublishingMatrix.tsx # 8-page status matrix strip with dynamic dispatch status
+│   │   ├── OfficePageFilterBar.tsx   # All Pages + 8 page tabs + platform filter chips
+│   │   ├── SunoPipelineSpotlight.tsx # 6-stage Suno Music pipeline & interactive asset cards
+│   │   ├── OfficeKanbanBoard.tsx     # 6-stage Content Production Kanban board with card transitions
+│   │   └── DailyContentChecklist.tsx # 7-step interactive daily publishing checklist
 │   └── common/
 │       └── EmptyState.tsx            # Actionable zero-data fallbacks
 ├── hooks/
@@ -114,11 +121,13 @@ src/
 │   └── constants.ts                  # Workspaces, 8 Office pages, recurring routines
 ├── types/
 │   ├── task.ts                       # Task, subtask, priorities, statuses, filters
+│   ├── office.ts                     # Office workflow stages, Suno pipeline, KPIs, checklists
 │   ├── workspace.ts                  # 4 Workspace definitions & workflow stages
 │   ├── navigation.ts                 # Nav items & badges
 │   └── database.ts                   # Supabase / PostgreSQL schema interfaces
 ├── services/
 │   ├── taskService.ts                # Supabase task repository with CRUD, subtasks & stats
+│   ├── officeService.ts              # Office KPIs, 8-page completion statuses & checklist engine
 │   └── workspaceService.ts           # Workspace & Office pages repository
 ├── database/
 │   ├── migrations/                   # Sequential SQL migrations (001, 002)
@@ -126,6 +135,7 @@ src/
 └── scripts/
     ├── check-routes.mjs              # Route healthcheck verification
     ├── test-task-service.mjs         # 33-step automated task service test suite
+    ├── test-office-workspace.mjs     # Automated Office workspace & publishing matrix test suite
     └── run-lint.mjs                  # Strict ESLint automation runner
 ```
 
@@ -172,7 +182,7 @@ Built upon the **Google Stitch Precision Focus Minimal** specification:
 - [x] **PHASE 2: Complete App Shell & Navigation** — Reusable Sidebar, Header, NavigationItem, WorkspaceNavigation, MobileNavigation, PageContainer, PageHeader, collapse states, and real routing.
 - [x] **PHASE 3: Database & Supabase Integration** — 12 PostgreSQL tables, Row Level Security (RLS), 8 seeded Office pages, multi-tenant user triggers, and Supabase SSR client SDK.
 - [x] **PHASE 4: Full Task System** — Complete task CRUD, Supabase persistence, Stitch UI fidelity, TaskDetailDrawer, Subtasks checklist with progress bar, Statuses (`TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `COMPLETED`), Priorities (`LOW`, `MEDIUM`, `HIGH`), Filter Tabs (`All`, `Today`, `Upcoming`, `Overdue`, `Completed`), Multi-criteria filters & sorting, Optimistic UI updates, and 33-step automated test suite.
-- [ ] **PHASE 5: Workspaces & Office Pages** — 8-page publishing matrix, reel queue, and Suno Music visual pipeline.
+- [x] **PHASE 5: Workspaces & Office Pages** — Complete Office workspace with real database-driven KPI telemetry, 8 Office Pages (`Shooting Page`, `Ismail Shahid Fans`, `ZK Production`, `Jahangir Khan`, `Inaya Kailash`, `Political Affairs`, `Nazia Iqbal Fanz`, `Suno Music`), dynamic page completion statuses (`Shooting Page — completed`, `ZK Production — in progress`, `Jahangir Khan — pending`), 6-stage Content Production Kanban (`IDEAS`, `TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `PUBLISHED`), 6-stage Suno Music pipeline spotlight (`BRIEF`, `ASSETS`, `DESIGN`, `REVIEW`, `EXPORT`, `DELIVERED`), 7-step Daily Content Checklist, horizontal filter bar with platform chips, and automated integration tests.
 - [ ] **PHASE 6: Personal, College & Web Dev Modules** — 9-stage vlog pipeline, academic modules, and Monday & Tuesday class trackers.
 - [ ] **PHASE 7: Recurring Tasks Engine** — Cron schedules, recurring rule editor, and automated queue population.
 - [ ] **PHASE 8: Interactive Calendar** — Day/Week/Month time-blocking and calendar synchronization.

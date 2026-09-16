@@ -95,6 +95,7 @@ export interface CreateTaskInput {
   pageId?: string;
   projectId?: string;
   status?: TaskStatus;
+  stage?: string;
   priority?: TaskPriority;
   dueDate?: string;
   dueTime?: string;
@@ -112,6 +113,7 @@ export interface UpdateTaskInput {
   pageId?: string | null;
   projectId?: string | null;
   status?: TaskStatus;
+  stage?: string;
   priority?: TaskPriority;
   dueDate?: string | null;
   dueTime?: string | null;
@@ -120,3 +122,4 @@ export interface UpdateTaskInput {
   tags?: string[];
   notes?: string | null;
 }
+

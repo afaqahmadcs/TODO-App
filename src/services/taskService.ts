@@ -225,6 +225,336 @@ const INITIAL_TASKS: Task[] = [
       { id: "act-9", taskId: "task-8", action: "Marked as completed", actor: "Afaq", timestamp: "10:15 AM" },
     ],
   },
+  {
+    id: "task-office-shooting-pub",
+    title: "Verify published post & check audio copyright clearance",
+    description: "Confirm Instagram & TikTok distribution, audio match, and check views.",
+    workspaceId: "office",
+    officePageId: "shooting-page",
+    status: "published",
+    stage: "PUBLISHED",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "11:30",
+    estimatedDurationMin: 20,
+    actualDurationMin: 18,
+    tags: ["reels", "4K", "meta"],
+    isCompleted: true,
+    completedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
+    updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    subtasks: [
+      { id: "sub-sp-1", taskId: "task-office-shooting-pub", title: "Check new content", completed: true },
+      { id: "sub-sp-2", taskId: "task-office-shooting-pub", title: "Select content", completed: true },
+      { id: "sub-sp-3", taskId: "task-office-shooting-pub", title: "Edit", completed: true },
+      { id: "sub-sp-4", taskId: "task-office-shooting-pub", title: "Caption", completed: true },
+      { id: "sub-sp-5", taskId: "task-office-shooting-pub", title: "Hashtags", completed: true },
+      { id: "sub-sp-6", taskId: "task-office-shooting-pub", title: "Upload", completed: true },
+      { id: "sub-sp-7", taskId: "task-office-shooting-pub", title: "Verify published", completed: true },
+    ],
+    notes: "Audio copyright cleared on Meta Creator Studio.",
+    activity: [
+      { id: "act-sp-1", taskId: "task-office-shooting-pub", action: "Published reel verified", actor: "Afaq", timestamp: "11:30 AM" },
+    ],
+  },
+  {
+    id: "task-office-shooting-edit",
+    title: "Video color grade & audio level balance",
+    description: "4K 60fps DaVinci Resolve color treatment and dynamic range normalization.",
+    workspaceId: "office",
+    officePageId: "shooting-page",
+    status: "in_progress",
+    stage: "IN_PROGRESS",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "14:45",
+    estimatedDurationMin: 45,
+    actualDurationMin: 30,
+    tags: ["4K", "davinci", "reels"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-sp-8", taskId: "task-office-shooting-edit", title: "Import raw 4K clip", completed: true },
+      { id: "sub-sp-9", taskId: "task-office-shooting-edit", title: "Grade skin tones", completed: true },
+      { id: "sub-sp-10", taskId: "task-office-shooting-edit", title: "Normalize dialogue to -14 LUFS", completed: false },
+    ],
+    activity: [
+      { id: "act-sp-2", taskId: "task-office-shooting-edit", action: "Color grading started", actor: "Afaq", timestamp: "01:20 PM" },
+    ],
+  },
+  {
+    id: "task-office-ismail-pub",
+    title: "Classic Scene 4K Remaster Clip #108",
+    description: "Archived comedy clip remaster with AI upscale and cleaned Pashto dialogue audio.",
+    workspaceId: "office",
+    officePageId: "ismail-shahid-fans",
+    status: "published",
+    stage: "PUBLISHED",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "12:00",
+    estimatedDurationMin: 25,
+    actualDurationMin: 20,
+    tags: ["comedy", "classic", "reels"],
+    isCompleted: true,
+    completedAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    createdAt: new Date(Date.now() - 3600000 * 7).toISOString(),
+    updatedAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    subtasks: [
+      { id: "sub-isf-1", taskId: "task-office-ismail-pub", title: "Select episode cut", completed: true },
+      { id: "sub-isf-2", taskId: "task-office-ismail-pub", title: "Topaz 4K enhance", completed: true },
+      { id: "sub-isf-3", taskId: "task-office-ismail-pub", title: "Verify live post", completed: true },
+    ],
+    activity: [
+      { id: "act-isf-1", taskId: "task-office-ismail-pub", action: "Published to Ismail Shahid Fans", actor: "Afaq", timestamp: "12:00 PM" },
+    ],
+  },
+  {
+    id: "task-office-ismail-ready",
+    title: "Upload finalized 9:16 reel to Meta Business Scheduler",
+    description: "Schedule peak evening release at 6:00 PM with comedy hashtags and collaborator credits.",
+    workspaceId: "office",
+    officePageId: "ismail-shahid-fans",
+    status: "ready",
+    stage: "READY",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "18:00",
+    estimatedDurationMin: 15,
+    actualDurationMin: 0,
+    tags: ["reels", "meta", "scheduler"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-isf-4", taskId: "task-office-ismail-ready", title: "Upload master mp4", completed: true },
+      { id: "sub-isf-5", taskId: "task-office-ismail-ready", title: "Set schedule 6:00 PM", completed: true },
+      { id: "sub-isf-6", taskId: "task-office-ismail-ready", title: "Double-check thumbnail preview", completed: false },
+    ],
+    activity: [
+      { id: "act-isf-2", taskId: "task-office-ismail-ready", action: "Stage updated to READY", actor: "Afaq", timestamp: "02:00 PM" },
+    ],
+  },
+  {
+    id: "task-office-zk-edit",
+    title: "Edit reel & add dynamic auto-captions with motion pop",
+    description: "Standard daily content production cycle for ZK Production featuring motion kinetic subtitles.",
+    workspaceId: "office",
+    officePageId: "zk-production",
+    status: "in_progress",
+    stage: "IN_PROGRESS",
+    priority: "urgent",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "14:30",
+    estimatedDurationMin: 40,
+    actualDurationMin: 25,
+    tags: ["reels", "captions", "tiktok"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-zk-1", taskId: "task-office-zk-edit", title: "Check new content", completed: true },
+      { id: "sub-zk-2", taskId: "task-office-zk-edit", title: "Select content", completed: true },
+      { id: "sub-zk-3", taskId: "task-office-zk-edit", title: "Edit", completed: true },
+      { id: "sub-zk-4", taskId: "task-office-zk-edit", title: "Caption", completed: false },
+      { id: "sub-zk-5", taskId: "task-office-zk-edit", title: "Hashtags", completed: false },
+      { id: "sub-zk-6", taskId: "task-office-zk-edit", title: "Upload", completed: false },
+      { id: "sub-zk-7", taskId: "task-office-zk-edit", title: "Verify published", completed: false },
+    ],
+    activity: [
+      { id: "act-zk-1", taskId: "task-office-zk-edit", action: "Captions editing in progress", actor: "Afaq", timestamp: "02:10 PM" },
+    ],
+  },
+  {
+    id: "task-office-inaya-todo",
+    title: "Create thumbnail for Inaya Kailash poetry reel",
+    description: "Design high-contrast aesthetic calligraphy overlay in Figma for 1080x1920 mobile viewport.",
+    workspaceId: "office",
+    officePageId: "inaya-kailash",
+    status: "todo",
+    stage: "TODO",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "16:30",
+    estimatedDurationMin: 25,
+    actualDurationMin: 0,
+    tags: ["figma", "reels", "thumbnail"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-ik-1", taskId: "task-office-inaya-todo", title: "Extract frame from poetry recitation", completed: false },
+      { id: "sub-ik-2", taskId: "task-office-inaya-todo", title: "Apply gradient vignette", completed: false },
+    ],
+    activity: [
+      { id: "act-ik-1", taskId: "task-office-inaya-todo", action: "Task queued in To Do", actor: "Afaq", timestamp: "11:30 AM" },
+    ],
+  },
+  {
+    id: "task-office-political-pub",
+    title: "Morning Roundup Reel & Policy Graphic Infographic",
+    description: "Quick 60-second summary of assembly proceedings and legislative digest carousel.",
+    workspaceId: "office",
+    officePageId: "political-affairs",
+    status: "published",
+    stage: "PUBLISHED",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "09:30",
+    estimatedDurationMin: 35,
+    actualDurationMin: 35,
+    tags: ["shorts", "news", "digest"],
+    isCompleted: true,
+    completedAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    createdAt: new Date(Date.now() - 3600000 * 8).toISOString(),
+    updatedAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    subtasks: [
+      { id: "sub-pa-1", taskId: "task-office-political-pub", title: "Check new content", completed: true },
+      { id: "sub-pa-2", taskId: "task-office-political-pub", title: "Select content", completed: true },
+      { id: "sub-pa-3", taskId: "task-office-political-pub", title: "Edit", completed: true },
+      { id: "sub-pa-4", taskId: "task-office-political-pub", title: "Caption", completed: true },
+      { id: "sub-pa-5", taskId: "task-office-political-pub", title: "Hashtags", completed: true },
+      { id: "sub-pa-6", taskId: "task-office-political-pub", title: "Upload", completed: true },
+      { id: "sub-pa-7", taskId: "task-office-political-pub", title: "Verify published", completed: true },
+    ],
+    activity: [
+      { id: "act-pa-1", taskId: "task-office-political-pub", action: "Published and verified", actor: "Afaq", timestamp: "09:30 AM" },
+    ],
+  },
+  {
+    id: "task-office-political-review",
+    title: "Review carousel layout text proofs & headline accuracy",
+    description: "Editorial sign-off on statistical graphics and quote citations before evening boost.",
+    workspaceId: "office",
+    officePageId: "political-affairs",
+    status: "review",
+    stage: "REVIEW",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "17:00",
+    estimatedDurationMin: 20,
+    actualDurationMin: 0,
+    tags: ["review", "quotes", "editorial"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-pa-8", taskId: "task-office-political-review", title: "Verify source dates", completed: true },
+      { id: "sub-pa-9", taskId: "task-office-political-review", title: "Check headline grammar", completed: false },
+    ],
+    activity: [
+      { id: "act-pa-2", taskId: "task-office-political-review", action: "Submitted for editor review", actor: "Afaq", timestamp: "01:45 PM" },
+    ],
+  },
+  {
+    id: "task-office-nazia-todo",
+    title: "Write caption & hashtags for vintage concert throwback",
+    description: "Research historical archive date and generate SEO-optimized Pashto music hashtags.",
+    workspaceId: "office",
+    officePageId: "nazia-iqbal-fanz",
+    status: "todo",
+    stage: "TODO",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "20:00",
+    estimatedDurationMin: 20,
+    actualDurationMin: 0,
+    tags: ["pashto", "music", "throwback"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-ni-1", taskId: "task-office-nazia-todo", title: "Check new content", completed: true },
+      { id: "sub-ni-2", taskId: "task-office-nazia-todo", title: "Select content", completed: false },
+      { id: "sub-ni-3", taskId: "task-office-nazia-todo", title: "Edit", completed: false },
+      { id: "sub-ni-4", taskId: "task-office-nazia-todo", title: "Caption", completed: false },
+      { id: "sub-ni-5", taskId: "task-office-nazia-todo", title: "Hashtags", completed: false },
+      { id: "sub-ni-6", taskId: "task-office-nazia-todo", title: "Upload", completed: false },
+      { id: "sub-ni-7", taskId: "task-office-nazia-todo", title: "Verify published", completed: false },
+    ],
+    activity: [
+      { id: "act-ni-1", taskId: "task-office-nazia-todo", action: "Clip selected for evening drop", actor: "Afaq", timestamp: "12:40 PM" },
+    ],
+  },
+  {
+    id: "task-office-suno-loop",
+    title: "Animated Canvas Loop (Spotify 9:16)",
+    description: "8-second seamless fluid motion graphics for mobile streaming background in After Effects.",
+    workspaceId: "office",
+    officePageId: "suno-music",
+    status: "review",
+    stage: "REVIEW",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "17:00",
+    estimatedDurationMin: 35,
+    actualDurationMin: 30,
+    tags: ["spotify", "9:16", "aftereffects"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-sm-1", taskId: "task-office-suno-loop", title: "Render loop cycle", completed: true },
+      { id: "sub-sm-2", taskId: "task-office-suno-loop", title: "Test Spotify Canvas dimensions", completed: true },
+      { id: "sub-sm-3", taskId: "task-office-suno-loop", title: "Check compression artifacts", completed: false },
+    ],
+    activity: [
+      { id: "act-sm-1", taskId: "task-office-suno-loop", action: "Loop submitted for review", actor: "Afaq", timestamp: "02:20 PM" },
+    ],
+  },
+  {
+    id: "task-office-suno-visualizer",
+    title: "YouTube Audio Visualizer 4K",
+    description: "Reactive audio waveform spectrum overlay with dynamic particle lighting for full song drop.",
+    workspaceId: "office",
+    officePageId: "suno-music",
+    status: "ready",
+    stage: "EXPORT",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "19:00",
+    estimatedDurationMin: 45,
+    actualDurationMin: 40,
+    tags: ["youtube", "4K", "visualizer"],
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-sm-4", taskId: "task-office-suno-visualizer", title: "Bake particle simulation", completed: true },
+      { id: "sub-sm-5", taskId: "task-office-suno-visualizer", title: "Queue Adobe Media Encoder 4K 60fps", completed: true },
+    ],
+    activity: [
+      { id: "act-sm-2", taskId: "task-office-suno-visualizer", action: "Ready for auto-dispatch", actor: "Afaq", timestamp: "03:10 PM" },
+    ],
+  },
+  {
+    id: "task-office-suno-master",
+    title: "Generative Lo-Fi Beat Mastering",
+    description: "Multi-band limiter and loudness mastering (-14 LUFS) for Suno AI generative composition.",
+    workspaceId: "office",
+    officePageId: "suno-music",
+    status: "published",
+    stage: "DELIVERED",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "10:00",
+    estimatedDurationMin: 30,
+    actualDurationMin: 30,
+    tags: ["audio", "mastering", "suno"],
+    isCompleted: true,
+    completedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
+    updatedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    subtasks: [
+      { id: "sub-sm-6", taskId: "task-office-suno-master", title: "Stem separation", completed: true },
+      { id: "sub-sm-7", taskId: "task-office-suno-master", title: "LUFS normalization", completed: true },
+      { id: "sub-sm-8", taskId: "task-office-suno-master", title: "Deliver wav master", completed: true },
+    ],
+    activity: [
+      { id: "act-sm-3", taskId: "task-office-suno-master", action: "Delivered master wav", actor: "Afaq", timestamp: "10:00 AM" },
+    ],
+  },
 ];
 
 // In-memory store for fallback/offline operations
@@ -637,6 +967,7 @@ export const taskService = {
       pageId: input.pageId,
       projectId: input.projectId,
       status: status,
+      stage: input.stage || (status === "completed" ? "PUBLISHED" : "TODO"),
       priority: priority,
       dueDate: defaultDate,
       dueTime: defaultTime,
@@ -805,6 +1136,73 @@ export const taskService = {
   },
 
   /**
+   * Update task workflow stage (e.g. IDEAS, TODO, IN_PROGRESS, REVIEW, READY, PUBLISHED)
+   */
+  updateTaskStage: async (id: string, stage: string, explicitStatus?: TaskStatus): Promise<Task | null> => {
+    let derivedStatus: TaskStatus = explicitStatus || "todo";
+    const s = stage.toUpperCase();
+    if (!explicitStatus) {
+      if (s === "PUBLISHED" || s === "DELIVERED" || s === "DONE") {
+        derivedStatus = "published";
+      } else if (s === "READY" || s === "EXPORT") {
+        derivedStatus = "ready";
+      } else if (s === "REVIEW") {
+        derivedStatus = "review";
+      } else if (s === "IN_PROGRESS" || s === "DESIGN" || s === "RECORDING" || s === "EDITING") {
+        derivedStatus = "in_progress";
+      } else {
+        derivedStatus = "todo";
+      }
+    }
+
+    const isComp = derivedStatus === "completed" || derivedStatus === "published";
+
+    if (isSupabaseConfigured()) {
+      try {
+        const dbStatus = isComp
+          ? "completed"
+          : derivedStatus === "done"
+          ? "completed"
+          : derivedStatus;
+
+        const updatePayload: Database["public"]["Tables"]["tasks"]["Update"] = {
+          status: dbStatus as Database["public"]["Enums"]["task_status"],
+          completed_at: isComp ? new Date().toISOString() : null,
+        };
+
+        await supabase
+          .from("tasks")
+          .update(updatePayload)
+          .eq("id", id);
+      } catch (err) {
+        console.warn("[taskService] updateTaskStage live failed:", err);
+      }
+    }
+
+    // Sync local
+    const idx = localTasks.findIndex((t) => t.id === id);
+    if (idx === -1) return null;
+
+    localTasks[idx].stage = stage;
+    localTasks[idx].status = derivedStatus;
+    localTasks[idx].isCompleted = isComp;
+    localTasks[idx].completedAt = isComp ? new Date().toISOString() : undefined;
+    localTasks[idx].updatedAt = new Date().toISOString();
+    localTasks[idx].activity = [
+      ...(localTasks[idx].activity || []),
+      {
+        id: `act-${Date.now()}`,
+        taskId: id,
+        action: `Moved stage to ${stage}`,
+        actor: "Afaq",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      },
+    ];
+
+    return { ...localTasks[idx] };
+  },
+
+  /**
    * Toggle task completion
    */
   toggleTaskCompletion: async (id: string): Promise<Task | null> => {
@@ -936,6 +1334,15 @@ export const taskService = {
     });
 
     return found;
+  },
+
+  toggleSubtask: async (subtaskId: string): Promise<Subtask | null> => {
+    let currentCompleted = false;
+    localTasks.forEach((t) => {
+      const found = (t.subtasks || []).find((s) => s.id === subtaskId);
+      if (found) currentCompleted = Boolean(found.completed || found.isCompleted);
+    });
+    return taskService.updateSubtask(subtaskId, { completed: !currentCompleted });
   },
 
   deleteSubtask: async (subtaskId: string): Promise<boolean> => {
