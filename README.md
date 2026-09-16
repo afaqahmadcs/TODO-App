@@ -6,8 +6,9 @@
 ![React](https://img.shields.io/badge/React-19.2.8-61DAFB?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 ![Design System](https://img.shields.io/badge/Design_System-Google_Stitch-4F46E5?style=for-the-badge)
-![Status](https://img.shields.io/badge/Phase_3-Complete-10B981?style=for-the-badge)
+![Status](https://img.shields.io/badge/Phase_4-Complete-10B981?style=for-the-badge)
 
 ---
 
@@ -23,6 +24,43 @@ The entire UI/UX is built strictly upon **Google Stitch** design specs, featurin
 
 ---
 
+## ⚡ Phase 4: Complete Task-Management System
+
+Phase 4 delivers the complete end-to-end task management system backed by Supabase PostgreSQL and Google Stitch design system components:
+
+### 1. Task Creation & Full Property Editing
+- **Comprehensive Fields**: Title, description, workspace target, office page context, project affiliation, due date, due time, priority, estimated duration, tags, initial subtask checklist, and freeform notes.
+- **Universal Quick Task Modal**: Press <kbd>N</kbd> anywhere in the application to trigger high-speed task creation.
+- **Inline Quick Add Bar**: Add tasks directly to active views with workspace and priority chips and <kbd>Enter</kbd> to save.
+
+### 2. Status & Priority Lifecycle
+- **Statuses**: `TODO` ➔ `IN_PROGRESS` ➔ `REVIEW` ➔ `READY` ➔ `COMPLETED`.
+- **Inline Status Switcher**: Update task lifecycle directly from Task Cards or the Task Detail Drawer.
+- **Priorities**: `LOW`, `MEDIUM`, `HIGH` (and `URGENT` compatibility) with distinct Stitch visual states and pulse indicators.
+- **Task Completion**: Instant completion toggle, automated `completed_at` timestamping, and real-time dashboard statistic recomputations.
+
+### 3. Subtasks Management
+- Full CRUD: Create, inline edit, delete, mark completed, and reorder.
+- Visual completion progress bar showing percentage and `X / Y done` counters.
+
+### 4. Stitch Task Detail Drawer
+- **Slide-Over Inspection Panel**: Opens smoothly on task selection.
+- **Editable Properties Table**: Live updates for workspace, office page, due date, due time, duration, tags, and priority with auto-save indication.
+- **Activity & History Timeline**: Chronological event logs for creation, status transitions, and subtask completions.
+
+### 5. Views, Filtering & Sorting
+- **Views**: Seamless switching between **Grouped List Stream** (Overdue, Daytime, Evening, Completed) and **Kanban Board** (columns for each status).
+- **Segmented Filter Tabs**: `All`, `Today`, `Upcoming`, `Overdue` (pulsing red alert), `Completed`.
+- **Multi-Property Filtering**: Workspace, Office Page, Priority, Status, Tags, and instant keyword search.
+- **Sorting**: Order by `Due Time`, `Priority`, or `Created Date` with ascending/descending toggles.
+
+### 6. Persistence & Optimistic UI
+- Direct Supabase PostgreSQL persistence across `tasks`, `subtasks`, `tags`, `task_tags`, and `notes`.
+- Zero-latency optimistic UI updates with automatic rollback and user-friendly error banners if database errors occur.
+- Resilient local fallback cache when offline or during initial configuration.
+
+---
+
 ## 🏛️ System Architecture
 
 ```
@@ -31,8 +69,8 @@ src/
 │   ├── layout.tsx                    # Master HTML, font bindings & AppShell
 │   ├── globals.css                   # Stitch design tokens & Tailwind v4 theme
 │   ├── page.tsx                      # Root route (redirects to /dashboard)
-│   ├── dashboard/page.tsx            # Executive Command Center & Telemetry
-│   ├── tasks/page.tsx                # Universal Task Inbox (Board & List)
+│   ├── dashboard/page.tsx            # Executive Command Center & Live Telemetry
+│   ├── tasks/page.tsx                # Universal Task Inbox (Board, List, Tabs & Drawer)
 │   ├── calendar/page.tsx             # Time-Blocking Schedule by Domain
 │   ├── recurring/page.tsx            # Automation Engine & Standing Routines
 │   ├── analytics/page.tsx            # Velocity Telemetry & Velocity Charts
@@ -45,7 +83,6 @@ src/
 │   └── settings/page.tsx             # User Profile, Keyboard Map & Supabase Status
 ├── components/
 │   ├── layout/                       # Reusable App Shell Architecture
-│   │   ├── index.ts                  # Layout components barrel export
 │   │   ├── AppShell.tsx              # Viewport coordinator (desktop/tablet/mobile)
 │   │   ├── Sidebar.tsx               # Collapsible desktop command rail
 │   │   ├── Header.tsx                # Dynamic breadcrumbs, search, quick add
@@ -61,28 +98,35 @@ src/
 │   │   ├── Input.tsx                 # Dark high-density inputs with shortcut chips
 │   │   ├── Checkbox.tsx              # 18px checkbox with smooth strike animation
 │   │   ├── Avatar.tsx                # User avatar with status indicator
-│   │   ├── Icon.tsx                  # Google Material Symbols Outlined
-│   │   └── Skeleton.tsx              # Zero-CLS loading skeleton with shimmer
-│   ├── tasks/
-│   │   ├── TaskCard.tsx              # Interactive cards with priority & workspace dots
-│   │   └── QuickTaskModal.tsx        # Universal modal triggered via 'N' shortcut
+│   │   └── Icon.tsx                  # Google Material Symbols Outlined
+│   ├── tasks/                        # Task Management UI Suite
+│   │   ├── TaskCard.tsx              # Card & row layouts with inline status dropdown
+│   │   ├── TaskDetailDrawer.tsx      # Stitch slide-over inspection & subtasks panel
+│   │   └── QuickTaskModal.tsx        # Comprehensive task creation modal (<kbd>N</kbd>)
 │   └── common/
 │       └── EmptyState.tsx            # Actionable zero-data fallbacks
 ├── hooks/
 │   ├── useKeyboardShortcut.ts        # Event listener for 'N', 'F', 'Cmd+K', 'Esc'
-│   └── useMediaQuery.ts              # SSR-safe reactive matchMedia with useSyncExternalStore
+│   └── useMediaQuery.ts              # SSR-safe reactive matchMedia
 ├── lib/
+│   ├── supabase/                     # Supabase client, server, and middleware helpers
 │   ├── utils.ts                      # Tailwind merge & utility helpers
 │   └── constants.ts                  # Workspaces, 8 Office pages, recurring routines
 ├── types/
-│   ├── task.ts                       # Task, subtask, priorities, durations
+│   ├── task.ts                       # Task, subtask, priorities, statuses, filters
 │   ├── workspace.ts                  # 4 Workspace definitions & workflow stages
 │   ├── navigation.ts                 # Nav items & badges
 │   └── database.ts                   # Supabase / PostgreSQL schema interfaces
 ├── services/
-│   └── taskService.ts                # Decoupled repository layer with initial mock tasks
-└── database/
-    └── schema.sql                    # PostgreSQL relational schema ready for Supabase
+│   ├── taskService.ts                # Supabase task repository with CRUD, subtasks & stats
+│   └── workspaceService.ts           # Workspace & Office pages repository
+├── database/
+│   ├── migrations/                   # Sequential SQL migrations (001, 002)
+│   └── schema.sql                    # Consolidated PostgreSQL relational schema
+└── scripts/
+    ├── check-routes.mjs              # Route healthcheck verification
+    ├── test-task-service.mjs         # 33-step automated task service test suite
+    └── run-lint.mjs                  # Strict ESLint automation runner
 ```
 
 ---
@@ -127,7 +171,7 @@ Built upon the **Google Stitch Precision Focus Minimal** specification:
 - [x] **PHASE 1: Next.js Foundation & Stitch UI** — Next.js 16 App Router, React 19, Tailwind CSS v4, design tokens, and initial route scaffolding.
 - [x] **PHASE 2: Complete App Shell & Navigation** — Reusable Sidebar, Header, NavigationItem, WorkspaceNavigation, MobileNavigation, PageContainer, PageHeader, collapse states, and real routing.
 - [x] **PHASE 3: Database & Supabase Integration** — 12 PostgreSQL tables, Row Level Security (RLS), 8 seeded Office pages, multi-tenant user triggers, and Supabase SSR client SDK.
-- [ ] **PHASE 4: Full Task System** — Kanban boards, drag & drop, filtering, subtasks, checklists, and time estimation.
+- [x] **PHASE 4: Full Task System** — Complete task CRUD, Supabase persistence, Stitch UI fidelity, TaskDetailDrawer, Subtasks checklist with progress bar, Statuses (`TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `COMPLETED`), Priorities (`LOW`, `MEDIUM`, `HIGH`), Filter Tabs (`All`, `Today`, `Upcoming`, `Overdue`, `Completed`), Multi-criteria filters & sorting, Optimistic UI updates, and 33-step automated test suite.
 - [ ] **PHASE 5: Workspaces & Office Pages** — 8-page publishing matrix, reel queue, and Suno Music visual pipeline.
 - [ ] **PHASE 6: Personal, College & Web Dev Modules** — 9-stage vlog pipeline, academic modules, and Monday & Tuesday class trackers.
 - [ ] **PHASE 7: Recurring Tasks Engine** — Cron schedules, recurring rule editor, and automated queue population.
@@ -167,8 +211,11 @@ Visit [http://localhost:3000](http://localhost:3000) to access Afaq TaskFlow.
 # Type check all TypeScript files
 npx tsc --noEmit
 
-# Run ESLint validation
+# Run ESLint validation (0 errors, 0 warnings)
 npm run lint
+
+# Run automated Task Service test suite (33 assertions)
+npx tsx scripts/test-task-service.mjs
 
 # Build production bundle with Next.js Turbopack
 npm run build

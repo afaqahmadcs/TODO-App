@@ -1,37 +1,122 @@
 import { WorkspaceType, OfficePageId } from "./workspace";
 
-export type TaskPriority = "high" | "medium" | "low";
+export type TaskPriority = "low" | "medium" | "high" | "urgent";
 
-export type TaskStatus = "todo" | "in_progress" | "review" | "done";
+export type TaskStatus =
+  | "todo"
+  | "in_progress"
+  | "review"
+  | "ready"
+  | "completed"
+  | "done"
+  | "published";
 
 export interface Subtask {
   id: string;
   taskId: string;
   title: string;
-  isCompleted: boolean;
+  completed: boolean;
+  isCompleted?: boolean;
+  position?: number;
+  createdAt?: string;
+}
+
+export interface TaskNote {
+  id: string;
+  taskId: string;
+  title?: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface TaskActivity {
+  id: string;
+  taskId: string;
+  action: string;
+  actor: string;
+  timestamp: string;
+  icon?: string;
 }
 
 export interface Task {
   id: string;
+  userId?: string;
   title: string;
   description?: string;
   workspaceId: WorkspaceType;
   officePageId?: OfficePageId;
+  pageId?: string | null;
+  projectId?: string | null;
   status: TaskStatus;
-  stage?: string; // Workflow stage (e.g. IDEAS, RECORDING, DESIGN)
+  stage?: string; // Workflow stage (e.g. IDEAS, RECORDING, DESIGN, SPRINT)
   priority: TaskPriority;
-  dueDate?: string; // YYYY-MM-DD
-  dueTime?: string; // e.g. "16:00"
+  dueDate?: string | null; // YYYY-MM-DD
+  dueTime?: string | null; // e.g. "16:00"
   estimatedDurationMin?: number;
   actualDurationMin?: number;
   tags: string[];
   isRecurring?: boolean;
-  recurringPattern?: string; // e.g. "Every Mon & Tue at 4:00 PM"
+  recurringPattern?: string; // e.g. "Every Mon & Thu at 4:00 PM"
   isCompleted: boolean;
   completedAt?: string;
   createdAt: string;
   updatedAt: string;
   subtasks?: Subtask[];
+  notes?: string | null;
+  activity?: TaskActivity[];
   linkedVlogEpisode?: string;
   githubBranchOrCommit?: string;
+}
+
+export type TaskFilterTab = "all" | "today" | "upcoming" | "overdue" | "completed";
+
+export type TaskSortOption = "due_time" | "priority" | "created_date";
+
+export interface TaskFilterOptions {
+  tab?: TaskFilterTab;
+  workspaceId?: WorkspaceType | "all";
+  officePageId?: OfficePageId | "all";
+  pageId?: string;
+  projectId?: string;
+  status?: string;
+  priority?: string;
+  date?: string;
+  tags?: string[];
+  searchQuery?: string;
+  sortBy?: TaskSortOption;
+  sortOrder?: "asc" | "desc";
+}
+
+export interface CreateTaskInput {
+  title: string;
+  description?: string;
+  workspaceId: WorkspaceType;
+  officePageId?: OfficePageId;
+  pageId?: string;
+  projectId?: string;
+  status?: TaskStatus;
+  priority?: TaskPriority;
+  dueDate?: string;
+  dueTime?: string;
+  estimatedDurationMin?: number;
+  tags?: string[];
+  subtasks?: string[]; // initial subtask titles
+  notes?: string;
+}
+
+export interface UpdateTaskInput {
+  title?: string;
+  description?: string;
+  workspaceId?: WorkspaceType;
+  officePageId?: OfficePageId;
+  pageId?: string | null;
+  projectId?: string | null;
+  status?: TaskStatus;
+  priority?: TaskPriority;
+  dueDate?: string | null;
+  dueTime?: string | null;
+  estimatedDurationMin?: number;
+  actualDurationMin?: number;
+  tags?: string[];
+  notes?: string | null;
 }

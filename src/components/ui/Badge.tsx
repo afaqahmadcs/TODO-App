@@ -20,7 +20,12 @@ export const Badge: React.FC<BadgeProps> = ({
   ...props
 }) => {
   if (variant === "priority" && priority) {
-    const priorityConfig = {
+    const priorityConfigMap = {
+      urgent: {
+        wrapper: "bg-red-600/20 text-red-300 border-red-500/40",
+        dot: "bg-red-500",
+        label: "Urgent",
+      },
       high: {
         wrapper: "bg-rose-500/15 text-rose-300 border-rose-500/30",
         dot: "bg-rose-500",
@@ -36,7 +41,8 @@ export const Badge: React.FC<BadgeProps> = ({
         dot: "bg-slate-400",
         label: "Low",
       },
-    }[priority];
+    };
+    const priorityConfig = priorityConfigMap[priority] || priorityConfigMap.medium;
 
     return (
       <span
