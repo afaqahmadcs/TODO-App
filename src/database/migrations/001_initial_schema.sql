@@ -1,7 +1,6 @@
 -- ==============================================================================
--- Afaq TaskFlow - Complete Relational PostgreSQL Schema (for Supabase)
+-- Afaq TaskFlow - Initial Database Schema Migration (001_initial_schema.sql)
 -- Multi-workspace personal productivity and work-management system
--- Compatible with Supabase SQL Editor and automated migrations
 -- ==============================================================================
 
 -- Enable UUID extension

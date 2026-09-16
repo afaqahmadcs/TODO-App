@@ -5,7 +5,6 @@ import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Avatar } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 
 export default function SettingsPage() {
@@ -73,22 +72,78 @@ export default function SettingsPage() {
           <div className="flex items-center gap-2">
             <Icon name="database" size={20} className="text-emerald-400" />
             <h3 className="text-base font-bold text-on-surface font-headline">
-              Supabase Backend Status
+              Supabase Backend Data Layer
             </h3>
           </div>
           <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-mono text-xs font-semibold">
-            Ready for Phase 3
+            Phase 3 Configured
           </span>
         </div>
 
         <p className="text-xs text-on-surface-variant leading-relaxed">
-          The application is currently running in decoupled frontend mode with typed service abstractions and PostgreSQL schema migrations prepared in <code className="text-secondary font-mono">src/database/schema.sql</code>.
+          12 PostgreSQL tables, Row Level Security (RLS) policies, and user onboarding triggers are defined in{" "}
+          <code className="text-secondary font-mono">src/database/schema.sql</code> and migrations.
         </p>
 
-        <div className="flex items-center gap-2 pt-2">
-          <Button variant="secondary" size="sm" icon="sync">
-            Verify Schema Integrity
-          </Button>
+        {/* 12 Core Tables Grid */}
+        <div className="space-y-2 pt-1">
+          <span className="text-xs font-mono text-outline uppercase tracking-wider block">
+            12 Database Tables
+          </span>
+          <div className="flex flex-wrap gap-1.5">
+            {[
+              "profiles",
+              "workspaces",
+              "pages",
+              "projects",
+              "tasks",
+              "subtasks",
+              "tags",
+              "task_tags",
+              "recurring_tasks",
+              "focus_sessions",
+              "notes",
+              "notifications",
+            ].map((tbl) => (
+              <span
+                key={tbl}
+                className="px-2 py-0.5 rounded-md bg-surface-container font-mono text-[11px] text-on-surface border border-outline-variant/15"
+              >
+                {tbl}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 8 Seeded Office Pages */}
+        <div className="space-y-2 pt-1">
+          <span className="text-xs font-mono text-outline uppercase tracking-wider block">
+            8 Seeded Office Pages
+          </span>
+          <div className="flex flex-wrap gap-1.5">
+            {[
+              "Shooting Page",
+              "Ismail Shahid Fans",
+              "ZK Production",
+              "Jahangir Khan",
+              "Inaya Kailash",
+              "Political Affairs",
+              "Nazia Iqbal Fanz",
+              "Suno Music",
+            ].map((page) => (
+              <span
+                key={page}
+                className="px-2 py-0.5 rounded-md bg-blue-500/10 font-mono text-[11px] text-blue-300 border border-blue-500/20"
+              >
+                {page}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between pt-3 border-t border-outline-variant/10 text-xs font-mono text-outline">
+          <span>RLS Protection: Active (auth.uid)</span>
+          <span className="text-emerald-400 font-semibold">Multi-Tenant Ready</span>
         </div>
       </Card>
     </PageContainer>

@@ -1,4 +1,4 @@
-export type WorkspaceType = "office" | "personal" | "college" | "web-development";
+export type WorkspaceType = "office" | "personal" | "college" | "web-development" | "web_development";
 
 export interface WorkspaceConfig {
   id: WorkspaceType;

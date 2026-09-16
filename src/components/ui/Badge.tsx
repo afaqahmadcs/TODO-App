@@ -64,6 +64,7 @@ export const Badge: React.FC<BadgeProps> = ({
       personal: "bg-purple-500/15 text-purple-300 border-purple-500/30",
       college: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
       "web-development": "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
+      web_development: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
     }[workspace];
 
     return (
