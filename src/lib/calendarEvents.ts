@@ -138,6 +138,12 @@ export const WEB_DEV_CLASS_TEMPLATES = [
 /**
  * All-Day Deadlines & Milestones
  */
+function getRelativeDateStr(offsetDays: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
+  return d.toISOString().split("T")[0];
+}
+
 export const SCHEDULED_DEADLINES: {
   date: string;
   title: string;
@@ -146,43 +152,43 @@ export const SCHEDULED_DEADLINES: {
   category: string;
 }[] = [
   {
-    date: "2025-09-16",
+    date: getRelativeDateStr(0),
     title: "Sprint Goal 03 Complete",
     workspaceId: "web-development",
     priority: "high",
     category: "Sprint Goal",
   },
   {
-    date: "2025-09-19",
-    title: "CS301 Lab Due (Midnight)",
+    date: getRelativeDateStr(2),
+    title: "Systems Lab Milestone Due",
     workspaceId: "college",
     priority: "urgent",
     category: "Academic Submission",
   },
   {
-    date: "2025-09-24",
-    title: "CS301 Midterm Examination",
+    date: getRelativeDateStr(5),
+    title: "Review Lecture Notes & Study Session",
     workspaceId: "college",
     priority: "urgent",
-    category: "Midterm Exam",
+    category: "Exam Prep",
   },
   {
-    date: "2025-10-22",
-    title: "CS301 Midterm Exam",
+    date: getRelativeDateStr(8),
+    title: "Fullstack Architecture Presentation",
     workspaceId: "college",
-    priority: "urgent",
-    category: "Exam",
+    priority: "high",
+    category: "Milestone",
   },
   {
-    date: "2025-10-25",
+    date: getRelativeDateStr(14),
     title: "Portfolio 2026 Redesign Due",
     workspaceId: "web-development",
     priority: "high",
     category: "Major Project",
   },
   {
-    date: "2025-11-15",
-    title: "TaskFlow v2.4 Public Beta Launch",
+    date: getRelativeDateStr(21),
+    title: "TaskFlow Production Release",
     workspaceId: "web-development",
     priority: "urgent",
     category: "Production Release",

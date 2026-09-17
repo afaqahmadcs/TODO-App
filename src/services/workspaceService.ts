@@ -1,6 +1,7 @@
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import { WORKSPACES, OFFICE_PAGES } from "@/lib/constants";
 import { WorkspaceRow, PageRow } from "@/types/database";
+import { authService } from "./authService";
 
 export interface WorkspaceItem {
   id: string;
@@ -63,7 +64,9 @@ export const workspaceService = {
   },
 
   /**
-   * Fetch all pages for a specific workspace (e.g. 8 Office pages).
+   * Fetch all pages for a specific workspace.
+   * GUARANTEE: Afaq's 8 Office publishing pages are ONLY returned for Afaq's account.
+   * New users start with an empty page collection.
    */
   getPagesByWorkspace: async (workspaceTypeOrId: string): Promise<PageItem[]> => {
     if (isSupabaseConfigured()) {
@@ -98,8 +101,9 @@ export const workspaceService = {
       }
     }
 
-    // Fallback for Office pages
-    if (workspaceTypeOrId === "office" || workspaceTypeOrId.includes("office")) {
+    // Fallback for Office pages: strictly isolated to Afaq's primary account
+    const isAfaq = await authService.isCurrentUserAfaq();
+    if (isAfaq && (workspaceTypeOrId === "office" || workspaceTypeOrId.includes("office"))) {
       return OFFICE_PAGES.map((p) => ({
         id: p.id,
         workspaceId: "office",

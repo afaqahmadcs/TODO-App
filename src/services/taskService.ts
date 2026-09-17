@@ -12,6 +12,7 @@ import {
 import { WorkspaceType, OfficePageId } from "@/types/workspace";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import { Database, TaskDbRow, SubtaskRow } from "@/types/database";
+import { authService } from "./authService";
 
 // Seeded local initial tasks representing realistic data across the 4 workspaces
 const INITIAL_TASKS: Task[] = [
@@ -1064,8 +1065,66 @@ const INITIAL_TASKS: Task[] = [
   },
 ];
 
-// In-memory store for fallback/offline operations
-let localTasks: Task[] = [...INITIAL_TASKS];
+// User-partitioned local storage state for fallback/offline multi-tenant operations
+let currentLoadedUserId: string | null = null;
+let localTasks: Task[] = [];
+let isLocalTasksLoaded = false;
+
+export async function ensureLocalTasksLoaded(): Promise<{ userId: string; isAfaq: boolean; tasks: Task[] }> {
+  const user = await authService.getUser();
+  const userId = user?.id || "anonymous";
+  const isAfaq = user?.email?.toLowerCase() === "afaq@taskflow.dev" ||
+                 user?.email?.toLowerCase() === "afaqahmadcs@gmail.com" ||
+                 userId === "demo-creator-afaq";
+
+  if (!isLocalTasksLoaded || currentLoadedUserId !== userId) {
+    currentLoadedUserId = userId;
+    isLocalTasksLoaded = true;
+
+    const storageKey = `afaq_taskflow_tasks_${userId}`;
+    let loaded: Task[] | null = null;
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (stored) {
+          loaded = JSON.parse(stored);
+        }
+      } catch {}
+    }
+
+    if (loaded) {
+      localTasks = loaded;
+    } else if (isAfaq) {
+      localTasks = INITIAL_TASKS.map((t) => ({ ...t, userId }));
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(localTasks));
+        } catch {}
+      }
+    } else {
+      // Clean slate for new / other users: 0 tasks!
+      localTasks = [];
+    }
+  }
+
+  return { userId, isAfaq, tasks: localTasks };
+}
+
+export function persistLocalTasks(): void {
+  if (currentLoadedUserId && typeof window !== "undefined") {
+    try {
+      localStorage.setItem(`afaq_taskflow_tasks_${currentLoadedUserId}`, JSON.stringify(localTasks));
+    } catch {}
+  }
+}
+
+if (typeof window !== "undefined") {
+  authService.onProfileChange((profile) => {
+    if (profile && profile.id !== currentLoadedUserId) {
+      isLocalTasksLoaded = false;
+    }
+  });
+}
 
 // Helper to normalize Supabase status values
 function normalizeStatus(statusStr?: string | null): TaskStatus {
@@ -1186,7 +1245,7 @@ export const taskService = {
         // Apply Sorting
         if (filters?.sortBy === "due_time") {
           query = query.order("due_date", { ascending: filters.sortOrder !== "desc" })
-                       .order("due_time", { ascending: filters.sortOrder !== "desc", nullsFirst: false });
+            .order("due_time", { ascending: filters.sortOrder !== "desc", nullsFirst: false });
         } else if (filters?.sortBy === "priority") {
           query = query.order("priority", { ascending: filters.sortOrder === "asc" });
         } else {
@@ -1245,7 +1304,8 @@ export const taskService = {
       }
     }
 
-    // Local Fallback Processing
+    // Local Fallback Processing (User-Scoped)
+    await ensureLocalTasksLoaded();
     let result = [...localTasks];
 
     // Tab filter
@@ -1368,6 +1428,7 @@ export const taskService = {
       }
     }
 
+    await ensureLocalTasksLoaded();
     const local = localTasks.find((t) => t.id === id);
     return local ? { ...local } : null;
   },
@@ -1454,7 +1515,8 @@ export const taskService = {
       }
     }
 
-    // Local Fallback Creation
+    // Local Fallback Creation (User-Scoped)
+    await ensureLocalTasksLoaded();
     const newId = `task-${Date.now()}`;
     const localSubtasks: Subtask[] = (input.subtasks || []).map((subTitle, idx) => ({
       id: `sub-${Date.now()}-${idx}`,
@@ -1467,6 +1529,7 @@ export const taskService = {
 
     const newTask: Task = {
       id: newId,
+      userId: currentLoadedUserId || undefined,
       title: input.title,
       description: input.description,
       workspaceId: input.workspaceId,
@@ -1498,6 +1561,7 @@ export const taskService = {
     };
 
     localTasks.unshift(newTask);
+    persistLocalTasks();
     return newTask;
   },
 
@@ -1557,6 +1621,7 @@ export const taskService = {
     }
 
     // Local update
+    await ensureLocalTasksLoaded();
     const idx = localTasks.findIndex((t) => t.id === id);
     if (idx === -1) return null;
 
@@ -1585,6 +1650,7 @@ export const taskService = {
     };
 
     localTasks[idx] = updated;
+    persistLocalTasks();
     return { ...updated };
   },
 
@@ -1669,8 +1735,8 @@ export const taskService = {
         const dbStatus = isComp
           ? "completed"
           : derivedStatus === "done"
-          ? "completed"
-          : derivedStatus;
+            ? "completed"
+            : derivedStatus;
 
         const updatePayload: Database["public"]["Tables"]["tasks"]["Update"] = {
           status: dbStatus as Database["public"]["Enums"]["task_status"],
@@ -1738,8 +1804,10 @@ export const taskService = {
       }
     }
 
+    await ensureLocalTasksLoaded();
     const prevLen = localTasks.length;
     localTasks = localTasks.filter((t) => t.id !== id);
+    persistLocalTasks();
     return localTasks.length < prevLen;
   },
 

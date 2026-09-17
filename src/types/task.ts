@@ -172,3 +172,21 @@ export interface UpdateTaskInput {
   recurringPattern?: string;
 }
 
+export interface TemplateSubtask {
+  title: string;
+  completed?: boolean;
+}
+
+export interface TaskTemplate {
+  id: string;
+  name: string;
+  description: string;
+  workspaceType: WorkspaceType | "general";
+  defaultPriority: TaskPriority;
+  defaultDuration: number;
+  workflowType: string;
+  subtasks: TemplateSubtask[];
+  tags: string[];
+  isSystem: boolean;
+  createdAt?: string;
+}

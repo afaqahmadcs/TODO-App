@@ -9,6 +9,8 @@ import { WorkspaceNavigation } from "./WorkspaceNavigation";
 import { Avatar } from "@/components/ui/Avatar";
 import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/utils";
+import { authService, AuthUserProfile } from "@/services/authService";
+import { taskService } from "@/services/taskService";
 
 export interface SidebarProps {
   isCollapsed?: boolean;
@@ -21,6 +23,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleCollapse,
   className,
 }) => {
+  const [userProfile, setUserProfile] = React.useState<AuthUserProfile | null>(null);
+  const [pendingCount, setPendingCount] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    authService.getProfile().then(setUserProfile);
+    const unsub = authService.onProfileChange((p) => {
+      setUserProfile(p);
+    });
+
+    taskService.getTasks().then((tasks) => {
+      const pending = tasks.filter((t) => !t.isCompleted && t.status !== "completed");
+      setPendingCount(pending.length);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
   return (
     <aside
       className={cn(
@@ -91,7 +112,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 label={item.label}
                 href={item.href}
                 icon={item.icon}
-                badge={item.badge}
+                badge={item.id === "tasks" && pendingCount !== null ? String(pendingCount) : item.badge}
                 isCollapsed={isCollapsed}
               />
             ))}
@@ -141,33 +162,44 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
 
         {/* User Profile / Settings Row */}
-        <Link
-          href="/settings"
-          title={isCollapsed ? "Afaq Ahmad (Settings)" : undefined}
+        <div
           className={cn(
-            "flex items-center rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors group focus:outline-none focus:ring-2 focus:ring-primary-container/40",
-            isCollapsed ? "p-2 justify-center" : "p-2.5 justify-between"
+            "flex items-center rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors group p-1.5",
+            isCollapsed ? "justify-center" : "justify-between"
           )}
         >
-          <div className="flex items-center gap-2.5 min-w-0">
-            <Avatar size="sm" src="/assets/avatar.png" statusDot="online" />
+          <Link
+            href="/profile"
+            title={isCollapsed ? `${userProfile?.name || "Afaq Ahmad"} (Profile)` : undefined}
+            className="flex items-center gap-2.5 min-w-0 flex-1 p-1 rounded-lg hover:bg-surface-container-highest/60 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container/40"
+          >
+            <Avatar
+              size="sm"
+              src={userProfile?.avatarUrl || "/assets/avatar.png"}
+              alt={userProfile?.name || "Afaq Ahmad"}
+              statusDot="online"
+            />
             {!isCollapsed && (
-              <div className="flex flex-col min-w-0">
+              <div className="flex flex-col min-w-0 text-left">
                 <span className="text-xs font-semibold text-on-surface truncate group-hover:text-primary transition-colors">
-                  Afaq Ahmad
+                  {userProfile?.name || "Afaq Ahmad"}
                 </span>
                 <span className="text-[10px] text-on-surface-variant truncate">
-                  Pro Creator
+                  @{userProfile?.username || "afaqahmad"}
                 </span>
               </div>
             )}
-          </div>
+          </Link>
           {!isCollapsed && (
-            <span className="p-1 rounded text-outline group-hover:text-on-surface flex items-center">
-              <Icon name="settings" size={18} />
-            </span>
+            <Link
+              href="/settings"
+              title="Settings"
+              className="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container-highest flex items-center transition-colors"
+            >
+              <Icon name="settings" size={17} />
+            </Link>
           )}
-        </Link>
+        </div>
 
         {/* Expand trigger when collapsed */}
         {isCollapsed && onToggleCollapse && (

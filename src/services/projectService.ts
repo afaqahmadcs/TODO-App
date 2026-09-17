@@ -1,6 +1,7 @@
 import { Project, CreateProjectInput, ProjectStatus } from "@/types/project";
 import { WorkspaceType } from "@/types/workspace";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
+import { authService } from "./authService";
 
 const INITIAL_PROJECTS: Project[] = [
   {
@@ -12,13 +13,13 @@ const INITIAL_PROJECTS: Project[] = [
     progress: 82,
     tasksTotal: 17,
     tasksCompleted: 14,
-    deadline: "Due Oct 25, 2025",
+    deadline: "Due in 2 Weeks",
     focusHours: 38.5,
     techStack: ["Next.js", "TailwindCSS", "Framer Motion", "Vercel"],
     linkedVlogId: "task-personal-ep42", // Relational reference to Vlog EP #42
     color: "border-l-cyan-400",
-    createdAt: "2025-09-01T10:00:00.000Z",
-    updatedAt: "2025-09-15T16:00:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 30).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
   },
   {
     id: "proj-web-taskflow",
@@ -29,13 +30,13 @@ const INITIAL_PROJECTS: Project[] = [
     progress: 68,
     tasksTotal: 35,
     tasksCompleted: 24,
-    deadline: "Due Nov 15, 2025",
+    deadline: "Next Month",
     focusHours: 56.0,
     techStack: ["TypeScript", "React 19", "Supabase", "TailwindCSS"],
     linkedVlogId: "task-personal-ep43", // Relational reference to Vlog EP #43
     color: "border-l-indigo-500",
-    createdAt: "2025-08-15T09:00:00.000Z",
-    updatedAt: "2025-09-16T12:00:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 45).toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "proj-web-practice",
@@ -50,40 +51,40 @@ const INITIAL_PROJECTS: Project[] = [
     focusHours: 22.0,
     techStack: ["LeetCode", "Rust CLI", "WebGL Shaders", "Algorithms"],
     color: "border-l-purple-500",
-    createdAt: "2025-09-05T08:00:00.000Z",
-    updatedAt: "2025-09-16T14:00:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 20).toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "proj-college-distkv",
     workspaceId: "college",
     name: "Distributed Key-Value Store",
-    description: "CS301 Capstone project implementing Raft consensus, write-ahead logging (WAL), compaction, and gRPC endpoints.",
-    status: "in_progress",
-    progress: 65,
-    tasksTotal: 8,
-    tasksCompleted: 5,
-    deadline: "Due Nov 12, 2025",
-    focusHours: 32.0,
-    techStack: ["Go", "gRPC", "Raft", "Distributed Systems"],
+    description: "Capstone project exploring scalable client-server architectures, Raft consensus, and gRPC endpoints.",
+    status: "active",
+    progress: 85,
+    tasksTotal: 15,
+    tasksCompleted: 13,
+    deadline: "Next Week",
+    focusHours: 42.0,
+    techStack: ["Go", "gRPC", "Raft Consensus", "Distributed Systems"],
     color: "border-l-emerald-500",
-    createdAt: "2025-09-02T11:00:00.000Z",
-    updatedAt: "2025-09-16T11:30:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 25).toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
-    id: "proj-college-hospital",
+    id: "proj-college-capstone",
     workspaceId: "college",
-    name: "Hospital Management DB Schema & Normalization",
-    description: "CS340 Database architecture course project covering BCNF normalization, indexing, and PostgreSQL stored procedures.",
+    name: "Fullstack Architecture & Systems Capstone",
+    description: "Distributed systems and cloud architecture course capstone covering microservices, caching layers, and high-concurrency workloads.",
     status: "active",
     progress: 90,
     tasksTotal: 10,
     tasksCompleted: 9,
-    deadline: "Due Oct 24, 2025",
-    focusHours: 18.5,
-    techStack: ["PostgreSQL", "SQL", "Database Design", "ERD"],
+    deadline: "Due This Month",
+    focusHours: 24.5,
+    techStack: ["PostgreSQL", "Next.js", "Redis", "System Design"],
     color: "border-l-teal-500",
-    createdAt: "2025-09-04T14:00:00.000Z",
-    updatedAt: "2025-09-15T18:00:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 15).toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "proj-personal-docu",
@@ -94,12 +95,12 @@ const INITIAL_PROJECTS: Project[] = [
     progress: 45,
     tasksTotal: 12,
     tasksCompleted: 6,
-    deadline: "Due Dec 31, 2025",
+    deadline: "Year-End Release",
     focusHours: 64.0,
     techStack: ["Final Cut Pro", "DaVinci Resolve", "Sony A7IV", "Shure SM7B"],
     color: "border-l-fuchsia-500",
-    createdAt: "2025-08-20T10:00:00.000Z",
-    updatedAt: "2025-09-16T15:00:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 40).toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "proj-office-suno",
@@ -110,44 +111,61 @@ const INITIAL_PROJECTS: Project[] = [
     progress: 75,
     tasksTotal: 12,
     tasksCompleted: 9,
-    deadline: "Due Oct 15, 2025",
+    deadline: "Due This Week",
     focusHours: 42.0,
     techStack: ["Photoshop", "After Effects", "Figma", "Spotify Canvas"],
     color: "border-l-blue-500",
-    createdAt: "2025-09-01T08:00:00.000Z",
-    updatedAt: "2025-09-16T16:00:00.000Z",
+    createdAt: new Date(Date.now() - 86400000 * 20).toISOString(),
+    updatedAt: new Date().toISOString(),
   }
 ];
 
-const STORAGE_KEY = "afaq_taskflow_projects_cache";
-
 class ProjectService {
   private localProjects: Project[] = [];
+  private currentUserId: string | null = null;
 
-  constructor() {
-    this.init();
-  }
+  private async ensureProjectsLoaded(): Promise<{ userId: string; isAfaq: boolean; projects: Project[] }> {
+    const user = await authService.getUser();
+    const userId = user?.id || "anonymous";
+    const isAfaq = user?.email?.toLowerCase() === "afaq@taskflow.dev" ||
+                   user?.email?.toLowerCase() === "afaqahmadcs@gmail.com" ||
+                   userId === "demo-creator-afaq";
 
-  private init() {
-    if (typeof window !== "undefined") {
-      try {
-        const cached = localStorage.getItem(STORAGE_KEY);
-        if (cached) {
-          this.localProjects = JSON.parse(cached);
-          return;
+    if (this.currentUserId !== userId) {
+      this.currentUserId = userId;
+      const storageKey = `afaq_taskflow_projects_${userId}`;
+      let loaded: Project[] | null = null;
+      if (typeof window !== "undefined") {
+        try {
+          const cached = localStorage.getItem(storageKey);
+          if (cached) {
+            loaded = JSON.parse(cached);
+          }
+        } catch {}
+      }
+
+      if (loaded) {
+        this.localProjects = loaded;
+      } else if (isAfaq) {
+        this.localProjects = INITIAL_PROJECTS.map((p) => ({ ...p, userId }));
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(this.localProjects));
+          } catch {}
         }
-      } catch (e) {
-        console.warn("ProjectService: local storage read failed", e);
+      } else {
+        // Clean account for all other users: 0 projects!
+        this.localProjects = [];
       }
     }
-    this.localProjects = [...INITIAL_PROJECTS];
-    this.saveCache();
+
+    return { userId, isAfaq, projects: this.localProjects };
   }
 
-  private saveCache() {
+  private saveCache(userId: string) {
     if (typeof window !== "undefined") {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.localProjects));
+        localStorage.setItem(`afaq_taskflow_projects_${userId}`, JSON.stringify(this.localProjects));
       } catch (e) {
         console.warn("ProjectService: local storage write failed", e);
       }
@@ -183,10 +201,11 @@ class ProjectService {
       }
     }
 
+    const { projects } = await this.ensureProjectsLoaded();
     if (!workspaceId || workspaceId === "all") {
-      return [...this.localProjects];
+      return [...projects];
     }
-    return this.localProjects.filter((p) => p.workspaceId === workspaceId);
+    return projects.filter((p) => p.workspaceId === workspaceId);
   }
 
   public async getProjectById(id: string): Promise<Project | null> {
@@ -195,8 +214,10 @@ class ProjectService {
   }
 
   public async createProject(input: CreateProjectInput): Promise<Project> {
+    const { userId } = await this.ensureProjectsLoaded();
     const newProj: Project = {
       id: `proj-${Date.now()}`,
+      userId: userId,
       workspaceId: input.workspaceId,
       name: input.name,
       description: input.description,
@@ -216,10 +237,10 @@ class ProjectService {
       try {
         const dbWorkspace = input.workspaceId === "web-development" ? "web_development" : input.workspaceId;
         const { data: userData } = await supabase.auth.getUser();
-        const userId = userData?.user?.id || "00000000-0000-0000-0000-000000000001";
+        const activeUserId = userData?.user?.id || userId;
         const { data, error } = await supabase.from("projects").insert({
           id: newProj.id,
-          user_id: userId,
+          user_id: activeUserId,
           name: newProj.name,
           description: newProj.description,
           workspace_id: dbWorkspace,
@@ -236,11 +257,12 @@ class ProjectService {
     }
 
     this.localProjects.unshift(newProj);
-    this.saveCache();
+    this.saveCache(userId);
     return newProj;
   }
 
   public async updateProjectProgress(id: string, progress: number, focusHoursDelta = 0): Promise<Project | null> {
+    const { userId } = await this.ensureProjectsLoaded();
     const proj = this.localProjects.find((p) => p.id === id);
     if (!proj) return null;
 
@@ -261,7 +283,7 @@ class ProjectService {
       }
     }
 
-    this.saveCache();
+    this.saveCache(userId);
     return { ...proj };
   }
 }

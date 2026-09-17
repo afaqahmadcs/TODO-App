@@ -12,6 +12,7 @@ import { analyticsService } from "@/services/analyticsService";
 import { Task } from "@/types/task";
 import { DashboardTelemetry } from "@/types/analytics";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { authService, AuthUserProfile } from "@/services/authService";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -24,18 +25,21 @@ export default function DashboardPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [focusModeActive, setFocusModeActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [userProfile, setUserProfile] = useState<AuthUserProfile | null>(null);
 
   useEffect(() => {
     let mounted = true;
     async function loadData() {
       try {
-        const [allTasks, liveTelemetry] = await Promise.all([
+        const [allTasks, liveTelemetry, profile] = await Promise.all([
           taskService.getTasks(),
           analyticsService.getDashboardTelemetry(),
+          authService.getProfile(),
         ]);
         if (mounted) {
           setTasks(allTasks);
           setTelemetry(liveTelemetry);
+          setUserProfile(profile);
           setIsLoading(false);
         }
       } catch (err) {
@@ -45,8 +49,13 @@ export default function DashboardPage() {
     }
     loadData();
 
+    const unsubProfile = authService.onProfileChange((p) => {
+      if (mounted) setUserProfile(p);
+    });
+
     return () => {
       mounted = false;
+      unsubProfile();
     };
   }, []);
 
@@ -175,6 +184,8 @@ export default function DashboardPage() {
     }
   };
 
+  const firstName = userProfile?.name ? userProfile.name.split(" ")[0] : "Afaq";
+
   return (
     <PageContainer>
       {/* Top Welcome Header Section */}
@@ -182,7 +193,7 @@ export default function DashboardPage() {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <h1 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-bold text-on-surface tracking-tight">
-              {greeting}, Afaq
+              {greeting}, {firstName}
             </h1>
             <span className="text-2xl animate-pulse">👋</span>
           </div>

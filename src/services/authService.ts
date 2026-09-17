@@ -1,12 +1,28 @@
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
+export interface SocialLinks {
+  [key: string]: string | undefined;
+  instagram?: string;
+  youtube?: string;
+  tiktok?: string;
+  facebook?: string;
+  x?: string;
+  linkedin?: string;
+  github?: string;
+}
+
 export interface AuthUserProfile {
   id: string;
   email: string;
   name: string;
-  avatarUrl?: string;
+  username?: string;
+  bio?: string;
+  location?: string;
   timezone?: string;
+  website?: string;
+  avatarUrl?: string;
+  socialLinks?: SocialLinks;
 }
 
 export interface AuthResult {
@@ -17,14 +33,40 @@ export interface AuthResult {
 
 const LOCAL_STORAGE_USER_KEY = "afaq_taskflow_auth_user";
 
-// Default demo creator profile when running in offline / evaluation mode
+// Default realistic demo creator profile when running in offline / evaluation mode
 const DEMO_USER: AuthUserProfile = {
   id: "demo-creator-afaq",
   email: "afaq@taskflow.dev",
   name: "Afaq Ahmad",
-  avatarUrl: "/assets/avatar.png",
+  username: "afaqahmad",
+  bio: "Visual Content Producer & Fullstack Developer. Managing 8 client channels while building modern web applications.",
+  location: "Peshawar, Pakistan",
   timezone: "Asia/Karachi",
+  website: "https://afaqahmad.dev",
+  avatarUrl: "/assets/avatar.png",
+  socialLinks: {
+    instagram: "https://instagram.com/afaqahmad",
+    youtube: "https://youtube.com/@afaqahmad",
+    tiktok: "https://tiktok.com/@afaqahmad",
+    x: "https://x.com/afaqahmadcs",
+    github: "https://github.com/afaqahmadcs",
+    linkedin: "https://linkedin.com/in/afaqahmad",
+  },
 };
+
+// Listeners for real-time profile updates across components
+type ProfileListener = (profile: AuthUserProfile) => void;
+const profileListeners = new Set<ProfileListener>();
+
+function notifyProfileChange(profile: AuthUserProfile) {
+  for (const listener of profileListeners) {
+    try {
+      listener(profile);
+    } catch (err) {
+      console.error("[authService] Listener error:", err);
+    }
+  }
+}
 
 export const authService = {
   /**
@@ -35,28 +77,80 @@ export const authService = {
   },
 
   /**
+   * Subscribe to live profile changes
+   */
+  onProfileChange: (callback: ProfileListener) => {
+    profileListeners.add(callback);
+    return () => {
+      profileListeners.delete(callback);
+    };
+  },
+
+  /**
+   * Alias for getUser to provide consistent profile fetching API
+   */
+  getProfile: async (): Promise<AuthUserProfile | null> => {
+    return authService.getUser();
+  },
+
+  /**
    * Get the current authenticated user profile
    */
   getUser: async (): Promise<AuthUserProfile | null> => {
     if (isSupabaseConfigured()) {
       try {
         const { data, error } = await supabase.auth.getUser();
-        if (error || !data.user) {
-          return null;
-        }
+        if (!error && data.user) {
+          const user = data.user;
 
-        const user = data.user;
-        return {
-          id: user.id,
-          email: user.email || "",
-          name:
-            user.user_metadata?.name ||
-            user.user_metadata?.full_name ||
-            user.email?.split("@")[0] ||
-            "Creator",
-          avatarUrl: user.user_metadata?.avatar_url || "/assets/avatar.png",
-          timezone: user.user_metadata?.timezone || "Asia/Karachi",
-        };
+          // Attempt to fetch extended profile from public.profiles table
+          let dbProfile: Partial<AuthUserProfile> = {};
+          try {
+            const { data: profRow } = await supabase
+              .from("profiles")
+              .select("*")
+              .eq("id", user.id)
+              .maybeSingle();
+
+            if (profRow) {
+              dbProfile = {
+                name: profRow.name,
+                username: profRow.username || undefined,
+                bio: profRow.bio || undefined,
+                location: profRow.location || undefined,
+                timezone: profRow.timezone,
+                website: profRow.website || undefined,
+                avatarUrl: profRow.avatar_url || undefined,
+                socialLinks: (profRow.social_links as SocialLinks) || undefined,
+              };
+            }
+          } catch {
+            // If table query fails, fallback to user_metadata
+          }
+
+          const metadata = user.user_metadata || {};
+          const isAfaq = user.email?.toLowerCase() === "afaq@taskflow.dev" || 
+                         user.email?.toLowerCase() === "afaqahmadcs@gmail.com" ||
+                         metadata.is_primary_creator === true;
+
+          return {
+            id: user.id,
+            email: user.email || "",
+            name:
+              dbProfile.name ||
+              metadata.name ||
+              metadata.full_name ||
+              user.email?.split("@")[0] ||
+              (isAfaq ? "Afaq Ahmad" : "User"),
+            username: dbProfile.username || metadata.username || user.email?.split("@")[0] || (isAfaq ? "afaqahmad" : "user"),
+            bio: dbProfile.bio !== undefined ? dbProfile.bio : (metadata.bio || (isAfaq ? DEMO_USER.bio : "")),
+            location: dbProfile.location !== undefined ? dbProfile.location : (metadata.location || (isAfaq ? DEMO_USER.location : "")),
+            timezone: dbProfile.timezone || metadata.timezone || "Asia/Karachi",
+            website: dbProfile.website !== undefined ? dbProfile.website : (metadata.website || (isAfaq ? DEMO_USER.website : "")),
+            avatarUrl: dbProfile.avatarUrl || metadata.avatar_url || (isAfaq ? DEMO_USER.avatarUrl : "/assets/avatar.png"),
+            socialLinks: dbProfile.socialLinks || metadata.social_links || (isAfaq ? DEMO_USER.socialLinks : {}),
+          };
+        }
       } catch (err) {
         console.warn("[authService] Failed to fetch Supabase user:", err);
       }
@@ -73,6 +167,168 @@ export const authService = {
     }
 
     return DEMO_USER;
+  },
+
+  /**
+   * Check if current active user is Afaq Ahmad's primary account
+   */
+  isCurrentUserAfaq: async (): Promise<boolean> => {
+    const user = await authService.getUser();
+    if (!user) return false;
+    const email = (user.email || "").toLowerCase();
+    return email === "afaq@taskflow.dev" || email === "afaqahmadcs@gmail.com" || user.id === "demo-creator-afaq";
+  },
+
+  /**
+   * Update the user's profile information
+   */
+  updateProfile: async (
+    updates: Partial<AuthUserProfile>
+  ): Promise<{ success: boolean; profile: AuthUserProfile | null; error?: string }> => {
+    try {
+      const current = await authService.getUser();
+      const merged: AuthUserProfile = {
+        ...(current || DEMO_USER),
+        ...updates,
+        socialLinks: {
+          ...(current?.socialLinks || DEMO_USER.socialLinks),
+          ...(updates.socialLinks || {}),
+        },
+      };
+
+      if (isSupabaseConfigured()) {
+        try {
+          const { data: authData } = await supabase.auth.getUser();
+          if (authData.user) {
+            // 1. Update Supabase Auth user metadata
+            await supabase.auth.updateUser({
+              data: {
+                name: merged.name,
+                username: merged.username,
+                bio: merged.bio,
+                location: merged.location,
+                timezone: merged.timezone,
+                website: merged.website,
+                avatar_url: merged.avatarUrl,
+                social_links: merged.socialLinks,
+              },
+            });
+
+            // 2. Update public.profiles row
+            await supabase
+              .from("profiles")
+              .upsert({
+                id: authData.user.id,
+                name: merged.name,
+                email: merged.email || authData.user.email || "afaqahmadcs@gmail.com",
+                username: merged.username,
+                bio: merged.bio,
+                location: merged.location,
+                timezone: merged.timezone,
+                website: merged.website,
+                avatar_url: merged.avatarUrl,
+                social_links: merged.socialLinks,
+                updated_at: new Date().toISOString(),
+              });
+          }
+        } catch (dbErr: unknown) {
+          console.warn("[authService] Supabase profile sync failed, persisting locally:", dbErr);
+        }
+      }
+
+      // Persist to localStorage
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(merged));
+        } catch {}
+      }
+
+      // Broadcast update to all live listeners
+      notifyProfileChange(merged);
+
+      return { success: true, profile: merged };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to update profile";
+      return { success: false, profile: null, error: message };
+    }
+  },
+
+  /**
+   * Upload an avatar photo with validation and Supabase Storage support
+   */
+  uploadAvatar: async (
+    file: File
+  ): Promise<{ success: boolean; avatarUrl?: string; error?: string }> => {
+    // 1. Validate file format
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowedTypes.includes(file.type)) {
+      return {
+        success: false,
+        error: "Invalid file type. Please upload a JPEG, PNG, WebP, or GIF image.",
+      };
+    }
+
+    // 2. Validate file size (max 5MB)
+    const MAX_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      return {
+        success: false,
+        error: "Image is too large. Please select a photo under 5MB.",
+      };
+    }
+
+    // 3. Supabase Storage upload if configured
+    if (isSupabaseConfigured()) {
+      try {
+        const { data: authData } = await supabase.auth.getUser();
+        if (authData.user) {
+          const fileExt = file.name.split(".").pop() || "png";
+          const filePath = `${authData.user.id}/${Date.now()}.${fileExt}`;
+
+          const { error: uploadError } = await supabase.storage
+            .from("avatars")
+            .upload(filePath, file, {
+              upsert: true,
+              cacheControl: "3600",
+            });
+
+          if (!uploadError) {
+            const {
+              data: { publicUrl },
+            } = supabase.storage.from("avatars").getPublicUrl(filePath);
+
+            await authService.updateProfile({ avatarUrl: publicUrl });
+            return { success: true, avatarUrl: publicUrl };
+          } else {
+            console.warn("[authService] Storage upload failed, falling back to local:", uploadError);
+          }
+        }
+      } catch (err) {
+        console.warn("[authService] Supabase upload failed:", err);
+      }
+    }
+
+    // 4. Local / Offline base64 DataURL fallback
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64Url = reader.result as string;
+        await authService.updateProfile({ avatarUrl: base64Url });
+        resolve({ success: true, avatarUrl: base64Url });
+      };
+      reader.onerror = () => {
+        resolve({ success: false, error: "Failed to read image file." });
+      };
+      reader.readAsDataURL(file);
+    });
+  },
+
+  /**
+   * Remove the current avatar photo and restore default
+   */
+  removeAvatar: async (): Promise<{ success: boolean }> => {
+    const result = await authService.updateProfile({ avatarUrl: "/assets/avatar.png" });
+    return { success: result.success };
   },
 
   /**
@@ -119,19 +375,28 @@ export const authService = {
     }
 
     // Offline / demo sign-in
-    const localUser: AuthUserProfile = {
-      id: `usr-${Date.now()}`,
-      email: email.trim(),
-      name: email.split("@")[0] || "Afaq Ahmad",
-      avatarUrl: "/assets/avatar.png",
-      timezone: "Asia/Karachi",
-    };
+    const isAfaq = email.trim().toLowerCase() === "afaq@taskflow.dev" || email.trim().toLowerCase() === "afaqahmadcs@gmail.com";
+    const localUser: AuthUserProfile = isAfaq
+      ? DEMO_USER
+      : {
+          id: `usr-${Date.now()}`,
+          email: email.trim(),
+          name: email.split("@")[0] || "User",
+          username: email.split("@")[0] || "user",
+          bio: "",
+          location: "",
+          timezone: "Asia/Karachi",
+          website: "",
+          avatarUrl: "/assets/avatar.png",
+          socialLinks: {},
+        };
 
     if (typeof window !== "undefined") {
       try {
         localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(localUser));
       } catch {}
     }
+    notifyProfileChange(localUser);
 
     return {
       user: {
@@ -168,6 +433,7 @@ export const authService = {
           options: {
             data: {
               name: fullName?.trim() || email.split("@")[0],
+              username: email.split("@")[0],
               avatar_url: "/assets/avatar.png",
             },
             emailRedirectTo: `${siteUrl}/auth/callback`,
@@ -189,19 +455,28 @@ export const authService = {
     }
 
     // Offline / demo sign-up
-    const localUser: AuthUserProfile = {
-      id: `usr-${Date.now()}`,
-      email: email.trim(),
-      name: fullName?.trim() || email.split("@")[0] || "Afaq Ahmad",
-      avatarUrl: "/assets/avatar.png",
-      timezone: "Asia/Karachi",
-    };
+    const isAfaq = email.trim().toLowerCase() === "afaq@taskflow.dev" || email.trim().toLowerCase() === "afaqahmadcs@gmail.com";
+    const localUser: AuthUserProfile = isAfaq
+      ? DEMO_USER
+      : {
+          id: `usr-${Date.now()}`,
+          email: email.trim(),
+          name: fullName?.trim() || email.split("@")[0] || "User",
+          username: email.split("@")[0] || "user",
+          bio: "",
+          location: "",
+          timezone: "Asia/Karachi",
+          website: "",
+          avatarUrl: "/assets/avatar.png",
+          socialLinks: {},
+        };
 
     if (typeof window !== "undefined") {
       try {
         localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(localUser));
       } catch {}
     }
+    notifyProfileChange(localUser);
 
     return {
       user: {

@@ -33,14 +33,20 @@ export const Header: React.FC<HeaderProps> = ({
 
   React.useEffect(() => {
     let isMounted = true;
-    authService.getUser().then((user) => {
+    authService.getProfile().then((user) => {
       if (isMounted && user) {
         setUserProfile(user);
       }
     });
 
+    const unsubscribeProfile = authService.onProfileChange((p) => {
+      if (isMounted) {
+        setUserProfile(p);
+      }
+    });
+
     const subscription = authService.onAuthStateChange(() => {
-      authService.getUser().then((user) => {
+      authService.getProfile().then((user) => {
         if (isMounted) {
           setUserProfile(user);
         }
@@ -49,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
 
     return () => {
       isMounted = false;
+      unsubscribeProfile();
       if (subscription && typeof subscription.unsubscribe === "function") {
         subscription.unsubscribe();
       }
@@ -86,6 +93,9 @@ export const Header: React.FC<HeaderProps> = ({
     }
     if (pathname.startsWith("/notes")) {
       return { section: "Tools", title: "Notes & Docs", subtitle: "" };
+    }
+    if (pathname.startsWith("/profile")) {
+      return { section: "Account", title: "User Profile", subtitle: "(Creator Identity & Socials)" };
     }
     if (pathname.startsWith("/settings")) {
       return { section: "System", title: "Settings & Preferences", subtitle: "" };
@@ -220,10 +230,10 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* User Profile Avatar */}
         <Link
-          href="/settings"
-          aria-label={`Settings (${userProfile?.name || "Afaq Ahmad"})`}
+          href="/profile"
+          aria-label={`Profile (${userProfile?.name || "Afaq Ahmad"})`}
           className="ml-1 shrink-0 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-container"
-          title={userProfile ? `${userProfile.name} (${userProfile.email})` : "Settings"}
+          title={userProfile ? `${userProfile.name} (@${userProfile.username || "afaqahmad"})` : "User Profile"}
         >
           <Avatar
             size="sm"

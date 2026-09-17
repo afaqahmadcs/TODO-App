@@ -29,6 +29,11 @@ export interface Database {
           email: string;
           avatar_url: string | null;
           timezone: string;
+          username?: string | null;
+          bio?: string | null;
+          location?: string | null;
+          website?: string | null;
+          social_links?: Json | null;
           created_at: string;
           updated_at: string;
         };
@@ -38,6 +43,11 @@ export interface Database {
           email: string;
           avatar_url?: string | null;
           timezone?: string;
+          username?: string | null;
+          bio?: string | null;
+          location?: string | null;
+          website?: string | null;
+          social_links?: Json | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -47,6 +57,11 @@ export interface Database {
           email?: string;
           avatar_url?: string | null;
           timezone?: string;
+          username?: string | null;
+          bio?: string | null;
+          location?: string | null;
+          website?: string | null;
+          social_links?: Json | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -88,6 +103,7 @@ export interface Database {
         Row: {
           id: string;
           workspace_id: string;
+          user_id: string | null;
           name: string;
           description: string | null;
           active: boolean;
@@ -97,6 +113,7 @@ export interface Database {
         Insert: {
           id?: string;
           workspace_id: string;
+          user_id?: string | null;
           name: string;
           description?: string | null;
           active?: boolean;
@@ -106,6 +123,7 @@ export interface Database {
         Update: {
           id?: string;
           workspace_id?: string;
+          user_id?: string | null;
           name?: string;
           description?: string | null;
           active?: boolean;
@@ -285,6 +303,7 @@ export interface Database {
       recurring_tasks: {
         Row: {
           id: string;
+          user_id: string | null;
           task_id: string;
           frequency: RecurringFrequency;
           interval: number;
@@ -298,6 +317,7 @@ export interface Database {
         };
         Insert: {
           id?: string;
+          user_id?: string | null;
           task_id: string;
           frequency: RecurringFrequency;
           interval?: number;
@@ -311,6 +331,7 @@ export interface Database {
         };
         Update: {
           id?: string;
+          user_id?: string | null;
           task_id?: string;
           frequency?: RecurringFrequency;
           interval?: number;
@@ -516,6 +537,49 @@ export interface Database {
         };
         Relationships: [];
       };
+
+      task_templates: {
+        Row: {
+          id: string;
+          name: string;
+          description: string | null;
+          workspace_type: string;
+          default_priority: TaskPriority;
+          default_duration: number;
+          workflow_type: string;
+          subtasks: Json;
+          tags: string[];
+          is_system: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id: string;
+          name: string;
+          description?: string | null;
+          workspace_type: string;
+          default_priority?: TaskPriority;
+          default_duration?: number;
+          workflow_type?: string;
+          subtasks?: Json;
+          tags?: string[];
+          is_system?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          description?: string | null;
+          workspace_type?: string;
+          default_priority?: TaskPriority;
+          default_duration?: number;
+          workflow_type?: string;
+          subtasks?: Json;
+          tags?: string[];
+          is_system?: boolean;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -550,3 +614,4 @@ export type RecurringTaskRow = Database["public"]["Tables"]["recurring_tasks"]["
 export type FocusSessionRow = Database["public"]["Tables"]["focus_sessions"]["Row"];
 export type NoteRow = Database["public"]["Tables"]["notes"]["Row"];
 export type NotificationRow = Database["public"]["Tables"]["notifications"]["Row"];
+export type TaskTemplateRow = Database["public"]["Tables"]["task_templates"]["Row"];

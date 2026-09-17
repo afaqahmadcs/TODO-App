@@ -1,6 +1,6 @@
 import { NoteItem, CreateNoteInput, NoteCategory } from "@/types/note";
-
-const LOCAL_STORAGE_NOTES_KEY = "afaq_taskflow_notes";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
+import { authService } from "./authService";
 
 const INITIAL_NOTES: NoteItem[] = [
   {
@@ -65,27 +65,96 @@ const INITIAL_NOTES: NoteItem[] = [
   },
 ];
 
-let cachedNotes: NoteItem[] = [...INITIAL_NOTES];
+let cachedNotes: NoteItem[] = [];
+let currentLoadedUserId: string | null = null;
 
-export const noteService = {
-  getNotes: async (category?: string): Promise<NoteItem[]> => {
+async function ensureNotesLoaded(): Promise<{ userId: string; isAfaq: boolean; notes: NoteItem[] }> {
+  const user = await authService.getUser();
+  const userId = user?.id || "anonymous";
+  const isAfaq = user?.email?.toLowerCase() === "afaq@taskflow.dev" ||
+                 user?.email?.toLowerCase() === "afaqahmadcs@gmail.com" ||
+                 userId === "demo-creator-afaq";
+
+  if (currentLoadedUserId !== userId) {
+    currentLoadedUserId = userId;
+    const storageKey = `afaq_taskflow_notes_${userId}`;
+    let loaded: NoteItem[] | null = null;
+
     if (typeof window !== "undefined") {
       try {
-        const raw = localStorage.getItem(LOCAL_STORAGE_NOTES_KEY);
+        const raw = localStorage.getItem(storageKey);
         if (raw) {
-          cachedNotes = JSON.parse(raw);
+          loaded = JSON.parse(raw);
         }
       } catch {}
     }
 
-    if (category && category !== "All") {
-      return cachedNotes.filter((n) => n.category.toLowerCase() === category.toLowerCase());
+    if (loaded) {
+      cachedNotes = loaded;
+    } else if (isAfaq) {
+      cachedNotes = [...INITIAL_NOTES];
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(cachedNotes));
+        } catch {}
+      }
+    } else {
+      // Clean account: 0 notes for new users
+      cachedNotes = [];
+    }
+  }
+
+  return { userId, isAfaq, notes: cachedNotes };
+}
+
+function persistNotes(userId: string) {
+  if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(`afaq_taskflow_notes_${userId}`, JSON.stringify(cachedNotes));
+    } catch {}
+  }
+}
+
+export const noteService = {
+  getNotes: async (category?: string): Promise<NoteItem[]> => {
+    if (isSupabaseConfigured()) {
+      try {
+        const { data, error } = await supabase
+          .from("notes")
+          .select("*")
+          .order("updated_at", { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          return data.map((row) => ({
+            id: row.id,
+            userId: row.user_id,
+            title: row.title,
+            category: "General" as NoteCategory,
+            snippet: row.content ? row.content.slice(0, 120) + "..." : "",
+            content: row.content || "",
+            updated: new Date(row.updated_at).toLocaleDateString(),
+            color: "border-l-primary",
+            tags: [],
+            createdAt: row.created_at,
+            updatedAt: row.updated_at,
+          }));
+        }
+      } catch (err) {
+        console.warn("[noteService] Supabase notes fetch failed, using fallback:", err);
+      }
     }
 
-    return [...cachedNotes];
+    const { notes } = await ensureNotesLoaded();
+
+    if (category && category !== "All") {
+      return notes.filter((n) => n.category.toLowerCase() === category.toLowerCase());
+    }
+
+    return [...notes];
   },
 
   createNote: async (input: CreateNoteInput): Promise<NoteItem> => {
+    const { userId } = await ensureNotesLoaded();
     const categoryColors: Record<NoteCategory, string> = {
       "Web Development": "border-l-cyan-500",
       Office: "border-l-blue-500",
@@ -95,6 +164,7 @@ export const noteService = {
 
     const newNote: NoteItem = {
       id: `note-${Date.now()}`,
+      userId: userId,
       title: input.title,
       category: input.category,
       snippet: input.snippet || (input.content ? input.content.slice(0, 120) + "..." : ""),
@@ -106,25 +176,35 @@ export const noteService = {
       updatedAt: new Date().toISOString(),
     };
 
-    cachedNotes.unshift(newNote);
-
-    if (typeof window !== "undefined") {
+    if (isSupabaseConfigured()) {
       try {
-        localStorage.setItem(LOCAL_STORAGE_NOTES_KEY, JSON.stringify(cachedNotes));
-      } catch {}
+        const { data: userData } = await supabase.auth.getUser();
+        const activeUserId = userData?.user?.id || userId;
+        await supabase.from("notes").insert({
+          id: newNote.id,
+          user_id: activeUserId,
+          title: newNote.title,
+          content: newNote.content,
+        });
+      } catch (err) {
+        console.warn("[noteService] Supabase note insert failed, keeping local:", err);
+      }
     }
+
+    cachedNotes.unshift(newNote);
+    persistNotes(userId);
 
     return newNote;
   },
 
   getNoteById: async (id: string): Promise<NoteItem | null> => {
-    await noteService.getNotes();
-    const found = cachedNotes.find((n) => n.id === id);
+    const list = await noteService.getNotes();
+    const found = list.find((n) => n.id === id);
     return found ? { ...found } : null;
   },
 
   updateNote: async (id: string, updates: Partial<CreateNoteInput>): Promise<NoteItem | null> => {
-    await noteService.getNotes();
+    const { userId } = await ensureNotesLoaded();
     const index = cachedNotes.findIndex((n) => n.id === id);
     if (index === -1) return null;
 
@@ -137,21 +217,36 @@ export const noteService = {
     };
     cachedNotes[index] = updated;
 
-    if (typeof window !== "undefined") {
+    if (isSupabaseConfigured()) {
       try {
-        localStorage.setItem(LOCAL_STORAGE_NOTES_KEY, JSON.stringify(cachedNotes));
-      } catch {}
+        await supabase.from("notes").update({
+          title: updated.title,
+          content: updated.content,
+          updated_at: updated.updatedAt,
+        }).eq("id", id);
+      } catch (err) {
+        console.warn("[noteService] Supabase note update failed:", err);
+      }
     }
+
+    persistNotes(userId);
     return updated;
   },
 
   deleteNote: async (id: string): Promise<boolean> => {
+    const { userId } = await ensureNotesLoaded();
     cachedNotes = cachedNotes.filter((n) => n.id !== id);
-    if (typeof window !== "undefined") {
+
+    if (isSupabaseConfigured()) {
       try {
-        localStorage.setItem(LOCAL_STORAGE_NOTES_KEY, JSON.stringify(cachedNotes));
-      } catch {}
+        await supabase.from("notes").delete().eq("id", id);
+      } catch (err) {
+        console.warn("[noteService] Supabase note delete failed:", err);
+      }
     }
+
+    persistNotes(userId);
     return true;
   },
 };
+
