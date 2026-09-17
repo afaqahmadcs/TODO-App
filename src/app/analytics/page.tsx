@@ -6,6 +6,10 @@ import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import { taskService } from "@/services/taskService";
 import { analyticsService } from "@/services/analyticsService";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
+import { StatSkeleton, CardSkeleton } from "@/components/ui/SkeletonLoader";
+import { useRouter } from "next/navigation";
 import {
   WorkspaceStats,
   ProductivityScoreBreakdown,
@@ -16,6 +20,7 @@ import {
 } from "@/types/analytics";
 
 export default function AnalyticsPage() {
+  const router = useRouter();
   const [telemetry, setTelemetry] = useState<DashboardTelemetry | null>(null);
   const [scoreBreakdown, setScoreBreakdown] = useState<ProductivityScoreBreakdown | null>(null);
   const [weeklyVelocity, setWeeklyVelocity] = useState<WeeklyDayVelocity[]>([]);
@@ -24,13 +29,48 @@ export default function AnalyticsPage() {
   const [weeklyReview, setWeeklyReview] = useState<WeeklyReview | null>(null);
   const [timeRange, setTimeRange] = useState<"7days" | "30days" | "semester">("7days");
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loggingFocus, setLoggingFocus] = useState(false);
 
+  const loadData = React.useCallback(async () => {
+    setIsLoading(true);
+    setErrorMessage(null);
+    try {
+      const allTasks = await taskService.getTasks();
+      const [telemetryData, focusData, workspacesData, velocityData, reviewData] =
+        await Promise.all([
+          analyticsService.getDashboardTelemetry(),
+          analyticsService.getFocusTimeMetrics(),
+          analyticsService.getWorkspaceStatistics(allTasks),
+          analyticsService.getWeeklyVelocity(allTasks),
+          analyticsService.getWeeklyReview(allTasks),
+        ]);
+
+      const streak = analyticsService.calculateCurrentStreak(allTasks);
+      const score = analyticsService.calculateProductivityScoreBreakdown(
+        allTasks,
+        focusData.thisWeekMinutes,
+        streak
+      );
+
+      setTelemetry(telemetryData);
+      setFocusMetrics(focusData);
+      setWorkspaceStats(workspacesData);
+      setWeeklyVelocity(velocityData);
+      setWeeklyReview(reviewData);
+      setScoreBreakdown(score);
+    } catch (err) {
+      console.error("[Analytics] Failed to load telemetry data:", err);
+      setErrorMessage("Failed to load analytics telemetry. Please verify connection and retry.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    let mounted = true;
-    async function loadData() {
+    let isMounted = true;
+    taskService.getTasks().then(async (allTasks) => {
       try {
-        const allTasks = await taskService.getTasks();
         const [telemetryData, focusData, workspacesData, velocityData, reviewData] =
           await Promise.all([
             analyticsService.getDashboardTelemetry(),
@@ -47,7 +87,7 @@ export default function AnalyticsPage() {
           streak
         );
 
-        if (mounted) {
+        if (isMounted) {
           setTelemetry(telemetryData);
           setFocusMetrics(focusData);
           setWorkspaceStats(workspacesData);
@@ -58,13 +98,15 @@ export default function AnalyticsPage() {
         }
       } catch (err) {
         console.error("[Analytics] Failed to load telemetry data:", err);
-        if (mounted) setIsLoading(false);
+        if (isMounted) {
+          setErrorMessage("Failed to load analytics telemetry. Please verify connection and retry.");
+          setIsLoading(false);
+        }
       }
-    }
+    });
 
-    loadData();
     return () => {
-      mounted = false;
+      isMounted = false;
     };
   }, []);
 
@@ -168,8 +210,35 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        {/* 8 Main Key Metrics Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+        {errorMessage ? (
+          <ErrorState
+            title="Telemetry Synchronization Failed"
+            message={errorMessage}
+            onRetry={loadData}
+          />
+        ) : isLoading ? (
+          <div className="space-y-6">
+            <StatSkeleton count={4} />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <CardSkeleton count={3} />
+            </div>
+          </div>
+        ) : !telemetry || telemetry.totalTasks === 0 ? (
+          <EmptyState
+            icon="insights"
+            badge="NO ANALYTICS"
+            title="No Telemetry Data Available"
+            description="Productivity tracking, focus times, and velocity scores will automatically compute once you start adding and completing tasks."
+            primaryActionLabel="+ Create Your First Task"
+            onPrimaryAction={() => {
+              router.push("/tasks");
+            }}
+            variant="purple"
+          />
+        ) : (
+          <>
+            {/* 8 Main Key Metrics Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {/* Metric 1: Tasks Done */}
           <div className="p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all shadow-sm border border-outline-variant/10 flex flex-col justify-between">
             <div className="flex items-center justify-between text-outline text-[11px] font-mono">
@@ -824,6 +893,8 @@ export default function AnalyticsPage() {
             </div>
           </Card>
         </div>
+          </>
+        )}
       </div>
     </PageContainer>
   );

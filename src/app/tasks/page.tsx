@@ -7,7 +7,9 @@ import { Icon } from "@/components/ui/Icon";
 import { TaskCard } from "@/components/tasks/TaskCard";
 import { TaskDetailDrawer } from "@/components/tasks/TaskDetailDrawer";
 import { QuickTaskModal } from "@/components/tasks/QuickTaskModal";
-import { EmptyState } from "@/components/common/EmptyState";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
+import { RowSkeleton, CardSkeleton } from "@/components/ui/SkeletonLoader";
 import { taskService } from "@/services/taskService";
 import { Task, TaskFilterTab, TaskSortOption, TaskStatus, TaskPriority } from "@/types/task";
 import { WorkspaceType, OfficePageId, OfficePage } from "@/types/workspace";
@@ -684,11 +686,22 @@ export default function MyTasksPage() {
       <div className="flex flex-col xl:flex-row items-start gap-space-lg w-full">
         {/* Left Column: Task Stream / Board View */}
         <div className="flex-1 flex flex-col gap-space-xl w-full min-w-0">
+          {errorMessage && (
+            <ErrorState
+              title="Failed to Sync Tasks"
+              message={errorMessage}
+              onRetry={refreshTasks}
+            />
+          )}
+
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center p-12 text-outline gap-3">
-              <Icon name="progress_activity" size={28} className="animate-spin text-primary" />
-              <span className="text-xs font-mono">Synchronizing tasks with Supabase...</span>
-            </div>
+            viewMode === "board" ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4">
+                <CardSkeleton count={5} />
+              </div>
+            ) : (
+              <RowSkeleton count={6} />
+            )
           ) : tasks.length === 0 ? (
             <EmptyState
               icon="task_alt"
@@ -706,6 +719,7 @@ export default function MyTasksPage() {
                 setSearchQuery("");
                 setActiveTab("all");
               }}
+              variant="primary"
             />
           ) : viewMode === "board" ? (
             /* Kanban Board Mode */

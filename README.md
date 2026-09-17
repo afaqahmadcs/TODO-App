@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 ![Design System](https://img.shields.io/badge/Design_System-Google_Stitch-4F46E5?style=for-the-badge)
-![Status](https://img.shields.io/badge/Phase_10-Complete-10B981?style=for-the-badge)
+![Status](https://img.shields.io/badge/Phase_11-Complete-10B981?style=for-the-badge)
 
 ---
 
@@ -485,6 +485,46 @@ Phase 10 implements an immersive **Focus Mode** and an intelligent **Task Notifi
 
 ---
 
+## ⚡ Phase 11: Global Search & Final UX Improvements
+
+Phase 11 introduces unified global command search, intelligent accessibility shortcuts, comprehensive Google Stitch empty states, and skeleton loading across all views:
+
+### 1. Global Command Palette & Unified Search (`/` or `⌘K`)
+* **Multi-Domain Querying**: Simultaneously searches live data across:
+  - `TASKS` — Filtered by title, description, tags, priority, and due dates.
+  - `PROJECTS` — Sprints, deliverables, tech stack keywords, and progress badges.
+  - `PAGES` — 8 Office social publishing matrix pages with live publishing status.
+  - `NOTES` — Technical snippets, algorithm derivations, and creative outlines.
+  - `VLOG ENTRIES` — Vlog episode pipeline, shooting checklist, and thumbnail status.
+* **Grouped Results Display**: Categorized with Stitch colored badges, match counters, and instant deep-linking.
+* **Quick Navigation Recommendations**: Instant jump shortcuts for rapid navigation when the search input is blank.
+* **Full Keyboard Navigation**:
+  - <kbd>↑</kbd> and <kbd>↓</kbd> for active result selection.
+  - <kbd>↵</kbd> (Enter) to execute action or deep-link.
+  - <kbd>ESC</kbd> to dismiss modal.
+
+### 2. Guarded Keyboard Shortcuts Engine
+* **Shortcuts**:
+  - <kbd>N</kbd> ➔ Universal Quick Task creation modal.
+  - <kbd>/</kbd> or <kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd> ➔ Global Search palette.
+  - <kbd>Escape</kbd> ➔ Hierarchical modal and drawer dismissal.
+* **Input Isolation Protection**: All single-key shortcuts automatically detect and yield when the user is typing inside `<input>`, `<textarea>`, `contentEditable`, or `role="textbox"`, guaranteeing zero interference with standard text entry.
+
+### 3. Reusable Google Stitch Empty States
+Unified `<EmptyState />` component featuring glowing icon rings, duotone icons, and actionable CTA triggers for all 6 required system empty states:
+1. **No tasks**: Inbox Zero state with quick creation and filter reset on `/tasks`.
+2. **No projects**: Portfolio & sprint empty state with "+ New Project" modal trigger on `/projects`.
+3. **No recurring tasks**: Automation routine empty state with "+ Create Routine" on `/recurring`.
+4. **No notes**: Knowledge base empty state with "+ Create Note" on `/notes`.
+5. **No upcoming events**: Schedule empty state on `/calendar` (and `/dashboard`).
+6. **No analytics**: Telemetry empty state on `/analytics` guiding user to add initial workload items.
+
+### 4. Skeleton Loaders & Resilient Error States
+* **Skeleton Variants**: `RowSkeleton` (task streams), `CardSkeleton` (projects and notes grids), `StatSkeleton` (analytics telemetry), and `CalendarSkeleton` (time grids) eliminate layout shifts.
+* **Error Boundaries**: `<ErrorState />` with custom alert title, descriptive message, and retry button for network or Supabase synchronization failures.
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -515,6 +555,9 @@ npx tsc --noEmit
 
 # Run ESLint validation (0 errors, 0 warnings)
 npm run lint
+
+# Run automated Phase 11 (Global Search & Final UX) test suite (23 assertions)
+npx tsx scripts/test-global-search-ux.mjs
 
 # Run automated Phase 10 (Focus Mode & Notifications) test suite (9 test suites)
 npx tsx scripts/test-focus-notifications.mjs

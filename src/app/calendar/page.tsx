@@ -6,6 +6,8 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { CalendarSkeleton } from "@/components/ui/SkeletonLoader";
+import { EmptyState } from "@/components/ui/EmptyState";
 import { Task } from "@/types/task";
 import { WorkspaceType } from "@/types/workspace";
 import { RecurringRule } from "@/types/recurring";
@@ -121,10 +123,13 @@ export default function CalendarPage() {
     return () => clearInterval(timer);
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   // Fetch initial data
   useEffect(() => {
     let isMounted = true;
     async function loadCalendarData() {
+      setIsLoading(true);
       try {
         await recurringTaskService.generateUpcomingTasks(14);
         const [loadedTasks, loadedRules, loadedProjects] = await Promise.all([
@@ -139,6 +144,8 @@ export default function CalendarPage() {
         }
       } catch (err) {
         console.error("Failed to load calendar data:", err);
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
     }
     loadCalendarData();
@@ -731,9 +738,14 @@ export default function CalendarPage() {
         ))}
       </div>
 
-      {/* ========================================================================= */}
-      {/* WEEK VIEW (Time-Slot Matrix) */}
-      {/* ========================================================================= */}
+      {/* Calendar Skeleton Loader or Views */}
+      {isLoading ? (
+        <CalendarSkeleton />
+      ) : (
+        <>
+          {/* ========================================================================= */}
+          {/* WEEK VIEW (Time-Slot Matrix) */}
+          {/* ========================================================================= */}
       {view === "week" && (
         <div className="w-full flex flex-col bg-surface-container-low rounded-2xl border border-outline-variant/20 shadow-md overflow-hidden">
           {/* Day Headers */}
@@ -961,17 +973,15 @@ export default function CalendarPage() {
 
           <div className="space-y-4">
             {filteredEvents.length === 0 ? (
-              <div className="py-16 text-center text-on-surface-variant font-mono text-sm space-y-3">
-                <Icon name="event_busy" size={32} className="text-outline mx-auto" />
-                <p>No events or tasks scheduled for this day.</p>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => handleEmptySlotClick(currentAnchorDate, "10:00")}
-                >
-                  Schedule First Event
-                </Button>
-              </div>
+              <EmptyState
+                icon="event_busy"
+                badge="NO UPCOMING EVENTS"
+                title="No Events Scheduled for this Day"
+                description="Your timeline is clear. Schedule your first class, vlog session, or milestone task."
+                primaryActionLabel="+ Schedule First Event"
+                onPrimaryAction={() => handleEmptySlotClick(currentAnchorDate, "10:00")}
+                variant="cyan"
+              />
             ) : (
               filteredEvents.map((event) => {
                 const theme = WORKSPACE_THEMES[event.workspaceId] || WORKSPACE_THEMES.office;
@@ -1192,6 +1202,8 @@ export default function CalendarPage() {
             </div>
           </div>
         </div>
+      )}
+        </>
       )}
 
       {/* ========================================================================= */}

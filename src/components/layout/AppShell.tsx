@@ -8,6 +8,7 @@ import { QuickTaskModal } from "@/components/tasks/QuickTaskModal";
 import { FocusModeModal } from "@/components/focus/FocusModeModal";
 import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 import { TaskDetailDrawer } from "@/components/tasks/TaskDetailDrawer";
+import { GlobalSearchModal } from "@/components/search/GlobalSearchModal";
 import { taskService } from "@/services/taskService";
 import { notificationService } from "@/services/notificationService";
 import { useKeyboardShortcut } from "@/hooks/useKeyboardShortcut";
@@ -24,17 +25,47 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   const [isFocusModeOpen, setIsFocusModeOpen] = useState(false);
   const [focusTask, setFocusTask] = useState<Task | null>(null);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [inspectedTask, setInspectedTask] = useState<Task | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  // Global keyboard shortcuts: N = Quick Task, F = Focus Mode
+  // Global keyboard shortcuts:
+  // N = Quick Task
   useKeyboardShortcut({ key: "n" }, () => {
     setIsQuickTaskOpen(true);
   });
 
+  // / = Global Search
+  useKeyboardShortcut({ key: "/" }, () => {
+    setIsSearchOpen(true);
+  });
+
+  // ⌘K = Global Search
+  useKeyboardShortcut({ key: "k", ctrlOrCmd: true }, () => {
+    setIsSearchOpen((prev) => !prev);
+  });
+
+  // F = Focus Mode
   useKeyboardShortcut({ key: "f" }, () => {
     setIsFocusModeOpen(true);
+  });
+
+  // Escape = Close any active modal / panel
+  useKeyboardShortcut({ key: "Escape" }, () => {
+    if (isSearchOpen) {
+      setIsSearchOpen(false);
+    } else if (isQuickTaskOpen) {
+      setIsQuickTaskOpen(false);
+    } else if (isFocusModeOpen) {
+      setIsFocusModeOpen(false);
+      setFocusTask(null);
+    } else if (isNotificationsOpen) {
+      setIsNotificationsOpen(false);
+    } else if (isDrawerOpen) {
+      setIsDrawerOpen(false);
+      setInspectedTask(null);
+    }
   });
 
   // Subscribe to live notification updates and sync reminders on mount
@@ -81,6 +112,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
         onOpenQuickTask={() => setIsQuickTaskOpen(true)}
         onOpenFocusMode={() => setIsFocusModeOpen(true)}
         onOpenNotifications={() => setIsNotificationsOpen(true)}
+        onOpenSearch={() => setIsSearchOpen(true)}
         unreadCount={unreadCount}
       />
 
@@ -96,6 +128,13 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
 
       {/* Mobile Fixed Bottom Navigation */}
       <MobileNavigation onOpenQuickTask={() => setIsQuickTaskOpen(true)} />
+
+      {/* Universal Global Search Command Palette */}
+      <GlobalSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onSelectTask={handleSelectTaskFromNotification}
+      />
 
       {/* Global Universal Quick Task Creation Modal */}
       <QuickTaskModal

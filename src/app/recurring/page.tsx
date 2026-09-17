@@ -6,6 +6,8 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { CardSkeleton } from "@/components/ui/SkeletonLoader";
 import {
   RecurringRule,
   RecurringFilterTab,
@@ -410,24 +412,21 @@ export default function RecurringTasksPage() {
 
       {/* Rules Grid */}
       {isLoading ? (
-        <div className="p-12 text-center text-on-surface-variant font-mono text-sm">
-          Loading recurring rules...
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <CardSkeleton count={4} />
         </div>
       ) : rules.length === 0 ? (
-        <Card variant="low" className="p-12 text-center space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center mx-auto text-primary">
-            <Icon name="repeat" size={24} />
-          </div>
-          <div>
-            <h3 className="text-base font-bold text-on-surface">No recurring tasks in this view</h3>
-            <p className="text-xs text-on-surface-variant mt-1">
-              Create a new recurring routine or generate one from our preloaded templates.
-            </p>
-          </div>
-          <Button variant="primary" icon="add" onClick={openCreateModal}>
-            Create Routine Now
-          </Button>
-        </Card>
+        <EmptyState
+          icon="autorenew"
+          badge="NO RECURRING RULES"
+          variant="primary"
+          title="No Recurring Automations in this View"
+          description="Create a new recurring routine or generate one from our preloaded templates."
+          primaryActionLabel="+ Create Routine Now"
+          onPrimaryAction={openCreateModal}
+          secondaryActionLabel={filterTab !== "all" ? "View All Rules" : undefined}
+          onSecondaryAction={filterTab !== "all" ? () => setFilterTab("all") : undefined}
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {rules.map((rule) => {

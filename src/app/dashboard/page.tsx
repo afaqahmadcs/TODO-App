@@ -11,6 +11,7 @@ import { taskService } from "@/services/taskService";
 import { analyticsService } from "@/services/analyticsService";
 import { Task } from "@/types/task";
 import { DashboardTelemetry } from "@/types/analytics";
+import { EmptyState } from "@/components/ui/EmptyState";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -581,11 +582,16 @@ export default function DashboardPage() {
             {/* Task list items */}
             <div className="space-y-2.5">
               {priorityTasksList.length === 0 ? (
-                <div className="p-8 text-center rounded-xl bg-surface-container-low border border-outline-variant/10">
-                  <Icon name="task_alt" size={32} className="mx-auto text-secondary mb-2" />
-                  <p className="text-sm font-semibold text-on-surface">No priority tasks in this filter</p>
-                  <p className="text-xs text-outline mt-0.5">All matching tasks are completed or scheduled.</p>
-                </div>
+                <EmptyState
+                  icon="task_alt"
+                  badge="INBOX ZERO"
+                  title="No Priority Tasks in Filter"
+                  description="All matching priority tasks are completed or scheduled."
+                  primaryActionLabel="+ Add Task"
+                  onPrimaryAction={() => setIsCreateModalOpen(true)}
+                  variant="secondary"
+                  className="py-6"
+                />
               ) : (
                 priorityTasksList.slice(0, 6).map((task) => {
                   const isOverdue = Boolean(task.dueDate && task.dueDate < todayStr && !task.isCompleted);
@@ -706,9 +712,16 @@ export default function DashboardPage() {
 
             <div className="rounded-xl bg-surface-container-low divide-y divide-surface-container-highest/20 overflow-hidden shadow-sm border border-outline-variant/10">
               {upcomingTasksList.length === 0 ? (
-                <div className="p-5 text-center text-xs text-outline">
-                  No upcoming tasks scheduled for tomorrow yet.
-                </div>
+                <EmptyState
+                  icon="event_available"
+                  badge="NO UPCOMING EVENTS"
+                  title="No Upcoming Tasks Scheduled"
+                  description="No tasks are queued for tomorrow or beyond. Plan ahead by scheduling upcoming work."
+                  primaryActionLabel="+ Schedule Task"
+                  onPrimaryAction={() => setIsCreateModalOpen(true)}
+                  variant="primary"
+                  className="py-6 border-0 bg-transparent"
+                />
               ) : (
                 upcomingTasksList.map((task) => (
                   <div

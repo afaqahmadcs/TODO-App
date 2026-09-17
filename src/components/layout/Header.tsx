@@ -13,6 +13,7 @@ export interface HeaderProps {
   onOpenQuickTask?: () => void;
   onOpenFocusMode?: () => void;
   onOpenNotifications?: () => void;
+  onOpenSearch?: () => void;
   unreadCount?: number;
   className?: string;
 }
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenQuickTask,
   onOpenFocusMode,
   onOpenNotifications,
+  onOpenSearch,
   unreadCount = 0,
   className,
 }) => {
@@ -98,27 +100,44 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Center Search Input with ⌘K */}
+      {/* Center Search Trigger with ⌘K or / */}
       <div className="flex-1 max-w-md mx-3 sm:mx-6 hidden md:block">
-        <div className="relative flex items-center">
-          <span className="absolute left-3 text-outline pointer-events-none flex items-center">
-            <Icon name="search" size={18} />
-          </span>
-          <input
-            type="text"
-            placeholder="Search tasks, docs, projects..."
-            className="w-full h-9 pl-9 pr-14 bg-surface-container-low text-on-surface placeholder:text-outline border border-outline-variant/30 rounded-lg text-xs transition-colors focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-          />
-          <div className="absolute right-2.5 flex items-center gap-0.5 pointer-events-none">
+        <button
+          type="button"
+          onClick={onOpenSearch}
+          aria-label="Open Global Search (/ or ⌘K)"
+          className="w-full h-9 px-3 bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant/30 hover:border-primary/40 rounded-lg text-xs transition-all flex items-center justify-between shadow-sm group cursor-pointer"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <Icon name="search" size={17} className="text-secondary group-hover:text-primary transition-colors" />
+            <span className="text-outline group-hover:text-on-surface-variant truncate">
+              Search tasks, projects, pages, notes, vlogs...
+            </span>
+          </div>
+          <div className="flex items-center gap-1 shrink-0">
+            <kbd className="font-mono text-[10px] text-outline bg-surface-container-highest px-1.5 py-0.5 rounded border border-outline-variant/20">
+              /
+            </kbd>
             <kbd className="font-mono text-[10px] text-outline bg-surface-container-highest px-1.5 py-0.5 rounded border border-outline-variant/20">
               ⌘K
             </kbd>
           </div>
-        </div>
+        </button>
       </div>
 
-      {/* Right Controls: Focus Mode, Notification, Quick Add Task, Profile Avatar */}
+      {/* Right Controls: Search (Mobile), Focus Mode, Notification, Quick Add Task, Profile Avatar */}
       <div className="flex items-center gap-1.5 sm:gap-2.5">
+        {/* Mobile Search Button */}
+        <button
+          type="button"
+          onClick={onOpenSearch}
+          aria-label="Global Search (/)"
+          className="md:hidden p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-container/40"
+          title="Global Search (/)"
+        >
+          <Icon name="search" size={20} />
+        </button>
+
         {/* Focus Mode Button */}
         <button
           type="button"

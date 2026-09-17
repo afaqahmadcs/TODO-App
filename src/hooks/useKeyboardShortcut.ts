@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export interface ShortcutOptions {
   key: string;
@@ -12,6 +12,13 @@ export function useKeyboardShortcut(
   callback: (e: KeyboardEvent) => void,
   enabled: boolean = true
 ) {
+  const { key, ctrlOrCmd, shift, alt } = options;
+  const callbackRef = useRef(callback);
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+
   useEffect(() => {
     if (!enabled) return;
 
@@ -22,26 +29,27 @@ export function useKeyboardShortcut(
         target &&
         (target.tagName === "INPUT" ||
           target.tagName === "TEXTAREA" ||
-          target.isContentEditable);
+          target.isContentEditable ||
+          target.getAttribute("role") === "textbox");
 
-      if (isInput && !options.ctrlOrCmd) {
+      if (isInput && !ctrlOrCmd) {
         return;
       }
 
-      const matchesKey = event.key.toLowerCase() === options.key.toLowerCase();
-      const matchesCmdOrCtrl = options.ctrlOrCmd
+      const matchesKey = event.key.toLowerCase() === key.toLowerCase();
+      const matchesCmdOrCtrl = ctrlOrCmd
         ? event.ctrlKey || event.metaKey
-        : true;
-      const matchesShift = options.shift ? event.shiftKey : !event.shiftKey;
-      const matchesAlt = options.alt ? event.altKey : !event.altKey;
+        : !event.ctrlKey && !event.metaKey;
+      const matchesShift = shift ? event.shiftKey : !event.shiftKey;
+      const matchesAlt = alt ? event.altKey : !event.altKey;
 
       if (matchesKey && matchesCmdOrCtrl && matchesShift && matchesAlt) {
         event.preventDefault();
-        callback(event);
+        callbackRef.current(event);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [options, callback, enabled]);
+  }, [key, ctrlOrCmd, shift, alt, enabled]);
 }
