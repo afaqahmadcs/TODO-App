@@ -38,6 +38,16 @@ export interface TaskActivity {
   icon?: string;
 }
 
+export interface ChecklistItem {
+  id: string;
+  title: string;
+  completed: boolean;
+}
+
+export type SocialPlatform = "Instagram" | "YouTube" | "TikTok" | "Facebook" | "X";
+export type ThumbnailStatus = "pending" | "designed" | "approved";
+export type PublishingStatus = "draft" | "scheduled" | "live" | "published" | "pending";
+
 export interface Task {
   id: string;
   userId?: string;
@@ -66,6 +76,27 @@ export interface Task {
   activity?: TaskActivity[];
   linkedVlogEpisode?: string;
   githubBranchOrCommit?: string;
+
+  // Phase 6 extensions:
+  linkedVlogId?: string | null; // Relational foreign-key reference to a personal vlog task ID
+  recordingChecklist?: ChecklistItem[];
+  editingChecklist?: ChecklistItem[];
+  thumbnailStatus?: ThumbnailStatus;
+  thumbnailUrl?: string;
+  caption?: string;
+  platforms?: SocialPlatform[];
+  publishingStatus?: PublishingStatus;
+  distributionStatus?: Record<string, string>;
+
+  // College metadata:
+  subject?: string; // e.g. "CS301 Algorithms", "CS340 Databases", "MATH204"
+  collegeCategory?: "classes" | "assignments" | "projects" | "exams" | "notes";
+  progressPercent?: number; // e.g. 85%
+  focusHours?: number; // e.g. 38.5
+  examDate?: string;
+  examScope?: string;
+  roomOrLocation?: string;
+  instructor?: string;
 }
 
 export type TaskFilterTab = "all" | "today" | "upcoming" | "overdue" | "completed";
@@ -103,6 +134,9 @@ export interface CreateTaskInput {
   tags?: string[];
   subtasks?: string[]; // initial subtask titles
   notes?: string;
+  subject?: string;
+  collegeCategory?: "classes" | "assignments" | "projects" | "exams" | "notes";
+  linkedVlogId?: string | null;
 }
 
 export interface UpdateTaskInput {
@@ -121,5 +155,8 @@ export interface UpdateTaskInput {
   actualDurationMin?: number;
   tags?: string[];
   notes?: string | null;
+  subject?: string;
+  collegeCategory?: "classes" | "assignments" | "projects" | "exams" | "notes";
+  linkedVlogId?: string | null;
 }
 

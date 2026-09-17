@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 ![Design System](https://img.shields.io/badge/Design_System-Google_Stitch-4F46E5?style=for-the-badge)
-![Status](https://img.shields.io/badge/Phase_4-Complete-10B981?style=for-the-badge)
+![Status](https://img.shields.io/badge/Phase_6-Complete-10B981?style=for-the-badge)
 
 ---
 
@@ -16,9 +16,9 @@
 
 **Afaq TaskFlow** is an elite, multi-domain personal productivity application built for **Afaq Ahmad** to seamlessly balance four concurrent high-intensity workloads:
 1. **🏢 Office Content & Visual Production** — Managing an 8-page social media publishing matrix, reel schedules, and visual brand assets for clients such as Suno Music.
-2. **🎥 Personal Vlog & Creator Suite** — 9-stage video production pipeline (Idea, Hook, Script, Shoot, Ingest, A-Roll, B-Roll, Color Grade, Publish).
-3. **🎓 College Academics** — Module management, homework schedules, lab deliverables, and credit hour tracking for CS-401, SE-302, DS-201, and AI-501.
-4. **💻 Web Development Mastery** — Fullstack Next.js and systems architecture curriculum, sprint goals, GitHub activity sync, and recurring Monday & Tuesday 4:00 PM – 6:00 PM live virtual classes.
+2. **🎥 Personal Vlog & Creator Suite** — 9-stage video production pipeline (IDEA, PLANNED, RECORDING, FOOTAGE READY, EDITING, THUMBNAIL, CAPTION, READY TO POST, PUBLISHED) with multi-platform distribution and checklists.
+3. **🎓 College Academics** — 5-section academic portal (Classes, Assignments, Projects, Exams, Notes) with Pomodoro study timer and GPA telemetry.
+4. **💻 Web Development Mastery** — Fullstack Next.js and systems architecture curriculum, sprint goals, GitHub activity sync, recurring Monday & Tuesday 4:00 PM – 6:00 PM live virtual classes, and relational vlog bridging.
 
 The entire UI/UX is built strictly upon **Google Stitch** design specs, featuring a dark slate palette (`#0B1326`), refined typographic hierarchy, and responsive navigation across desktop, tablet, and mobile.
 
@@ -58,6 +58,88 @@ Phase 4 delivers the complete end-to-end task management system backed by Supaba
 - Direct Supabase PostgreSQL persistence across `tasks`, `subtasks`, `tags`, `task_tags`, and `notes`.
 - Zero-latency optimistic UI updates with automatic rollback and user-friendly error banners if database errors occur.
 - Resilient local fallback cache when offline or during initial configuration.
+
+---
+
+## 🏢 Phase 5: Office Workspace & Daily Publishing Matrix
+
+Phase 5 delivers the production content engine, 8-channel publishing matrix, live database KPI telemetry, 6-stage content workflow Kanban board, 6-stage Suno Music pipeline, and interactive daily checklist according to the Google Stitch design system and real Supabase PostgreSQL data:
+
+### 1. The 8 Dedicated Office Pages
+- **Full Channel Matrix**: `Shooting Page`, `Ismail Shahid Fans`, `ZK Production`, `Jahangir Khan`, `Inaya Kailash`, `Political Affairs`, `Nazia Iqbal Fanz`, and `Suno Music`.
+- **Dynamic Completion Statuses**: Computes real-time execution states (e.g. `Shooting Page — completed`, `ZK Production — in progress`, `Jahangir Khan — pending`).
+- **One-Click Filtering**: Instant workspace filtering by clicking any page card in the matrix.
+
+### 2. 6-Stage Content Production Workflow
+- **Stages**: `IDEAS` ➔ `TODO` ➔ `IN_PROGRESS` ➔ `REVIEW` ➔ `READY` ➔ `PUBLISHED`.
+- **Interactive Transitions**: Single-click forward (`→`) and backward (`←`) column transitions with instant Supabase database persistence.
+
+### 3. Suno Music Specialized Visual & Audio Pipeline
+- **6 Pipeline Stages**: `BRIEF` ➔ `ASSETS` ➔ `DESIGN` ➔ `REVIEW` ➔ `EXPORT` ➔ `DELIVERED`.
+- **Dedicated Asset Cards**: Synthwave Track Artwork, Animated Canvas Loop (9:16 vertical), and 4K YouTube Audio Visualizer.
+
+### 4. 7-Step Daily Content Checklist
+- **Mandatory Subtasks**: `Check new content`, `Select content`, `Edit`, `Caption`, `Hashtags`, `Upload`, `Verify published`.
+- **Channel Dispatch**: Interactive checkboxes, progress metrics, and one-click "Complete All 7 Steps" batch action.
+
+---
+
+## 🎯 Phase 6: Personal, College & Web Development Workspaces
+
+Phase 6 implements the complete domain workspaces for Afaq Ahmad's Personal creator workflow, College academic curriculum, and Web Development mastery portal, strictly matching the Stitch design specifications:
+
+### 1. 🎥 Personal Workspace (`/personal`)
+- **9-Stage Vlog / Content Pipeline**:
+  `IDEA` ➔ `PLANNED` ➔ `RECORDING` ➔ `FOOTAGE READY` ➔ `EDITING` ➔ `THUMBNAIL` ➔ `CAPTION` ➔ `READY TO POST` ➔ `PUBLISHED`.
+- **Comprehensive Vlog Model**:
+  - `title`, `date`, `description`.
+  - **Recording Checklist**: Dynamic subtasks for B-Roll, A-Roll, microphone check, lighting setup.
+  - **Editing Checklist**: Rough cut, audio color grade, sound effects, final export.
+  - **Thumbnail Status**: `pending`, `designed`, `approved` badge indicators.
+  - **Captions & SEO Tags**: Full text captions and topic hashtags.
+  - **Multi-Platform Distribution**: `Instagram`, `YouTube`, `TikTok`, `Facebook`, and `X`.
+  - **Publishing Status**: Lifecycle tracking from Draft to Published.
+- **2-Column Creator Layout**:
+  - **Left**: Creator KPI metrics, interactive horizontal 9-stage pipeline switcher, and "My Web Dev Journey" showcase hub.
+  - **Right**: Active production schedule list with live Vlog Detail Inspector drawer.
+
+### 2. 🔗 Web Development Journey Relational Bridge
+- **Relational Database Reference (`linkedVlogId`)**:
+  - Web Development sprint tasks/projects link directly to Personal Vlog episodes (e.g. Task *"Build responsive navbar"* or *"Deploy Supabase Auth"* linked to Vlog *"Building my portfolio website"* `EP #42`).
+  - **Zero Duplicated Text**: Relational foreign-key mapping allows bi-directional updates; updating a vlog episode title reflects automatically in the linked dev task view.
+  - Bi-directional visual badges and one-click navigation between dev sprints and vlog production.
+
+### 3. 🎓 College Academics Workspace (`/college`)
+- **5 Core Academic Domains**:
+  1. **Classes**: Daily lecture schedules, room numbers, professors, and attendance status.
+  2. **Assignments**: Complete assignment tracking with `title`, `subject`, `due date`, `priority`, `estimated time`, `status`, and `notes`.
+  3. **Projects**: Multi-week term projects (e.g. Distributed Database Engine, AI Image Classifier) with milestone progress bars.
+  4. **Exams**: Upcoming midterm and final exams with dynamic countdown badges (e.g. `In 5 Days`).
+  5. **Notes**: Digital lecture notebooks tagged by course code (CS301, CS340, MATH204, CS380).
+- **Interactive Focus / Pomodoro Timer**:
+  - Built-in 25:00 study countdown timer with Play, Pause, and Reset controls for academic focus sessions.
+- **Academic Telemetry KPIs**:
+  - Current CGPA (`3.82 / 4.0`), Active Courses (`5 Enrolled`), Pending Submissions (`3 Due`), Semester Progress (`68%`), and Study Streak (`14 Days`).
+
+### 4. 💻 Web Development Workspace (`/web-development`)
+- **Real-Time Telemetry & Progress Gauges**:
+  - **Learning Progress**: `68%` overall fullstack curriculum mastery.
+  - **Current Project**: Active sprint spotlight (*"Afaq TaskFlow Production Release"*).
+  - **Practice Tasks**: Completed vs. pending drill exercises (`12 / 18 Complete`).
+  - **Upcoming Classes**: Real-time indicator for next live session.
+  - **Weekly Coding Hours**: Live focus hours tracker (`24.5 hrs` this week).
+  - **Active Projects**: Cross-track initiative tally.
+- **Dynamic Recurring Classes Engine**:
+  - **Monday 4:00 PM – 6:00 PM** & **Tuesday 4:00 PM – 6:00 PM** Advanced Next.js & Systems Architecture.
+  - Generates recurring session schedules **dynamically** without duplicating weekly database rows.
+- **Sprint Taskboard & Git Stream**:
+  - Sprints segmented by status (`TODO`, `IN_PROGRESS`, `REVIEW`, `COMPLETED`) with priority filter chips.
+  - Live Git commit activity stream with SVG velocity sparkline.
+
+### 5. 📂 Projects Portfolio (`/projects`)
+- Cross-workspace initiative dashboard powered by `projectService`.
+- Displays: **Progress %**, **Tasks Total / Completed**, **Deadline Countdown**, **Status** (`Active`, `In Review`, `Planned`), **Focus / Coding Hours**, and **Tech Stack tags**.
+- Segmented workspace filter tabs: `All Projects`, `Web Development`, `College`, `Office`, and `Personal`.
 
 ---
 
@@ -121,12 +203,14 @@ src/
 │   └── constants.ts                  # Workspaces, 8 Office pages, recurring routines
 ├── types/
 │   ├── task.ts                       # Task, subtask, priorities, statuses, filters
+│   ├── project.ts                    # Projects, milestones, deadlines, focus hours
 │   ├── office.ts                     # Office workflow stages, Suno pipeline, KPIs, checklists
 │   ├── workspace.ts                  # 4 Workspace definitions & workflow stages
 │   ├── navigation.ts                 # Nav items & badges
 │   └── database.ts                   # Supabase / PostgreSQL schema interfaces
 ├── services/
 │   ├── taskService.ts                # Supabase task repository with CRUD, subtasks & stats
+│   ├── projectService.ts             # Projects repository with progress, deadline & focus hours
 │   ├── officeService.ts              # Office KPIs, 8-page completion statuses & checklist engine
 │   └── workspaceService.ts           # Workspace & Office pages repository
 ├── database/
@@ -136,6 +220,7 @@ src/
     ├── check-routes.mjs              # Route healthcheck verification
     ├── test-task-service.mjs         # 33-step automated task service test suite
     ├── test-office-workspace.mjs     # Automated Office workspace & publishing matrix test suite
+    ├── test-phase6.mjs               # Automated Phase 6 (Personal, College, Web Dev) test suite
     └── run-lint.mjs                  # Strict ESLint automation runner
 ```
 
@@ -183,7 +268,7 @@ Built upon the **Google Stitch Precision Focus Minimal** specification:
 - [x] **PHASE 3: Database & Supabase Integration** — 12 PostgreSQL tables, Row Level Security (RLS), 8 seeded Office pages, multi-tenant user triggers, and Supabase SSR client SDK.
 - [x] **PHASE 4: Full Task System** — Complete task CRUD, Supabase persistence, Stitch UI fidelity, TaskDetailDrawer, Subtasks checklist with progress bar, Statuses (`TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `COMPLETED`), Priorities (`LOW`, `MEDIUM`, `HIGH`), Filter Tabs (`All`, `Today`, `Upcoming`, `Overdue`, `Completed`), Multi-criteria filters & sorting, Optimistic UI updates, and 33-step automated test suite.
 - [x] **PHASE 5: Workspaces & Office Pages** — Complete Office workspace with real database-driven KPI telemetry, 8 Office Pages (`Shooting Page`, `Ismail Shahid Fans`, `ZK Production`, `Jahangir Khan`, `Inaya Kailash`, `Political Affairs`, `Nazia Iqbal Fanz`, `Suno Music`), dynamic page completion statuses (`Shooting Page — completed`, `ZK Production — in progress`, `Jahangir Khan — pending`), 6-stage Content Production Kanban (`IDEAS`, `TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `PUBLISHED`), 6-stage Suno Music pipeline spotlight (`BRIEF`, `ASSETS`, `DESIGN`, `REVIEW`, `EXPORT`, `DELIVERED`), 7-step Daily Content Checklist, horizontal filter bar with platform chips, and automated integration tests.
-- [ ] **PHASE 6: Personal, College & Web Dev Modules** — 9-stage vlog pipeline, academic modules, and Monday & Tuesday class trackers.
+- [x] **PHASE 6: Personal, College & Web Dev Modules** — 9-stage vlog pipeline, academic modules, Monday & Tuesday recurring class engine, relational vlog linking, and projects overview.
 - [ ] **PHASE 7: Recurring Tasks Engine** — Cron schedules, recurring rule editor, and automated queue population.
 - [ ] **PHASE 8: Interactive Calendar** — Day/Week/Month time-blocking and calendar synchronization.
 - [ ] **PHASE 9: Analytics & Productivity Telemetry** — Flow-state tracking, weekly velocity, and streak telemetry.
@@ -226,6 +311,12 @@ npm run lint
 
 # Run automated Task Service test suite (33 assertions)
 npx tsx scripts/test-task-service.mjs
+
+# Run automated Office Workspace & Publishing Matrix test suite
+node scripts/test-office-workspace.mjs
+
+# Run automated Phase 6 (Personal, College, Web Dev) test suite
+node scripts/test-phase6.mjs
 
 # Build production bundle with Next.js Turbopack
 npm run build

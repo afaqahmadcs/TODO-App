@@ -6,6 +6,8 @@ import {
   Subtask,
   TaskStatus,
   TaskPriority,
+  SocialPlatform,
+  ThumbnailStatus,
 } from "@/types/task";
 import { WorkspaceType, OfficePageId } from "@/types/workspace";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
@@ -95,37 +97,186 @@ const INITIAL_TASKS: Task[] = [
     ],
   },
   {
-    id: "task-4",
-    title: "Vlog EP #42: Shoot Next.js learning montage & morning routine",
-    description: "Capture workspace aesthetic B-roll, coding montage, and voiceover explanation.",
+    id: "task-personal-ep42",
+    title: "EP #42: Building My Portfolio Website & Office Sprint",
+    description: "Vlog documenting the dual life of morning agency client work followed by coding the Next.js portfolio website navbar and state management.",
     workspaceId: "personal",
     status: "in_progress",
-    stage: "RECORDING",
+    stage: "FOOTAGE READY",
     priority: "high",
     dueDate: new Date().toISOString().split("T")[0],
     dueTime: "18:30",
     estimatedDurationMin: 90,
     actualDurationMin: 30,
-    tags: ["vlog", "b-roll", "sony-a7iv"],
+    tags: ["vlog", "b-roll", "sony-a7iv", "portfolio"],
     linkedVlogEpisode: "EP #42",
     isCompleted: false,
     createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
     updatedAt: new Date().toISOString(),
-    subtasks: [
-      { id: "sub-9", taskId: "task-4", title: "Record A-Roll desk tour intro", completed: true },
-      { id: "sub-10", taskId: "task-4", title: "Record coding screen capture", completed: true },
-      { id: "sub-11", taskId: "task-4", title: "Record Shure SM7B voiceover", completed: false },
-      { id: "sub-12", taskId: "task-4", title: "Upload raw footage to library", completed: false },
+    thumbnailStatus: "approved",
+    thumbnailUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuB2VJD5USG40NPDu6AthW2xx5syMrwq-35JwrcLyFAB1Pj-J_vQuizMI22CyI3P-J6gq-LnDo0MdPhnyzw0_LQ-RInpDCFu3NTR7Exhn3KtBv2VgOElbQeDB-aVV_WxTKA3z_F2M97Ytc3RAnaLRd-tJUG58fFsamTCn02N_4SvFG7SK1eUa_q1xDBkgqOP7OQilmM7yxwPn11PFK0-xE9R97TLVxlqkCQ8Adej0uemSz18KVAZYqWEBA",
+    caption: "Balancing agency clients with college & building my dream portfolio from scratch. Day 12 of the web dev journey is live! 🔥 #developer #vlog #productivity",
+    platforms: ["YouTube", "Instagram", "TikTok", "Facebook", "X"],
+    publishingStatus: "scheduled",
+    distributionStatus: {
+      YouTube: "SCHED 07:00 PM",
+      Instagram: "VERIFIED ✓",
+      TikTok: "DRAFT SAVED",
+      Facebook: "PENDING",
+      X: "COPY APPROVED",
+    },
+    recordingChecklist: [
+      { id: "rc-1", title: "Morning desk setup B-roll (Sony A7IV 24mm f1.4)", completed: true },
+      { id: "rc-2", title: "Commute & college lecture vlog clip", completed: true },
+      { id: "rc-3", title: "Screen recording of coding session (OBS 4K 60fps)", completed: true },
+      { id: "rc-4", title: "Shure SM7B voiceover commentary track", completed: false },
+      { id: "rc-5", title: "Golden hour outro talk-to-camera", completed: false },
     ],
-    notes: "Keep background music under -18dB during talking head segments.",
+    editingChecklist: [
+      { id: "ec-1", title: "Rough assembly", completed: true },
+      { id: "ec-2", title: "L-cut transitions", completed: true },
+      { id: "ec-3", title: "Synthwave LUT", completed: false },
+      { id: "ec-4", title: "Motion code FX", completed: false },
+    ],
+    subtasks: [
+      { id: "sub-9", taskId: "task-personal-ep42", title: "Record A-Roll desk tour intro", completed: true },
+      { id: "sub-10", taskId: "task-personal-ep42", title: "Record coding screen capture", completed: true },
+      { id: "sub-11", taskId: "task-personal-ep42", title: "Record Shure SM7B voiceover", completed: false },
+      { id: "sub-12", taskId: "task-personal-ep42", title: "Upload raw footage to library", completed: false },
+    ],
+    notes: "Audio sync matched via Tentacle Sync Jam-Sync • 48kHz 24-bit WAV dual-channel.",
     activity: [
-      { id: "act-5", taskId: "task-4", action: "Subtask completed: Record A-Roll", actor: "Afaq", timestamp: "02:15 PM" },
+      { id: "act-5", taskId: "task-personal-ep42", action: "Footage ingested into Final Cut", actor: "Afaq", timestamp: "02:15 PM" },
     ],
   },
   {
-    id: "task-5",
-    title: "Refactor indexedDB cache hydration worker & optimistic sync",
-    description: "Implement zero-latency mutations with automatic rollback on network failure.",
+    id: "task-personal-ep41",
+    title: "EP #41: College morning routine & CS301 lab prep",
+    description: "Documenting early morning study routine and graph algorithm lab preparation.",
+    workspaceId: "personal",
+    status: "published",
+    stage: "PUBLISHED",
+    priority: "medium",
+    dueDate: new Date(Date.now() - 86400000).toISOString().split("T")[0],
+    dueTime: "10:00",
+    tags: ["vlog", "college", "morning"],
+    linkedVlogEpisode: "EP #41",
+    isCompleted: true,
+    completedAt: new Date(Date.now() - 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000).toISOString(),
+    thumbnailStatus: "approved",
+    caption: "Early mornings as a CS major. Balancing code, gym, and coursework. 📚💻",
+    platforms: ["YouTube", "Instagram"],
+    publishingStatus: "published",
+    distributionStatus: {
+      YouTube: "PUBLISHED (4.2k views)",
+      Instagram: "PUBLISHED (14k plays)",
+    },
+    recordingChecklist: [
+      { id: "rc-41-1", title: "Sunrise coffee brewing shot", completed: true },
+      { id: "rc-41-2", title: "Desk time-lapse", completed: true },
+    ],
+    editingChecklist: [
+      { id: "ec-41-1", title: "Color grade rec709", completed: true },
+      { id: "ec-41-2", title: "Audio clean RX10", completed: true },
+    ],
+    subtasks: [],
+    notes: "Archived to YouTube creator library.",
+    activity: [
+      { id: "act-41-1", taskId: "task-personal-ep41", action: "Published on all channels", actor: "Afaq", timestamp: "Yesterday" },
+    ],
+  },
+  {
+    id: "task-personal-ep43",
+    title: "EP #43: Office work & social media management sprint",
+    description: "High-paced agency editing day with Suno Music design delivery.",
+    workspaceId: "personal",
+    status: "in_progress",
+    stage: "EDITING",
+    priority: "high",
+    dueDate: new Date(Date.now() + 86400000).toISOString().split("T")[0],
+    dueTime: "19:00",
+    tags: ["vlog", "office", "suno"],
+    linkedVlogEpisode: "EP #43",
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+    updatedAt: new Date().toISOString(),
+    thumbnailStatus: "designed",
+    caption: "Inside our creative agency pipeline: Managing 8 client channels in one day!",
+    platforms: ["YouTube", "TikTok"],
+    publishingStatus: "draft",
+    distributionStatus: {
+      YouTube: "READY TO EXPORT",
+      TikTok: "DRAFT IN TIMELINE",
+    },
+    recordingChecklist: [
+      { id: "rc-43-1", title: "Dual monitor setup b-roll", completed: true },
+      { id: "rc-43-2", title: "Team sync screen recording", completed: true },
+    ],
+    editingChecklist: [
+      { id: "ec-43-1", title: "Rough assembly cut", completed: true },
+      { id: "ec-43-2", title: "Audio track compression", completed: true },
+      { id: "ec-43-3", title: "Motion text overlays", completed: false },
+    ],
+    subtasks: [],
+    notes: "Premiere Pro project synced to local NAS.",
+    activity: [],
+  },
+  {
+    id: "task-personal-ep44",
+    title: "EP #44: Web development class & building my website",
+    description: "Attending Monday Next.js 15 virtual lab and coding auth session handling.",
+    workspaceId: "personal",
+    status: "todo",
+    stage: "RECORDING",
+    priority: "medium",
+    dueDate: new Date(Date.now() + 86400000 * 3).toISOString().split("T")[0],
+    dueTime: "17:00",
+    tags: ["vlog", "webdev", "class"],
+    linkedVlogEpisode: "EP #44",
+    isCompleted: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    thumbnailStatus: "pending",
+    caption: "Next.js 15 deep dive + building the portfolio that will get me hired.",
+    platforms: ["YouTube", "Instagram", "X"],
+    publishingStatus: "draft",
+    recordingChecklist: [
+      { id: "rc-44-1", title: "Virtual lab screen recording", completed: false },
+      { id: "rc-44-2", title: "Voiceover microphone test", completed: false },
+    ],
+    editingChecklist: [],
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-personal-ep45",
+    title: "EP #45: Daily journey: Evening coffee & creator reflections",
+    description: "Unfiltered thoughts on solo entrepreneurship and learning computer science.",
+    workspaceId: "personal",
+    status: "todo",
+    stage: "IDEA",
+    priority: "low",
+    dueDate: new Date(Date.now() + 86400000 * 5).toISOString().split("T")[0],
+    tags: ["vlog", "reflections"],
+    linkedVlogEpisode: "EP #45",
+    isCompleted: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    thumbnailStatus: "pending",
+    caption: "What no one tells you about learning to code while running a business.",
+    platforms: ["YouTube"],
+    publishingStatus: "draft",
+    recordingChecklist: [],
+    editingChecklist: [],
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-web-navbar",
+    title: "Build responsive navbar & mobile drawer",
+    description: "Construct fully accessible responsive navigation with mobile drawer and smooth transition states.",
     workspaceId: "web-development",
     status: "ready",
     stage: "SPRINT",
@@ -133,45 +284,401 @@ const INITIAL_TASKS: Task[] = [
     dueDate: new Date().toISOString().split("T")[0],
     dueTime: "20:00",
     estimatedDurationMin: 45,
-    actualDurationMin: 0,
-    tags: ["nextjs15", "indexeddb", "telemetry"],
+    actualDurationMin: 35,
+    tags: ["nextjs15", "tailwind", "responsive"],
     githubBranchOrCommit: "main@8f2a1b",
+    linkedVlogId: "task-personal-ep42", // RELATIONAL FOREIGN-KEY REFERENCE
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-wn-1", taskId: "task-web-navbar", title: "Implement backdrop blur header", completed: true },
+      { id: "sub-wn-2", taskId: "task-web-navbar", title: "Add mobile touch drawer navigation", completed: true },
+      { id: "sub-wn-3", taskId: "task-web-navbar", title: "Keyboard focus trap tests", completed: false },
+    ],
+    notes: "Vlog target linked: EP #42 (Timeline 04:15).",
+    activity: [],
+  },
+  {
+    id: "task-web-supabase",
+    title: "Deploy PostgreSQL database on Supabase & auth edge functions",
+    description: "Configure multi-workspace RLS policies, connection pooling, and optimistic indexing.",
+    workspaceId: "web-development",
+    status: "completed",
+    stage: "DONE",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "15:00",
+    estimatedDurationMin: 60,
+    actualDurationMin: 55,
+    tags: ["database", "supabase", "postgres"],
+    githubBranchOrCommit: "feat/supabase-migrations",
+    linkedVlogId: "task-personal-ep42", // RELATIONAL FOREIGN-KEY REFERENCE
+    isCompleted: true,
+    completedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
+    updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+    subtasks: [
+      { id: "sub-ws-1", taskId: "task-web-supabase", title: "Write 12 table DDL migration", completed: true },
+      { id: "sub-ws-2", taskId: "task-web-supabase", title: "Verify RLS policies", completed: true },
+    ],
+    notes: "32m screen recording ingested for EP #42.",
+    activity: [],
+  },
+  {
+    id: "task-web-nextauth",
+    title: "Build authentication with NextAuth & JWT sessions",
+    description: "Implement NextAuth session tokens, HttpOnly cookie rotation, and route protection middleware.",
+    workspaceId: "web-development",
+    status: "in_progress",
+    stage: "SPRINT",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "22:00",
+    estimatedDurationMin: 90,
+    actualDurationMin: 45,
+    tags: ["nextauth", "jwt", "security"],
+    githubBranchOrCommit: "feat/auth-tokens",
+    linkedVlogId: "task-personal-ep43", // RELATIONAL FOREIGN-KEY REFERENCE
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-na-1", taskId: "task-web-nextauth", title: "Configure session rotation", completed: true },
+      { id: "sub-na-2", taskId: "task-web-nextauth", title: "Handle edge auth middleware", completed: false },
+    ],
+    notes: "Vlog EP #43: Debugging Auth at 2AM & Why JWTs are Hard.",
+    activity: [],
+  },
+  {
+    id: "task-web-ratelimit",
+    title: "Deploy API Rate Limiter & Redis Cache to Staging",
+    description: "Token bucket rate limiting using Upstash Redis with 429 status response tests.",
+    workspaceId: "web-development",
+    status: "ready",
+    stage: "SPRINT",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "18:00",
+    estimatedDurationMin: 40,
+    actualDurationMin: 30,
+    tags: ["redis", "ratelimit", "api"],
+    githubBranchOrCommit: "feat/rate-limit",
+    linkedVlogId: "task-personal-ep42", // RELATIONAL FOREIGN-KEY REFERENCE
+    isCompleted: false,
+    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-rl-1", taskId: "task-web-ratelimit", title: "Write unit tests for sliding window", completed: true },
+      { id: "sub-rl-2", taskId: "task-web-ratelimit", title: "Deploy to staging edge worker", completed: true },
+    ],
+    activity: [],
+  },
+  {
+    id: "task-web-leetcode",
+    title: "Solve LeetCode #207 Course Schedule (Graph Cycle)",
+    description: "Implement Kahn's topological sort algorithm with cycle detection.",
+    workspaceId: "web-development",
+    status: "in_progress",
+    stage: "PRACTICE",
+    priority: "medium",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "17:30",
+    estimatedDurationMin: 45,
+    actualDurationMin: 20,
+    tags: ["leetcode", "algorithms", "graph"],
+    githubBranchOrCommit: "leetcode/graph",
     isCompleted: false,
     createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
     updatedAt: new Date().toISOString(),
-    subtasks: [
-      { id: "sub-13", taskId: "task-5", title: "Write unit test for offline queue", completed: true },
-      { id: "sub-14", taskId: "task-5", title: "Verify transaction rollback", completed: true },
-    ],
-    notes: "Check Edge runtime compatibility.",
-    activity: [
-      { id: "act-6", taskId: "task-5", action: "Status changed to READY", actor: "Afaq", timestamp: "03:40 PM" },
-    ],
+    subtasks: [],
+    activity: [],
   },
   {
-    id: "task-6",
-    title: "Submit Data Structures Algorithm Analysis Chapter 4",
-    description: "Complete graph traversal complexity comparisons and submit via university portal.",
-    workspaceId: "college",
+    id: "task-web-combobox",
+    title: "Build accessible custom select dropdown component",
+    description: "ARIA 1.2 compliant select combobox with keyboard arrow navigation.",
+    workspaceId: "web-development",
     status: "todo",
-    stage: "ASSIGNMENT",
+    stage: "SPRINT",
+    priority: "medium",
+    dueDate: new Date(Date.now() + 86400000).toISOString().split("T")[0],
+    dueTime: "16:00",
+    estimatedDurationMin: 40,
+    tags: ["ui", "combobox", "a11y"],
+    githubBranchOrCommit: "ui/combobox",
+    isCompleted: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-cs301-lec",
+    title: "CS301: Advanced Data Structures & Algorithms",
+    description: "Graph Traversal & Dijkstra's Shortest Path Algorithm lecture session.",
+    workspaceId: "college",
+    collegeCategory: "classes",
+    subject: "CS301 Algorithms",
+    roomOrLocation: "Room 402",
+    instructor: "Prof. Vance",
+    dueTime: "08:00 AM - 09:30 AM",
+    status: "completed",
+    priority: "high",
+    isCompleted: true,
+    tags: ["lecture", "algorithms", "cs301"],
+    createdAt: new Date(Date.now() - 3600000 * 8).toISOString(),
+    updatedAt: new Date().toISOString(),
+    notes: "Lecture slides and graph proofs synced to personal notes repository.",
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-cs340-lec",
+    title: "CS340: Database Architecture & SQL",
+    description: "Indexing B-Trees & PostgreSQL Query Execution Plans hands-on lab.",
+    workspaceId: "college",
+    collegeCategory: "classes",
+    subject: "CS340 Databases",
+    roomOrLocation: "Lab 3B",
+    instructor: "Prof. Reynolds",
+    dueTime: "11:30 AM - 01:00 PM",
+    status: "in_progress",
+    priority: "medium",
+    isCompleted: false,
+    tags: ["lab", "databases", "cs340"],
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    updatedAt: new Date().toISOString(),
+    notes: "Docker cluster configured on localhost:5432.",
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-math204-lec",
+    title: "MATH204: Discrete Mathematics",
+    description: "Proof by Induction, Catalan Numbers & Graph Coloring theory.",
+    workspaceId: "college",
+    collegeCategory: "classes",
+    subject: "MATH204",
+    roomOrLocation: "Hall B",
+    instructor: "Dr. Cho",
+    dueTime: "Friday • 10:00 AM",
+    status: "todo",
+    priority: "medium",
+    isCompleted: false,
+    tags: ["math", "discrete", "math204"],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    notes: "Pre-reading textbook Chapter 5.2.",
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-assign-1",
+    title: "CS301 Algorithm Midterm: Graph Traversal Lab Report",
+    description: "Include complexity analysis proofs for BFS vs DFS and benchmark code on 10k nodes.",
+    workspaceId: "college",
+    collegeCategory: "assignments",
+    subject: "CS301 Algorithms",
+    status: "in_progress",
+    priority: "high",
+    dueDate: new Date().toISOString().split("T")[0],
+    dueTime: "17:00",
+    estimatedDurationMin: 150,
+    actualDurationMin: 60,
+    progressPercent: 85,
+    tags: ["assignment", "algorithms", "cs301"],
+    isCompleted: false,
+    notes: "Due today 5:00 PM. LaTeX report formatted with IEEE style.",
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [
+      { id: "sub-ca-1", taskId: "task-college-assign-1", title: "Complete BFS vs DFS benchmark", completed: true },
+      { id: "sub-ca-2", taskId: "task-college-assign-1", title: "Write mathematical asymptotic proofs", completed: true },
+      { id: "sub-ca-3", taskId: "task-college-assign-1", title: "Compile final PDF report", completed: false },
+    ],
+    activity: [],
+  },
+  {
+    id: "task-college-assign-2",
+    title: "PostgreSQL B-Tree Index Benchmark Report",
+    description: "Use EXPLAIN ANALYZE on test dataset; generate latency plots.",
+    workspaceId: "college",
+    collegeCategory: "assignments",
+    subject: "CS340 Databases",
+    status: "todo",
     priority: "medium",
     dueDate: new Date(Date.now() + 86400000).toISOString().split("T")[0],
     dueTime: "23:59",
-    estimatedDurationMin: 90,
-    actualDurationMin: 0,
-    tags: ["academics", "algorithms"],
+    estimatedDurationMin: 195,
+    progressPercent: 0,
+    tags: ["assignment", "databases", "cs340"],
     isCompleted: false,
-    createdAt: new Date(Date.now() - 3600000 * 8).toISOString(),
+    notes: "Generate comparison plot between sequential scan and index scan.",
+    createdAt: new Date(Date.now() - 3600000 * 10).toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-assign-3",
+    title: "Discrete Probability & Graph Theory Problem Set #4",
+    description: "Problems 4.1 to 4.18 in textbook Chapter 4.",
+    workspaceId: "college",
+    collegeCategory: "assignments",
+    subject: "MATH204",
+    status: "todo",
+    priority: "low",
+    dueDate: "2025-10-18",
+    dueTime: "14:00",
+    estimatedDurationMin: 240,
+    progressPercent: 10,
+    tags: ["assignment", "math", "math204"],
+    isCompleted: false,
+    notes: "Focus on random walk and Markov chain questions.",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-assign-4",
+    title: "Software Engineering Agile Sprint Retrospective",
+    description: "Team sprint retro notes & Jira burndown screenshot.",
+    workspaceId: "college",
+    collegeCategory: "assignments",
+    subject: "CS380",
+    status: "in_progress",
+    priority: "medium",
+    dueDate: "2025-10-20",
+    dueTime: "18:00",
+    estimatedDurationMin: 105,
+    progressPercent: 40,
+    tags: ["assignment", "se", "agile"],
+    isCompleted: false,
+    notes: "Review velocity chart and retrospective takeaways.",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-proj-1",
+    title: "Distributed Key-Value Store",
+    description: "CS301 Capstone project implementing Raft consensus, write-ahead logging (WAL), compaction, and gRPC endpoints.",
+    workspaceId: "college",
+    collegeCategory: "projects",
+    subject: "CS301 Capstone",
+    status: "in_progress",
+    priority: "high",
+    dueDate: "2025-11-12",
+    progressPercent: 65,
+    focusHours: 32.0,
+    tags: ["project", "capstone", "raft"],
+    isCompleted: false,
+    notes: "Solo project lead. GitHub repo connected.",
+    createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     subtasks: [
-      { id: "sub-15", taskId: "task-6", title: "Solve Dijkstra proof", completed: false },
-      { id: "sub-16", taskId: "task-6", title: "Generate LaTeX PDF report", completed: false },
+      { id: "sub-cp-1", taskId: "task-college-proj-1", title: "Raft Consensus Algorithm Leader Election", completed: true },
+      { id: "sub-cp-2", taskId: "task-college-proj-1", title: "Write-Ahead Logging (WAL) & Compaction", completed: true },
+      { id: "sub-cp-3", taskId: "task-college-proj-1", title: "gRPC Endpoints & Client SDK Implementation", completed: false },
     ],
-    notes: "Due before midnight tomorrow.",
-    activity: [
-      { id: "act-7", taskId: "task-6", action: "Task created", actor: "Afaq", timestamp: "Yesterday" },
-    ],
+    activity: [],
+  },
+  {
+    id: "task-college-proj-2",
+    title: "Hospital Management DB Schema & Normalization",
+    description: "CS340 Course Project covering BCNF normalization, indexing, and PostgreSQL stored procedures.",
+    workspaceId: "college",
+    collegeCategory: "projects",
+    subject: "CS340 Course Project",
+    status: "ready",
+    priority: "medium",
+    dueDate: "2025-10-24",
+    progressPercent: 90,
+    focusHours: 18.5,
+    tags: ["project", "database", "erd"],
+    isCompleted: false,
+    notes: "Final review and ER diagram export complete.",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-exam-1",
+    title: "CS301 Midterm Examination",
+    description: "Coverage: Chapters 1–6 (Balanced Trees, Graphs, Greedy, Dynamic Programming).",
+    workspaceId: "college",
+    collegeCategory: "exams",
+    subject: "CS301 Algorithms",
+    status: "todo",
+    priority: "high",
+    dueDate: "2025-10-22",
+    examDate: "Oct 22, 09:00 AM - 11:00 AM",
+    progressPercent: 72,
+    tags: ["exam", "midterm", "algorithms"],
+    isCompleted: false,
+    notes: "Study guide and review problems finished for trees and graphs.",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-exam-2",
+    title: "MATH204 Discrete Math Midterm",
+    description: "Coverage: Mathematical Proofs, Set Theory, Combinatorics & Generating Functions.",
+    workspaceId: "college",
+    collegeCategory: "exams",
+    subject: "MATH204",
+    status: "todo",
+    priority: "medium",
+    dueDate: "2025-10-26",
+    examDate: "Oct 26, 02:00 PM - 04:00 PM",
+    progressPercent: 45,
+    tags: ["exam", "midterm", "math"],
+    isCompleted: false,
+    notes: "Formula sheet printed and verified.",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-note-1",
+    title: "Graph Traversal & Dijkstra's Shortest Path Algorithm",
+    description: "Detailed LaTeX notes covering priority queue implementations and time complexity proofs.",
+    workspaceId: "college",
+    collegeCategory: "notes",
+    subject: "CS301 Algorithms",
+    status: "completed",
+    priority: "low",
+    isCompleted: true,
+    tags: ["notes", "algorithms", "dijkstra"],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    notes: "Verified with Prof. Vance during office hours.",
+    subtasks: [],
+    activity: [],
+  },
+  {
+    id: "task-college-note-2",
+    title: "PostgreSQL Indexing B-Trees & Execution Plans",
+    description: "Comprehensive notes on index selectivity, bitmap heap scans, and query optimization.",
+    workspaceId: "college",
+    collegeCategory: "notes",
+    subject: "CS340 Databases",
+    status: "completed",
+    priority: "low",
+    isCompleted: true,
+    tags: ["notes", "databases", "indexes"],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    notes: "Docker reproduction scripts attached.",
+    subtasks: [],
+    activity: [],
   },
   {
     id: "task-7",
@@ -1412,4 +1919,156 @@ export const taskService = {
       rate,
     };
   },
+
+  /**
+   * Phase 6: Recurring Class Engine
+   * Generates dynamic weekly events for Monday 4 PM - 6 PM & Tuesday 4 PM - 6 PM
+   * without duplicating static records manually for every week.
+   */
+  getRecurringClasses: () => {
+    return RECURRING_CLASSES;
+  },
+
+  /**
+   * Phase 6: Get all Personal Vlog entries
+   */
+  getVlogs: async (): Promise<Task[]> => {
+    const allTasks = await taskService.getTasks();
+    return allTasks.filter((t) => t.workspaceId === "personal");
+  },
+
+  /**
+   * Phase 6: Web Development Journey ➔ Personal Vlog Cross-Link Query
+   * Relational database lookup: fetches all tasks linked to a vlog entry ID
+   */
+  getTasksLinkedToVlog: async (vlogId: string): Promise<Task[]> => {
+    const allTasks = await taskService.getTasks();
+    return allTasks.filter((t) => t.linkedVlogId === vlogId);
+  },
+
+  /**
+   * Phase 6: Get the vlog task referenced by a dev task's linkedVlogId
+   */
+  getLinkedVlog: async (devTaskId: string): Promise<Task | null> => {
+    const devTask = await taskService.getTaskById(devTaskId);
+    if (!devTask || !devTask.linkedVlogId) return null;
+    return taskService.getTaskById(devTask.linkedVlogId);
+  },
+
+  /**
+   * Phase 6: Relational linking of Web Dev Task ➔ Vlog Entry
+   */
+  linkTaskToVlog: async (devTaskId: string, vlogId: string | null): Promise<Task | null> => {
+    const updated = await taskService.updateTask(devTaskId, {
+      linkedVlogId: vlogId,
+    } as UpdateTaskInput);
+    return updated;
+  },
+
+  /**
+   * Phase 6: Vlog Checklist Toggle (recording / editing)
+   */
+  updateTaskChecklist: async (
+    taskId: string,
+    type: "recording" | "editing",
+    checklistItemId: string,
+    completed: boolean
+  ): Promise<Task | null> => {
+    const task = localTasks.find((t) => t.id === taskId);
+    if (!task) return null;
+
+    if (type === "recording" && task.recordingChecklist) {
+      task.recordingChecklist = task.recordingChecklist.map((item) =>
+        item.id === checklistItemId ? { ...item, completed } : item
+      );
+    } else if (type === "editing" && task.editingChecklist) {
+      task.editingChecklist = task.editingChecklist.map((item) =>
+        item.id === checklistItemId ? { ...item, completed } : item
+      );
+    }
+
+    task.updatedAt = new Date().toISOString();
+    return { ...task };
+  },
+
+  /**
+   * Phase 6: Vlog Platform Distribution Toggle
+   */
+  updateVlogPlatform: async (
+    taskId: string,
+    platform: SocialPlatform,
+    enabled: boolean
+  ): Promise<Task | null> => {
+    const task = localTasks.find((t) => t.id === taskId);
+    if (!task) return null;
+
+    const currentPlatforms = task.platforms || [];
+    if (enabled && !currentPlatforms.includes(platform)) {
+      task.platforms = [...currentPlatforms, platform];
+    } else if (!enabled) {
+      task.platforms = currentPlatforms.filter((p) => p !== platform);
+    }
+
+    task.updatedAt = new Date().toISOString();
+    return { ...task };
+  },
+
+  /**
+   * Phase 6: Vlog Thumbnail Status Update
+   */
+  updateThumbnailStatus: async (
+    taskId: string,
+    status: ThumbnailStatus
+  ): Promise<Task | null> => {
+    const task = localTasks.find((t) => t.id === taskId);
+    if (!task) return null;
+
+    task.thumbnailStatus = status;
+    task.updatedAt = new Date().toISOString();
+    return { ...task };
+  },
 };
+
+export interface RecurringClassEvent {
+  id: string;
+  title: string;
+  dayOfWeek: "Monday" | "Tuesday";
+  dayIndex: 1 | 2; // 1 = Mon, 2 = Tue
+  time: string; // "4:00 PM – 6:00 PM"
+  startTime: "16:00";
+  endTime: "18:00";
+  lab: string;
+  topics: string;
+  tags: string[];
+  discordLink?: string;
+  notesLink?: string;
+}
+
+export const RECURRING_CLASSES: RecurringClassEvent[] = [
+  {
+    id: "rec-class-mon",
+    title: "Advanced Fullstack Web Development",
+    dayOfWeek: "Monday",
+    dayIndex: 1,
+    time: "4:00 PM – 6:00 PM",
+    startTime: "16:00",
+    endTime: "18:00",
+    lab: "Virtual Lab #1",
+    topics: "Deep dive into Next.js 15 App Router, Server Actions, optimistic cache mutations, and production GraphQL integrations.",
+    tags: ["Next.js 15", "Server Actions", "GraphQL"],
+    discordLink: "https://discord.gg/virtual-lab-1",
+  },
+  {
+    id: "rec-class-tue",
+    title: "Backend Architecture & Distributed Systems",
+    dayOfWeek: "Tuesday",
+    dayIndex: 2,
+    time: "4:00 PM – 6:00 PM",
+    startTime: "16:00",
+    endTime: "18:00",
+    lab: "Virtual Lab #2",
+    topics: "PostgreSQL relational indexing strategies, Redis distributed locking, asynchronous workers, and event microservices.",
+    tags: ["PostgreSQL", "Redis Pub/Sub", "Microservices"],
+    notesLink: "/college",
+  },
+];
