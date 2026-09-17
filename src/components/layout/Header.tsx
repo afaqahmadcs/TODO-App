@@ -7,6 +7,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
 import { Avatar } from "@/components/ui/Avatar";
 import { cn } from "@/lib/utils";
+import { authService, AuthUserProfile } from "@/services/authService";
 
 export interface HeaderProps {
   isSidebarCollapsed?: boolean;
@@ -28,6 +29,31 @@ export const Header: React.FC<HeaderProps> = ({
   className,
 }) => {
   const pathname = usePathname();
+  const [userProfile, setUserProfile] = React.useState<AuthUserProfile | null>(null);
+
+  React.useEffect(() => {
+    let isMounted = true;
+    authService.getUser().then((user) => {
+      if (isMounted && user) {
+        setUserProfile(user);
+      }
+    });
+
+    const subscription = authService.onAuthStateChange(() => {
+      authService.getUser().then((user) => {
+        if (isMounted) {
+          setUserProfile(user);
+        }
+      });
+    });
+
+    return () => {
+      isMounted = false;
+      if (subscription && typeof subscription.unsubscribe === "function") {
+        subscription.unsubscribe();
+      }
+    };
+  }, []);
 
   // Page title mapping based on current active route
   const getPageTitleInfo = () => {
@@ -195,10 +221,16 @@ export const Header: React.FC<HeaderProps> = ({
         {/* User Profile Avatar */}
         <Link
           href="/settings"
-          aria-label="Go to Settings"
+          aria-label={`Settings (${userProfile?.name || "Afaq Ahmad"})`}
           className="ml-1 shrink-0 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-container"
+          title={userProfile ? `${userProfile.name} (${userProfile.email})` : "Settings"}
         >
-          <Avatar size="sm" src="/assets/avatar.png" statusDot="online" />
+          <Avatar
+            size="sm"
+            src={userProfile?.avatarUrl || "/assets/avatar.png"}
+            alt={userProfile?.name || "Afaq Ahmad"}
+            statusDot="online"
+          />
         </Link>
       </div>
     </header>

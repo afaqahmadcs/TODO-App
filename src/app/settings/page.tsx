@@ -1,13 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Avatar } from "@/components/ui/Avatar";
 import { Icon } from "@/components/ui/Icon";
+import { Button } from "@/components/ui/Button";
+import { authService, AuthUserProfile } from "@/services/authService";
 
 export default function SettingsPage() {
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useState<AuthUserProfile | null>(null);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    authService.getUser().then((user) => {
+      if (isMounted) setCurrentUser(user);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    setIsSigningOut(true);
+    try {
+      await authService.signOut();
+      router.push("/login");
+    } finally {
+      setIsSigningOut(false);
+    }
+  };
+
   const shortcuts = [
     { key: "⌘K", desc: "Open global command palette & search" },
     { key: "N", desc: "Open universal quick task creation modal" },
@@ -25,19 +53,47 @@ export default function SettingsPage() {
 
       {/* Profile Card */}
       <Card variant="low" className="p-6 space-y-4">
-        <h3 className="text-base font-bold text-on-surface font-headline border-b border-outline-variant/15 pb-3">
-          Creator Profile
-        </h3>
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-          <Avatar size="lg" src="/assets/avatar.png" statusDot="online" />
-          <div className="space-y-1">
-            <h4 className="text-lg font-bold text-on-surface">Afaq Ahmad</h4>
-            <p className="text-xs text-on-surface-variant">
-              Pro Creator • Multi-Workspace Producer & Fullstack Developer
-            </p>
-            <span className="inline-block font-mono text-xs text-secondary bg-secondary/10 px-2 py-0.5 rounded">
-              afaq@taskflow.dev
-            </span>
+        <div className="flex items-center justify-between border-b border-outline-variant/15 pb-3">
+          <h3 className="text-base font-bold text-on-surface font-headline">
+            Creator Profile & Authentication
+          </h3>
+          <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            {authService.isConfigured() ? "Supabase Live Auth" : "Local Workspace Mode"}
+          </span>
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Avatar size="lg" src={currentUser?.avatarUrl || "/assets/avatar.png"} statusDot="online" />
+            <div className="space-y-1">
+              <h4 className="text-lg font-bold text-on-surface">
+                {currentUser?.name || "Afaq Ahmad"}
+              </h4>
+              <p className="text-xs text-on-surface-variant">
+                Pro Creator • Multi-Workspace Producer & Fullstack Developer
+              </p>
+              <span className="inline-block font-mono text-xs text-secondary bg-secondary/10 px-2 py-0.5 rounded">
+                {currentUser?.email || "afaq@taskflow.dev"}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href="/login">
+              <Button variant="outline" size="sm" className="text-xs">
+                Switch Account
+              </Button>
+            </Link>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleSignOut}
+              disabled={isSigningOut}
+              className="text-xs"
+            >
+              Sign Out
+            </Button>
           </div>
         </div>
       </Card>

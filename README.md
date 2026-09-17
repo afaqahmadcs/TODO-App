@@ -525,6 +525,48 @@ Unified `<EmptyState />` component featuring glowing icon rings, duotone icons, 
 
 ---
 
+## 🔒 Phase 12: Production Deployment Readiness (Vercel & Supabase RLS)
+
+Phase 12 finalizes all engineering, security, and infrastructure requirements for production deployment on Vercel with Supabase PostgreSQL:
+
+### 1. Supabase Multi-Tenant Authentication & Session Management
+* **Auth Service** (`src/services/authService.ts`): Production client wrapper supporting `signIn`, `signUp`, `signOut`, `getUser`, `getSession`, `resetPassword`, and `onAuthStateChange`.
+* **Auth Route Handler** (`src/app/auth/callback/route.ts`): Server Route Handler exchanging auth code parameters for live sessions and redirecting to the application dashboard.
+* **Dedicated Login/Signup Page** (`src/app/login/page.tsx`): Google Stitch dark slate auth portal with client-side validation and a 1-click "Continue as Guest" demo bypass for offline evaluations.
+* **Header & Settings Sync**: Real-time auth state synchronization across the navigation header, user avatar, and settings portal.
+
+### 2. Strict Row-Level Security (RLS) Multi-Tenant Isolation
+* **Migration `004_production_security_rls.sql`**: Enforces strict `auth.uid() = user_id` row-level policies across all 12 database tables:
+  1. `profiles` — `id = auth.uid()`
+  2. `workspaces` — `user_id = auth.uid()`
+  3. `pages` — parent workspace belongs to `auth.uid()`
+  4. `projects` — `user_id = auth.uid()`
+  5. `tasks` — `user_id = auth.uid()`
+  6. `subtasks` — parent task belongs to `auth.uid()`
+  7. `tags` — `user_id = auth.uid()`
+  8. `task_tags` — parent task belongs to `auth.uid()`
+  9. `recurring_rules` — `user_id = auth.uid()`
+  10. `focus_sessions` — `user_id = auth.uid()`
+  11. `notes` — `user_id = auth.uid()`
+  12. `notifications` — `user_id = auth.uid()`
+* **Zero Cross-Tenant Leakage**: No user can read, insert, update, or delete records belonging to another creator.
+
+### 3. Vercel Production Infrastructure & Security Headers
+* **Deployment Config (`vercel.json`)**: Configured with strict production security headers:
+  - `X-Frame-Options: DENY` (prevents clickjacking)
+  - `X-Content-Type-Options: nosniff` (prevents MIME sniffing)
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+  - Static asset cache-control (`max-age=31536000, immutable`)
+* **Production Runtime Error Boundary** (`src/app/error.tsx`): Catches unexpected client/server runtime errors with retry buttons and graceful fallback to dashboard.
+* **Custom 404 Page** (`src/app/not-found.tsx`): Styled with Google Stitch design system and immediate navigation back to safety.
+
+### 4. Secret Hygiene & Environment Variable Guards
+* Private secrets, service-role keys, and credentials are strictly excluded from git tracking via `.gitignore`.
+* `.env.example` documents all required production and public environment variables with security instructions.
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -550,6 +592,9 @@ Visit [http://localhost:3000](http://localhost:3000) to access Afaq TaskFlow.
 ### Quality Validation Scripts
 
 ```bash
+# Run Master Production Readiness Audit (18 assertions covering all 21 categories)
+node scripts/test-production-readiness.mjs
+
 # Type check all TypeScript files (0 errors)
 npx tsc --noEmit
 
