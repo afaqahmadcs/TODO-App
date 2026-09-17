@@ -158,10 +158,12 @@ export const analyticsService = {
   logFocusSession: async (
     taskId?: string,
     durationMinutes: number = 25,
-    completed: boolean = true
+    completed: boolean = true,
+    customStartedAt?: string,
+    customEndedAt?: string
   ): Promise<FocusSession> => {
-    const startedAt = new Date(Date.now() - durationMinutes * 60000).toISOString();
-    const endedAt = new Date().toISOString();
+    const startedAt = customStartedAt || new Date(Date.now() - durationMinutes * 60000).toISOString();
+    const endedAt = customEndedAt || new Date().toISOString();
 
     if (isSupabaseConfigured()) {
       try {

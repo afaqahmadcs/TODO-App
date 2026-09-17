@@ -11,12 +11,18 @@ import { cn } from "@/lib/utils";
 export interface HeaderProps {
   isSidebarCollapsed?: boolean;
   onOpenQuickTask?: () => void;
+  onOpenFocusMode?: () => void;
+  onOpenNotifications?: () => void;
+  unreadCount?: number;
   className?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   isSidebarCollapsed = false,
   onOpenQuickTask,
+  onOpenFocusMode,
+  onOpenNotifications,
+  unreadCount = 0,
   className,
 }) => {
   const pathname = usePathname();
@@ -111,16 +117,39 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Right Controls: Notification, Quick Add Task, Profile Avatar */}
-      <div className="flex items-center gap-2 sm:gap-3">
+      {/* Right Controls: Focus Mode, Notification, Quick Add Task, Profile Avatar */}
+      <div className="flex items-center gap-1.5 sm:gap-2.5">
+        {/* Focus Mode Button */}
+        <button
+          type="button"
+          onClick={onOpenFocusMode}
+          aria-label="Focus Mode (Press F)"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold transition-all border border-outline-variant/15"
+          title="Start Focus Mode (F)"
+        >
+          <Icon name="bolt" size={18} className="text-secondary" />
+          <span className="hidden md:inline">Focus</span>
+          <kbd className="hidden md:inline-block px-1 py-0.2 rounded bg-surface-container-highest text-[10px] font-mono text-outline">
+            F
+          </kbd>
+        </button>
+
         {/* Notification Bell */}
         <button
           type="button"
-          aria-label="Notifications"
+          onClick={onOpenNotifications}
+          aria-label={`Notifications (${unreadCount} unread)`}
           className="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-container/40"
+          title="Notifications"
         >
           <Icon name="notifications" size={20} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface" />
+          {unreadCount > 0 ? (
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-rose-500 text-white text-[10px] font-mono font-bold rounded-full flex items-center justify-center ring-2 ring-surface animate-in zoom-in-50">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          ) : (
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-400 rounded-full ring-2 ring-surface" />
+          )}
         </button>
 
         {/* Quick Add Task Button */}

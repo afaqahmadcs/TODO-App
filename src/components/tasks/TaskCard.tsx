@@ -11,6 +11,7 @@ export interface TaskCardProps {
   onToggleComplete?: (id: string) => void;
   onStatusChange?: (id: string, status: TaskStatus) => void;
   onClick?: (task: Task) => void;
+  onStartFocus?: (task: Task) => void;
   isSelected?: boolean;
   layoutMode?: "card" | "row";
   className?: string;
@@ -21,6 +22,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   onToggleComplete,
   onStatusChange,
   onClick,
+  onStartFocus,
   isSelected = false,
   layoutMode = "card",
   className,
@@ -167,6 +169,20 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             {task.priority}
           </span>
 
+          {onStartFocus && !task.isCompleted && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onStartFocus(task);
+              }}
+              className="p-1 rounded text-amber-400 hover:text-amber-300 hover:bg-amber-400/15 transition-colors"
+              title="Start Focus Mode"
+            >
+              <Icon name="bolt" size={16} />
+            </button>
+          )}
+
           <button
             type="button"
             onClick={() => onClick?.(task)}
@@ -231,6 +247,20 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           >
             {task.priority}
           </span>
+
+          {onStartFocus && !task.isCompleted && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onStartFocus(task);
+              }}
+              className="p-1 rounded text-amber-400 hover:text-amber-300 hover:bg-amber-400/15 transition-colors"
+              title="Start Focus Mode"
+            >
+              <Icon name="bolt" size={14} />
+            </button>
+          )}
         </div>
       </div>
 

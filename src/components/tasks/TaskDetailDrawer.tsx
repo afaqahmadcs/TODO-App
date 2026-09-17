@@ -14,6 +14,7 @@ export interface TaskDetailDrawerProps {
   onClose: () => void;
   onTaskUpdated?: (updatedTask: Task) => void;
   onTaskDeleted?: (taskId: string) => void;
+  onStartFocus?: (task: Task) => void;
 }
 
 export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
@@ -22,6 +23,7 @@ export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
   onClose,
   onTaskUpdated,
   onTaskDeleted,
+  onStartFocus,
 }) => {
   const [currentTask, setCurrentTask] = useState<Task | null>(task);
   const [prevTaskId, setPrevTaskId] = useState(task?.id);
@@ -287,6 +289,18 @@ export const TaskDetailDrawer: React.FC<TaskDetailDrawerProps> = ({
             <Icon name="check_circle" size={16} />
             <span>{currentTask.isCompleted ? "Completed" : "Mark Done"}</span>
           </button>
+
+          {onStartFocus && !currentTask.isCompleted && (
+            <button
+              type="button"
+              onClick={() => onStartFocus(currentTask)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-all bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 shadow-sm"
+              title="Start Focus Session"
+            >
+              <Icon name="bolt" size={15} />
+              <span>Focus</span>
+            </button>
+          )}
 
           <button
             type="button"

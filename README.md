@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 ![Design System](https://img.shields.io/badge/Design_System-Google_Stitch-4F46E5?style=for-the-badge)
-![Status](https://img.shields.io/badge/Phase_9-Complete-10B981?style=for-the-badge)
+![Status](https://img.shields.io/badge/Phase_10-Complete-10B981?style=for-the-badge)
 
 ---
 
@@ -451,6 +451,40 @@ Phase 9 delivers a comprehensive, real-time command center and deep cognitive pr
 
 ---
 
+## ⚡ Phase 10: Focus Mode & Task Notifications System
+
+Phase 10 implements an immersive **Focus Mode** and an intelligent **Task Notification Center** backed by real Supabase PostgreSQL persistence:
+
+### 1. Immersive Focus Mode
+* **Full-Screen Modal**: Styled with Google Stitch dark slate palette (`#0B1326`, `#131B2E`), smooth circular SVG progress ring, and crisp digital countdown clock (MM:SS).
+* **Work & Break Presets**:
+  - `25/5 Pomodoro` (25m deep work, 5m restorative break)
+  - `50/10 Deep Work` (50m intensive focus block, 10m recharge)
+  - `Custom Duration` (Arbitrary minutes input for flexible timeboxing)
+* **Interactive Controls**:
+  - **Start / Pause / Resume**: Spacebar hotkey or primary action button.
+  - **Complete Task & Finish**: Marks the active task completed and logs the session in one click.
+  - **Task Switcher**: Change focus target on the fly among active tasks across Office, Personal, College, and Web Dev.
+* **Supabase Persistence**: When a session finishes or is completed, it persists directly to the `focus_sessions` table:
+  - `task_id`, `started_at`, `ended_at`, `duration_minutes`, `completed`
+* **Synthesized Audio Chimes**: Web Audio API two-tone harmonic bell (523.25 Hz & 659.25 Hz with exponential gain decay) fires upon sprint and break completion without external media dependencies.
+
+### 2. Intelligent Notification Center
+* **Slide-Over Drawer**: Accessible via the global header bell icon with a real-time unread badge counter (or hotkey).
+* **Segmented Filter Tabs**:
+  - `Unread` — Active reminders requiring attention.
+  - `Read` — Acknowledged alerts.
+  - `All` — Complete audit trail.
+* **Reminder Triggers**:
+  - **Upcoming Tasks**: Notifies user of imminent tasks due today within current focus blocks.
+  - **Overdue Tasks**: High-urgency alerts with `deadline` category for overdue deliverables.
+  - **Recurring Routines**: Automated morning cadence reminders for active recurring rules (e.g. Shooting Page 1:15 PM routine).
+* **Anti-Spam Deduplication Engine**: Deterministic fingerprint hashing (`overdue-${taskId}-${dueDate}`, `upcoming-${taskId}-${dueTime}-${todayStr}`, `recurring-${taskId}-${todayStr}`) prevents duplicate notification spamming.
+* **Direct Task Deep-Linking**: Clicking any notification immediately inspects and loads the target task in the Task Detail Drawer.
+* **Truthful Delivery**: Web Notification API integration validates browser permission gracefully (`granted`, `default`, `denied`) without false claims.
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -476,11 +510,14 @@ Visit [http://localhost:3000](http://localhost:3000) to access Afaq TaskFlow.
 ### Quality Validation Scripts
 
 ```bash
-# Type check all TypeScript files
+# Type check all TypeScript files (0 errors)
 npx tsc --noEmit
 
 # Run ESLint validation (0 errors, 0 warnings)
 npm run lint
+
+# Run automated Phase 10 (Focus Mode & Notifications) test suite (9 test suites)
+npx tsx scripts/test-focus-notifications.mjs
 
 # Run automated Phase 9 Analytics & Dashboard telemetry test suite (9 test suites)
 npx tsx scripts/test-analytics-system.mjs
