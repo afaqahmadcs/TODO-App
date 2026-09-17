@@ -325,6 +325,93 @@ export interface Database {
         Relationships: [];
       };
 
+      recurring_rules: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          title: string;
+          description: string | null;
+          template_id: string | null;
+          workspace_id: string;
+          office_page_id: string | null;
+          page_id: string | null;
+          project_id: string | null;
+          priority: TaskPriority;
+          due_time: string;
+          estimated_duration_min: number;
+          start_date: string;
+          end_date: string | null;
+          recurrence_type: string;
+          interval: number;
+          days_of_week: number[] | null;
+          day_of_month: number | null;
+          status: string;
+          checklist: string[] | null;
+          tags: string[] | null;
+          last_generated_date: string | null;
+          next_occurrence: string | null;
+          timezone: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string | null;
+          title: string;
+          description?: string | null;
+          template_id?: string | null;
+          workspace_id: string;
+          office_page_id?: string | null;
+          page_id?: string | null;
+          project_id?: string | null;
+          priority?: TaskPriority;
+          due_time?: string;
+          estimated_duration_min?: number;
+          start_date?: string;
+          end_date?: string | null;
+          recurrence_type: string;
+          interval?: number;
+          days_of_week?: number[] | null;
+          day_of_month?: number | null;
+          status?: string;
+          checklist?: string[] | null;
+          tags?: string[] | null;
+          last_generated_date?: string | null;
+          next_occurrence?: string | null;
+          timezone?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string | null;
+          title?: string;
+          description?: string | null;
+          template_id?: string | null;
+          workspace_id?: string;
+          office_page_id?: string | null;
+          page_id?: string | null;
+          project_id?: string | null;
+          priority?: TaskPriority;
+          due_time?: string;
+          estimated_duration_min?: number;
+          start_date?: string;
+          end_date?: string | null;
+          recurrence_type?: string;
+          interval?: number;
+          days_of_week?: number[] | null;
+          day_of_month?: number | null;
+          status?: string;
+          checklist?: string[] | null;
+          tags?: string[] | null;
+          last_generated_date?: string | null;
+          next_occurrence?: string | null;
+          timezone?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+
       focus_sessions: {
         Row: {
           id: string;

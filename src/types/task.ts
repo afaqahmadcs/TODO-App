@@ -77,6 +77,10 @@ export interface Task {
   linkedVlogEpisode?: string;
   githubBranchOrCommit?: string;
 
+  // Phase 7 Recurring System:
+  recurringRuleId?: string | null; // ID of the parent RecurringRule that generated this instance
+  recurrenceInstanceDate?: string; // YYYY-MM-DD that this instance was generated for
+
   // Phase 6 extensions:
   linkedVlogId?: string | null; // Relational foreign-key reference to a personal vlog task ID
   recordingChecklist?: ChecklistItem[];
@@ -137,6 +141,10 @@ export interface CreateTaskInput {
   subject?: string;
   collegeCategory?: "classes" | "assignments" | "projects" | "exams" | "notes";
   linkedVlogId?: string | null;
+  recurringRuleId?: string | null;
+  recurrenceInstanceDate?: string;
+  isRecurring?: boolean;
+  recurringPattern?: string;
 }
 
 export interface UpdateTaskInput {
@@ -158,5 +166,9 @@ export interface UpdateTaskInput {
   subject?: string;
   collegeCategory?: "classes" | "assignments" | "projects" | "exams" | "notes";
   linkedVlogId?: string | null;
+  recurringRuleId?: string | null;
+  recurrenceInstanceDate?: string;
+  isRecurring?: boolean;
+  recurringPattern?: string;
 }
 

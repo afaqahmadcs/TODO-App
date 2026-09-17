@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 ![Design System](https://img.shields.io/badge/Design_System-Google_Stitch-4F46E5?style=for-the-badge)
-![Status](https://img.shields.io/badge/Phase_6-Complete-10B981?style=for-the-badge)
+![Status](https://img.shields.io/badge/Phase_7-Complete-10B981?style=for-the-badge)
 
 ---
 
@@ -143,6 +143,66 @@ Phase 6 implements the complete domain workspaces for Afaq Ahmad's Personal crea
 
 ---
 
+## 🔄 Phase 7: Complete Recurring-Task System & Calendar Integration
+
+Phase 7 implements the mission-critical, enterprise-grade recurring task engine designed to generate task instances reliably without duplicates, backed by Supabase PostgreSQL, timezone accuracy (`Asia/Karachi` / `UTC+5`), and seamless Google Stitch UI integration across `/recurring` and `/calendar`:
+
+### 1. 🔁 Recurrence Types
+- **`EVERY_DAY`**: Daily recurring routines with 24-hour cadence.
+- **`WEEKDAYS`**: Monday through Friday business routines (e.g. Daily Shooting Page Management).
+- **`SPECIFIC_WEEKDAYS`**: Precision weekday selection (e.g. Mon & Tue Web Development classes).
+- **`WEEKLY`**: Every 7-day recurring cycle on the designated start day.
+- **`MONTHLY`**: Month-to-month standing routines anchored to day-of-month.
+- **`CUSTOM_INTERVAL`**: Configurable interval cadence (e.g., every 3 days, every 2 weeks).
+
+### 2. ⚙️ Recurring Task Configuration
+- **Rule Attributes**: Title, description, workspace, office page context, project link, priority (`low`, `medium`, `high`, `urgent`), due time, estimated duration, start date, expiration end date, active weekdays bitmap, checklist templates, and status (`active`, `paused`, `expired`).
+- **Subtask Checklist Template**: Multi-item checklist pre-configured on recurring generation (e.g. 7-step content checklist).
+- **Lifecycle Operations**: Full CRUD — Create, Edit, Pause, Resume, Delete, and Instant Generate.
+
+### 3. 🛡️ Zero-Duplication Engine & Architecture
+- **Segregated Storage**: Pure recurring rules are stored in `recurring_rules` completely segregated from generated task instances in `tasks`.
+- **Composite Unique Index**: `idx_tasks_recurring_rule_instance_unique` (`recurring_rule_id, due_date`) guarantees at the database level that no task instance can ever be duplicated for the same date.
+- **Next Occurrence Telemetry**: Continuously recalculates `next_occurrence` timestamp based on Pakistan Standard Time (`Asia/Karachi` / `UTC+5`).
+- **Resilience Handling**:
+  - **Skipped Occurrences**: Safely rolls forward past missed dates without creating ghost tasks.
+  - **Paused Rules**: Automatically bypassed during generation cycles without loss of cadence configuration.
+  - **Expired Rules**: Automatically transition to `expired` state once `endDate` is reached.
+
+### 4. 🎬 Canonical Reference Implementation: "Daily Shooting Page Management"
+- **Schedule**: Monday through Friday (`WEEKDAYS`) at `1:15 PM` (75-minute duration).
+- **Workspace**: Office 🏢 (`Shooting Page`).
+- **7-Step Mandatory Production Checklist**:
+  1. Check new content
+  2. Select content
+  3. Edit
+  4. Caption
+  5. Hashtags
+  6. Upload
+  7. Verify upload
+
+### 5. 📦 5 Reusable Production Templates
+1. **Office Daily Content**: Mon–Fri 1:15 PM (Shooting Page) with 7-step publishing checklist.
+2. **Suno Music Visual**: Mon/Wed/Fri 4:00 PM (Suno Music) with 6-stage audio/visual artwork pipeline.
+3. **Personal Vlog**: Tue/Thu/Sat 7:00 PM (Personal) with 4-stage filming & editing pipeline.
+4. **College Study**: Mon–Fri 9:00 AM (College) 25-min Pomodoro review & assignment prep.
+5. **Web Development Practice**: Mon & Tue 4:00 PM (Web Dev) live systems architecture & coding drills.
+
+### 6. 💻 Automation UI & Management Hub (`/recurring`)
+- **Stitch Metrics Strip**: 4 live KPI counters (Active Routines, Paused Routines, Today's Scheduled, Lifetime Generated).
+- **5 Filter Tabs**: `Active`, `Paused`, `Upcoming`, `Expired`, `All Rules`.
+- **Rule Management Cards**: Display workspace pill, recurrence badge, time slot, duration, next occurrence date, and action menu.
+- **Instant Generation**: Single-click "Generate Upcoming Tasks" button populates upcoming task windows (7 to 14 days) instantly.
+- **Interactive Rule Builder**: Modal with preset template selector, workspace & page picker, custom time/duration inputs, interactive days-of-week toggles, and dynamic subtask checklist editor.
+
+### 7. 📅 Unified Calendar Integration (`/calendar`)
+- **Time-Blocking Views**: Seamless switching between **Day**, **Week**, and **Month** grid layouts.
+- **Recurring Identifiers**: Recurring task instances feature a dedicated repeating badge (`repeat` icon) and rule linkage.
+- **Workspace Color Coding**: Blue (Office), Purple (Personal), Emerald (College), Cyan (Web Dev).
+- **Task Interaction Drawer**: Clicking any calendar event opens the Stitch Task Detail drawer for instant inspection and editing.
+
+---
+
 ## 🏛️ System Architecture
 
 ```
@@ -200,9 +260,12 @@ src/
 ├── lib/
 │   ├── supabase/                     # Supabase client, server, and middleware helpers
 │   ├── utils.ts                      # Tailwind merge & utility helpers
+│   ├── recurrenceEngine.ts           # Zero-duplication recurring task instance generator
+│   ├── recurringTemplates.ts         # 5 pre-configured workspace task templates
 │   └── constants.ts                  # Workspaces, 8 Office pages, recurring routines
 ├── types/
 │   ├── task.ts                       # Task, subtask, priorities, statuses, filters
+│   ├── recurring.ts                  # Recurrence types, rules, templates & intervals
 │   ├── project.ts                    # Projects, milestones, deadlines, focus hours
 │   ├── office.ts                     # Office workflow stages, Suno pipeline, KPIs, checklists
 │   ├── workspace.ts                  # 4 Workspace definitions & workflow stages
@@ -210,17 +273,19 @@ src/
 │   └── database.ts                   # Supabase / PostgreSQL schema interfaces
 ├── services/
 │   ├── taskService.ts                # Supabase task repository with CRUD, subtasks & stats
+│   ├── recurringTaskService.ts       # Recurring rules repository & queue generation
 │   ├── projectService.ts             # Projects repository with progress, deadline & focus hours
 │   ├── officeService.ts              # Office KPIs, 8-page completion statuses & checklist engine
 │   └── workspaceService.ts           # Workspace & Office pages repository
 ├── database/
-│   ├── migrations/                   # Sequential SQL migrations (001, 002)
+│   ├── migrations/                   # Sequential SQL migrations (001, 002, 003)
 │   └── schema.sql                    # Consolidated PostgreSQL relational schema
 └── scripts/
     ├── check-routes.mjs              # Route healthcheck verification
     ├── test-task-service.mjs         # 33-step automated task service test suite
     ├── test-office-workspace.mjs     # Automated Office workspace & publishing matrix test suite
     ├── test-phase6.mjs               # Automated Phase 6 (Personal, College, Web Dev) test suite
+    ├── test-recurring-system.mjs     # Automated Phase 7 recurring engine & duplication test suite
     └── run-lint.mjs                  # Strict ESLint automation runner
 ```
 
@@ -268,8 +333,7 @@ Built upon the **Google Stitch Precision Focus Minimal** specification:
 - [x] **PHASE 3: Database & Supabase Integration** — 12 PostgreSQL tables, Row Level Security (RLS), 8 seeded Office pages, multi-tenant user triggers, and Supabase SSR client SDK.
 - [x] **PHASE 4: Full Task System** — Complete task CRUD, Supabase persistence, Stitch UI fidelity, TaskDetailDrawer, Subtasks checklist with progress bar, Statuses (`TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `COMPLETED`), Priorities (`LOW`, `MEDIUM`, `HIGH`), Filter Tabs (`All`, `Today`, `Upcoming`, `Overdue`, `Completed`), Multi-criteria filters & sorting, Optimistic UI updates, and 33-step automated test suite.
 - [x] **PHASE 5: Workspaces & Office Pages** — Complete Office workspace with real database-driven KPI telemetry, 8 Office Pages (`Shooting Page`, `Ismail Shahid Fans`, `ZK Production`, `Jahangir Khan`, `Inaya Kailash`, `Political Affairs`, `Nazia Iqbal Fanz`, `Suno Music`), dynamic page completion statuses (`Shooting Page — completed`, `ZK Production — in progress`, `Jahangir Khan — pending`), 6-stage Content Production Kanban (`IDEAS`, `TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `PUBLISHED`), 6-stage Suno Music pipeline spotlight (`BRIEF`, `ASSETS`, `DESIGN`, `REVIEW`, `EXPORT`, `DELIVERED`), 7-step Daily Content Checklist, horizontal filter bar with platform chips, and automated integration tests.
-- [x] **PHASE 6: Personal, College & Web Dev Modules** — 9-stage vlog pipeline, academic modules, Monday & Tuesday recurring class engine, relational vlog linking, and projects overview.
-- [ ] **PHASE 7: Recurring Tasks Engine** — Cron schedules, recurring rule editor, and automated queue population.
+- [x] **PHASE 7: Recurring Tasks Engine** — Zero-duplication recurring engine, 6 recurrence patterns, 5 pre-configured templates, canonical Shooting Page daily routine (Mon-Fri 1:15 PM), management UI (`/recurring`), calendar time-blocking integration (`/calendar`), and automated test suite.
 - [ ] **PHASE 8: Interactive Calendar** — Day/Week/Month time-blocking and calendar synchronization.
 - [ ] **PHASE 9: Analytics & Productivity Telemetry** — Flow-state tracking, weekly velocity, and streak telemetry.
 - [ ] **PHASE 10: Notifications & Focus Mode** — In-app alerts, audio chimes, and full-screen Pomodoro mode.
@@ -317,6 +381,9 @@ node scripts/test-office-workspace.mjs
 
 # Run automated Phase 6 (Personal, College, Web Dev) test suite
 node scripts/test-phase6.mjs
+
+# Run automated Phase 7 (Recurring Engine & Zero Duplication) test suite
+node scripts/test-recurring-system.mjs
 
 # Build production bundle with Next.js Turbopack
 npm run build
