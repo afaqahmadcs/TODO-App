@@ -16,6 +16,9 @@ export interface QuickTaskModalProps {
   defaultWorkspace?: WorkspaceType;
   defaultPage?: OfficePageId | string;
   defaultStage?: string;
+  defaultDueDate?: string;
+  defaultDueTime?: string;
+  defaultEstimatedDurationMin?: number;
 }
 
 export const QuickTaskModal: React.FC<QuickTaskModalProps> = ({
@@ -25,6 +28,9 @@ export const QuickTaskModal: React.FC<QuickTaskModalProps> = ({
   defaultWorkspace = "office",
   defaultPage = "",
   defaultStage,
+  defaultDueDate,
+  defaultDueTime,
+  defaultEstimatedDurationMin = 30,
 }) => {
   const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceType>(defaultWorkspace);
   const [selectedOfficePage, setSelectedOfficePage] = useState<OfficePageId | "">(
@@ -33,9 +39,9 @@ export const QuickTaskModal: React.FC<QuickTaskModalProps> = ({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<TaskPriority>("medium");
-  const [dueDate, setDueDate] = useState(new Date().toISOString().split("T")[0]);
-  const [dueTime, setDueTime] = useState("17:00");
-  const [estimatedDurationMin, setEstimatedDurationMin] = useState(30);
+  const [dueDate, setDueDate] = useState(defaultDueDate || new Date().toISOString().split("T")[0]);
+  const [dueTime, setDueTime] = useState(defaultDueTime || "17:00");
+  const [estimatedDurationMin, setEstimatedDurationMin] = useState(defaultEstimatedDurationMin);
   const [tagInput, setTagInput] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [subtaskInput, setSubtaskInput] = useState("");
@@ -43,6 +49,21 @@ export const QuickTaskModal: React.FC<QuickTaskModalProps> = ({
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Sync defaults when modal opens with new preset props (React-recommended pattern without useEffect)
+  const [prevDefaultKey, setPrevDefaultKey] = useState<string>("");
+  const currentKey = `${isOpen ? "open" : "closed"}_${defaultDueDate || ""}_${defaultDueTime || ""}_${defaultWorkspace || ""}_${defaultPage || ""}_${defaultEstimatedDurationMin || 30}`;
+
+  if (currentKey !== prevDefaultKey) {
+    setPrevDefaultKey(currentKey);
+    if (isOpen) {
+      if (defaultDueDate) setDueDate(defaultDueDate);
+      if (defaultDueTime) setDueTime(defaultDueTime);
+      if (defaultWorkspace) setSelectedWorkspace(defaultWorkspace);
+      if (defaultPage) setSelectedOfficePage(defaultPage as OfficePageId);
+      if (defaultEstimatedDurationMin) setEstimatedDurationMin(defaultEstimatedDurationMin);
+    }
+  }
 
   // Handle escape key
   useEffect(() => {

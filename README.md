@@ -8,7 +8,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 ![Design System](https://img.shields.io/badge/Design_System-Google_Stitch-4F46E5?style=for-the-badge)
-![Status](https://img.shields.io/badge/Phase_7-Complete-10B981?style=for-the-badge)
+![Status](https://img.shields.io/badge/Phase_8-Complete-10B981?style=for-the-badge)
 
 ---
 
@@ -203,6 +203,60 @@ Phase 7 implements the mission-critical, enterprise-grade recurring task engine 
 
 ---
 
+## 📅 Phase 8: Complete Interactive Calendar System
+
+Phase 8 implements the complete, highly responsive, interactive time-blocking calendar engine based directly on the Google Stitch desktop and mobile designs (`afaq_taskflow_productivity_calendar` and `afaq_taskflow_mobile_productivity_calendar`):
+
+### 1. 🗓️ Three Comprehensive View Modes
+- **`MONTH` View**:
+  - 35-day grid (Monday through Sunday) with density heatmaps.
+  - Domain-colored event chips with clean "+X more" overflow badges.
+  - Interactive day selection switches directly to the expanded Day timeline.
+  - Integrated **Workspace Density & Capacity Map** widget and **Deadlines & Milestones** countdown panel.
+- **`WEEK` View (Default)**:
+  - Sticky day header with date pills, category dot indicators, and today highlight.
+  - **All-Day Deadlines Banner**: Positioned above the grid for all-day sprint goals and exam milestones.
+  - 15 hourly rows from **07:00 to 22:00**.
+  - **Real-Time Current Time Indicator**: Continuous red laser ruler with pulsing badge (`14:30 NOW`) calculated in Pakistan Standard Time (`Asia/Karachi` / `UTC+5`).
+  - Cards dynamically rendered with exact start time and duration height.
+- **`DAY` View**:
+  - Detailed single-day vertical hourly timeline.
+  - Shows subtasks completion metrics, venue/room location tags, professor details, and direct actions.
+
+### 2. 📊 Multi-Source Data Aggregation
+The calendar seamlessly combines 6 distinct data streams into unified scheduled blocks:
+1. **Standard Tasks**: Real tasks created in Office, Personal, College, or Web Dev workspaces.
+2. **Recurring Tasks**: Standing routines from Phase 7 projected dynamically without database record duplication.
+3. **College Classes**: CS301 (Algorithms), CS340 (Databases), MATH204 (Discrete Math), CS380 (OS Lab).
+4. **Web Development Classes**: Monday & Tuesday 4:00 PM – 6:00 PM live systems architecture sessions.
+5. **Deadlines & Milestones**: Major sprint targets (e.g. Sprint Goal 03, CS301 Lab Due, TaskFlow Beta Launch).
+6. **Project Portfolios**: Synced from `projectService`.
+
+### 3. ⚡ Frictionless Interactions
+- **Click Empty Time**: Click any hour slot in Week or Day view to open `QuickTaskModal` pre-populated with that date, start time, and estimated duration.
+- **Click Task / Event**: Opens the slide-over `TaskDetailDrawer` for instant inspection, property editing, checklist updates, or deletion.
+- **Drag & Drop Rescheduling**: Drag cards to any hour slot or day to update `dueDate` and `dueTime` with instant optimistic UI and Supabase persistence.
+- **Duration Resizing**: Interactive +/-15m stepper handles on cards allow adjusting `estimatedDurationMin` on the fly.
+
+### 4. 🎛️ Scope Filter Matrix
+- Multi-select toggle chips with real-time event counts:
+  - **All** (Total events)
+  - **Office** (Blue `#3B82F6`)
+  - **Personal** (Purple `#A855F7`)
+  - **College** (Emerald `#10B981`)
+  - **Web Development** (Cyan `#06B6D4`)
+  - **Deadlines / Projects** (Amber `#F59E0B`)
+  - **Recurring Sync** (Purple with `autorenew`)
+- **Cadence Metric**: Real-time booked hours counter (e.g., `31.5 hrs booked`).
+
+### 5. 📱 Responsive Mobile Calendar (`afaq_taskflow_mobile_productivity_calendar`)
+- 7-Day Date Carousel Bar with active date chip.
+- Segmented view switcher (`Day`, `Week`, `Month`).
+- Horizontal scrolling scope filter pills.
+- Clean hour-by-hour timeline avoiding clutter on smaller mobile viewports.
+
+---
+
 ## 🏛️ System Architecture
 
 ```
@@ -261,11 +315,13 @@ src/
 │   ├── supabase/                     # Supabase client, server, and middleware helpers
 │   ├── utils.ts                      # Tailwind merge & utility helpers
 │   ├── recurrenceEngine.ts           # Zero-duplication recurring task instance generator
+│   ├── calendarEvents.ts             # Unified calendar aggregator, class schedules & deadlines
 │   ├── recurringTemplates.ts         # 5 pre-configured workspace task templates
 │   └── constants.ts                  # Workspaces, 8 Office pages, recurring routines
 ├── types/
 │   ├── task.ts                       # Task, subtask, priorities, statuses, filters
 │   ├── recurring.ts                  # Recurrence types, rules, templates & intervals
+│   ├── calendar.ts                   # Calendar views, events, time slots & drag payload
 │   ├── project.ts                    # Projects, milestones, deadlines, focus hours
 │   ├── office.ts                     # Office workflow stages, Suno pipeline, KPIs, checklists
 │   ├── workspace.ts                  # 4 Workspace definitions & workflow stages
@@ -286,6 +342,7 @@ src/
     ├── test-office-workspace.mjs     # Automated Office workspace & publishing matrix test suite
     ├── test-phase6.mjs               # Automated Phase 6 (Personal, College, Web Dev) test suite
     ├── test-recurring-system.mjs     # Automated Phase 7 recurring engine & duplication test suite
+    ├── test-calendar-system.mjs      # Automated Phase 8 interactive calendar test suite
     └── run-lint.mjs                  # Strict ESLint automation runner
 ```
 
@@ -334,7 +391,7 @@ Built upon the **Google Stitch Precision Focus Minimal** specification:
 - [x] **PHASE 4: Full Task System** — Complete task CRUD, Supabase persistence, Stitch UI fidelity, TaskDetailDrawer, Subtasks checklist with progress bar, Statuses (`TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `COMPLETED`), Priorities (`LOW`, `MEDIUM`, `HIGH`), Filter Tabs (`All`, `Today`, `Upcoming`, `Overdue`, `Completed`), Multi-criteria filters & sorting, Optimistic UI updates, and 33-step automated test suite.
 - [x] **PHASE 5: Workspaces & Office Pages** — Complete Office workspace with real database-driven KPI telemetry, 8 Office Pages (`Shooting Page`, `Ismail Shahid Fans`, `ZK Production`, `Jahangir Khan`, `Inaya Kailash`, `Political Affairs`, `Nazia Iqbal Fanz`, `Suno Music`), dynamic page completion statuses (`Shooting Page — completed`, `ZK Production — in progress`, `Jahangir Khan — pending`), 6-stage Content Production Kanban (`IDEAS`, `TODO`, `IN_PROGRESS`, `REVIEW`, `READY`, `PUBLISHED`), 6-stage Suno Music pipeline spotlight (`BRIEF`, `ASSETS`, `DESIGN`, `REVIEW`, `EXPORT`, `DELIVERED`), 7-step Daily Content Checklist, horizontal filter bar with platform chips, and automated integration tests.
 - [x] **PHASE 7: Recurring Tasks Engine** — Zero-duplication recurring engine, 6 recurrence patterns, 5 pre-configured templates, canonical Shooting Page daily routine (Mon-Fri 1:15 PM), management UI (`/recurring`), calendar time-blocking integration (`/calendar`), and automated test suite.
-- [ ] **PHASE 8: Interactive Calendar** — Day/Week/Month time-blocking and calendar synchronization.
+- [x] **PHASE 8: Interactive Calendar** — Complete Stitch Month, Week & Day time-blocking schedule, drag & drop rescheduling, duration resizing, mobile calendar carousel, multi-source aggregation (tasks, recurring, classes, deadlines), and Supabase synchronization.
 - [ ] **PHASE 9: Analytics & Productivity Telemetry** — Flow-state tracking, weekly velocity, and streak telemetry.
 - [ ] **PHASE 10: Notifications & Focus Mode** — In-app alerts, audio chimes, and full-screen Pomodoro mode.
 - [ ] **PHASE 11: Search, Filters & Polish** — Command palette search, sorting, tag management, and micro-animations.
@@ -383,7 +440,10 @@ node scripts/test-office-workspace.mjs
 node scripts/test-phase6.mjs
 
 # Run automated Phase 7 (Recurring Engine & Zero Duplication) test suite
-node scripts/test-recurring-system.mjs
+npx tsx scripts/test-recurring-system.mjs
+
+# Run automated Phase 8 (Interactive Calendar & Rescheduling) test suite
+npx tsx scripts/test-calendar-system.mjs
 
 # Build production bundle with Next.js Turbopack
 npm run build
