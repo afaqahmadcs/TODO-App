@@ -16,7 +16,7 @@ export default function CollegeWorkspacePage() {
   const [timerSeconds, setTimerSeconds] = useState(25 * 60);
   const [timerActive, setTimerActive] = useState(false);
   const [newAssignmentTitle, setNewAssignmentTitle] = useState("");
-  const [newAssignmentSubject, setNewAssignmentSubject] = useState("CS301 Algorithms");
+  const [newAssignmentSubject, setNewAssignmentSubject] = useState("Computer Science");
   const [showAddModal, setShowAddModal] = useState(false);
 
   // Load live tasks from taskService / Supabase
@@ -177,10 +177,10 @@ export default function CollegeWorkspacePage() {
             <div className="font-headline text-2xl text-on-surface font-bold">2 Lectures</div>
             <div className="mt-1 flex flex-col gap-0.5 text-xs font-mono text-on-surface-variant">
               <div className="flex items-center gap-1.5 truncate">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary" /> CS301 (08:00 AM)
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary" /> Morning Class (08:00 AM)
               </div>
               <div className="flex items-center gap-1.5 truncate">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> CS340 (11:30 AM)
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Lab Session (11:30 AM)
               </div>
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function CollegeWorkspacePage() {
           <div className="mt-3">
             <div className="font-headline text-2xl text-on-surface font-bold">2 Upcoming</div>
             <div className="mt-1 text-xs text-on-surface-variant">
-              <span className="text-purple-300 font-semibold font-mono">Midterms</span> in 6 days (CS301, MATH)
+              <span className="text-purple-300 font-semibold font-mono">Study Guide</span> Review in progress
             </div>
           </div>
         </div>
@@ -815,10 +815,10 @@ export default function CollegeWorkspacePage() {
                   onChange={(e) => setNewAssignmentSubject(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm focus:outline-none focus:border-secondary"
                 >
-                  <option value="CS301 Algorithms">CS301 Algorithms</option>
-                  <option value="CS340 Databases">CS340 Databases</option>
-                  <option value="MATH204 Discrete Math">MATH204 Discrete Math</option>
-                  <option value="CS380 Software Engineering">CS380 Software Engineering</option>
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Database Systems">Database Systems</option>
+                  <option value="Mathematics">Mathematics</option>
+                  <option value="Software Engineering">Software Engineering</option>
                 </select>
               </div>
 

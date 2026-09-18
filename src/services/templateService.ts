@@ -1,6 +1,6 @@
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import { TaskTemplate, Task, TaskPriority } from "@/types/task";
-import { WorkspaceType } from "@/types/workspace";
+import { WorkspaceType, OfficePageId } from "@/types/workspace";
 import { taskService } from "./taskService";
 
 // Built-in global templates available to all users
@@ -101,7 +101,7 @@ export interface InstantiateTemplateOptions {
   dueTime?: string;
   priority?: TaskPriority;
   workspaceId?: WorkspaceType;
-  officePageId?: string;
+  officePageId?: OfficePageId;
   projectId?: string;
 }
 

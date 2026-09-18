@@ -93,7 +93,7 @@ export interface Task {
   distributionStatus?: Record<string, string>;
 
   // College metadata:
-  subject?: string; // e.g. "CS301 Algorithms", "CS340 Databases", "MATH204"
+  subject?: string; // e.g. "Computer Science", "Database Systems", "Mathematics"
   collegeCategory?: "classes" | "assignments" | "projects" | "exams" | "notes";
   progressPercent?: number; // e.g. 85%
   focusHours?: number; // e.g. 38.5

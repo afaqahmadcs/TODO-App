@@ -20,7 +20,7 @@ export interface Project {
   progress: number; // 0-100%
   tasksTotal?: number;
   tasksCompleted?: number;
-  deadline?: string; // e.g. "Due Oct 25, 2025" or "2025-10-25"
+  deadline?: string; // e.g. "Due Oct 25, 2026" or "2026-10-25"
   startDate?: string;
   focusHours?: number; // coding/focus hours logged
   techStack?: string[];

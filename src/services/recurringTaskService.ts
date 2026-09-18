@@ -134,7 +134,7 @@ const INITIAL_RECURRING_RULES: RecurringRule[] = [
     daysOfWeek: [1, 2, 3, 4, 5],
     status: "ACTIVE",
     checklist: [
-      "Review today's CS301 / CS340 lecture slides",
+      "Review today's lecture notes & class slides",
       "Solve 2 practice problem sets or coding exercises",
       "Check assignment submission deadlines",
       "Run 25-minute Pomodoro study focus sprint",

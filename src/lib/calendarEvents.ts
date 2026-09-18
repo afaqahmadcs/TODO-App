@@ -66,48 +66,48 @@ export interface AcademicClassTemplate {
 
 export const COLLEGE_CLASS_TEMPLATES: AcademicClassTemplate[] = [
   {
-    title: "CS301: Advanced Data Structures & Algorithms",
-    subject: "CS301",
+    title: "Attend College Class: Computer Science",
+    subject: "Computer Science",
     daysOfWeek: [1, 3], // Mon, Wed
     startTime: "08:00",
     endTime: "09:30",
     durationMin: 90,
     location: "Hall B • Room 402",
     professor: "Prof. Vance",
-    topics: "Red-Black Trees, Amortized Complexity, Graph Flows",
+    topics: "Data structures, algorithms, and theory",
   },
   {
-    title: "CS340: Database Architecture & SQL Lab",
-    subject: "CS340",
+    title: "Attend Database Lab Session",
+    subject: "Computer Science",
     daysOfWeek: [1, 3], // Mon, Wed
     startTime: "11:30",
     endTime: "13:00",
     durationMin: 90,
     location: "Lab 3B (Workstation 12)",
     professor: "Dr. Tariq",
-    topics: "B-Tree Indexes, ACID Transaction Isolation, Query Plan Tuning",
+    topics: "Database queries, indexing, and schema design",
   },
   {
-    title: "MATH204: Discrete Mathematics & Algorithmic Proofs",
-    subject: "MATH204",
+    title: "Attend Mathematics Class",
+    subject: "Mathematics",
     daysOfWeek: [2, 4], // Tue, Thu
     startTime: "09:00",
     endTime: "10:30",
     durationMin: 90,
     location: "Science Wing 104",
     professor: "Dr. Nasir",
-    topics: "Graph Colorings, Combinatorics, Recurrence Relations",
+    topics: "Discrete mathematics and algorithmic proofs",
   },
   {
-    title: "CS380: Operating Systems & Kernel Architecture Lab",
-    subject: "CS380",
+    title: "Attend Systems Architecture Lab",
+    subject: "Computer Science",
     daysOfWeek: [5], // Fri
     startTime: "14:00",
     endTime: "17:00",
     durationMin: 180,
     location: "Computing Center 3",
     professor: "Engr. Bilal",
-    topics: "Paging & Memory Virtualization, POSIX Semaphore synchronization",
+    topics: "Operating systems, concurrency, and architecture",
   },
 ];
 
@@ -204,8 +204,9 @@ export function aggregateCalendarEvents(params: {
   projects?: Project[];
   windowDates: string[]; // List of YYYY-MM-DD strings in the current view
   timezone?: string;
+  isAfaqUser?: boolean;
 }): UnifiedCalendarEvent[] {
-  const { tasks, recurringRules, projects = [], windowDates } = params;
+  const { tasks, recurringRules, projects = [], windowDates, isAfaqUser = false } = params;
   const events: UnifiedCalendarEvent[] = [];
   const eventIds = new Set<string>();
 
@@ -291,89 +292,91 @@ export function aggregateCalendarEvents(params: {
     }
   }
 
-  // 3. Project Academic College Classes
-  for (const dateStr of windowDates) {
-    const [y, m, d] = dateStr.split("-").map(Number);
-    const dateObj = new Date(Date.UTC(y, m - 1, d, 12, 0, 0));
-    const dayOfWeek = dateObj.getUTCDay(); // 0=Sun, 1=Mon, ..., 5=Fri, 6=Sat
+  // 3. Project Academic College & Web Dev Classes & Predefined Deadlines (ONLY for Afaq's account)
+  if (isAfaqUser) {
+    for (const dateStr of windowDates) {
+      const [y, m, d] = dateStr.split("-").map(Number);
+      const dateObj = new Date(Date.UTC(y, m - 1, d, 12, 0, 0));
+      const dayOfWeek = dateObj.getUTCDay(); // 0=Sun, 1=Mon, ..., 5=Fri, 6=Sat
 
-    for (const cls of COLLEGE_CLASS_TEMPLATES) {
-      if (!cls.daysOfWeek.includes(dayOfWeek)) continue;
+      for (const cls of COLLEGE_CLASS_TEMPLATES) {
+        if (!cls.daysOfWeek.includes(dayOfWeek)) continue;
 
-      // Check if user already created a specific task for this class on this date
-      const alreadyExists = tasks.some(
-        (t) => t.dueDate === dateStr && t.title.toLowerCase().includes(cls.subject.toLowerCase())
-      );
+        // Check if user already created a specific task for this class on this date
+        const alreadyExists = tasks.some(
+          (t) => t.dueDate === dateStr && t.title.toLowerCase().includes(cls.subject.toLowerCase())
+        );
 
-      if (!alreadyExists) {
-        const clsEvent: UnifiedCalendarEvent = {
-          id: `college-class-${cls.subject}-${dateStr}`,
-          title: cls.title,
-          description: cls.topics ? `${cls.topics} • ${cls.professor || ""}` : cls.professor,
-          date: dateStr,
-          startTime: cls.startTime,
-          endTime: cls.endTime,
-          durationMin: cls.durationMin,
-          workspaceId: "college",
-          sourceType: "college_class",
-          priority: "medium",
-          status: "scheduled",
-          location: cls.location,
-          isAllDay: false,
-          isRecurring: true,
-        };
-        events.push(clsEvent);
+        if (!alreadyExists) {
+          const clsEvent: UnifiedCalendarEvent = {
+            id: `college-class-${cls.subject}-${dateStr}`,
+            title: cls.title,
+            description: cls.topics ? `${cls.topics} • ${cls.professor || ""}` : cls.professor,
+            date: dateStr,
+            startTime: cls.startTime,
+            endTime: cls.endTime,
+            durationMin: cls.durationMin,
+            workspaceId: "college",
+            sourceType: "college_class",
+            priority: "medium",
+            status: "scheduled",
+            location: cls.location,
+            isAllDay: false,
+            isRecurring: true,
+          };
+          events.push(clsEvent);
+        }
+      }
+
+      // 4. Project Web Development Classes
+      for (const wcls of WEB_DEV_CLASS_TEMPLATES) {
+        if (!wcls.daysOfWeek.includes(dayOfWeek)) continue;
+
+        const alreadyExists = tasks.some(
+          (t) => t.dueDate === dateStr && t.title.toLowerCase().includes(wcls.title.toLowerCase())
+        );
+
+        if (!alreadyExists) {
+          const wclsEvent: UnifiedCalendarEvent = {
+            id: `web-class-${dayOfWeek}-${dateStr}`,
+            title: wcls.title,
+            description: wcls.topics,
+            date: dateStr,
+            startTime: wcls.startTime,
+            endTime: wcls.endTime,
+            durationMin: wcls.durationMin,
+            workspaceId: "web_development",
+            sourceType: "web_class",
+            priority: "high",
+            status: "scheduled",
+            location: wcls.location,
+            isAllDay: false,
+            isRecurring: true,
+          };
+          events.push(wclsEvent);
+        }
       }
     }
 
-    // 4. Project Web Development Classes
-    for (const wcls of WEB_DEV_CLASS_TEMPLATES) {
-      if (!wcls.daysOfWeek.includes(dayOfWeek)) continue;
-
-      const alreadyExists = tasks.some(
-        (t) => t.dueDate === dateStr && t.title.toLowerCase().includes(wcls.title.toLowerCase())
-      );
-
-      if (!alreadyExists) {
-        const wclsEvent: UnifiedCalendarEvent = {
-          id: `web-class-${dayOfWeek}-${dateStr}`,
-          title: wcls.title,
-          description: wcls.topics,
-          date: dateStr,
-          startTime: wcls.startTime,
-          endTime: wcls.endTime,
-          durationMin: wcls.durationMin,
-          workspaceId: "web_development",
-          sourceType: "web_class",
-          priority: "high",
-          status: "scheduled",
-          location: wcls.location,
-          isAllDay: false,
-          isRecurring: true,
-        };
-        events.push(wclsEvent);
+    // 5. Injected All-Day Deadlines & Milestones
+    for (const dl of SCHEDULED_DEADLINES) {
+      if (dateSet.has(dl.date)) {
+        events.push({
+          id: `deadline-${dl.date}-${dl.title.replace(/\s+/g, "-")}`,
+          title: dl.title,
+          description: dl.category,
+          date: dl.date,
+          startTime: "00:00",
+          endTime: "23:59",
+          durationMin: 1440,
+          workspaceId: dl.workspaceId,
+          sourceType: "deadline",
+          priority: dl.priority,
+          status: "deadline",
+          isAllDay: true,
+          isRecurring: false,
+        });
       }
-    }
-  }
-
-  // 5. Injected All-Day Deadlines & Milestones
-  for (const dl of SCHEDULED_DEADLINES) {
-    if (dateSet.has(dl.date)) {
-      events.push({
-        id: `deadline-${dl.date}-${dl.title.replace(/\s+/g, "-")}`,
-        title: dl.title,
-        description: dl.category,
-        date: dl.date,
-        startTime: "00:00",
-        endTime: "23:59",
-        durationMin: 1440,
-        workspaceId: dl.workspaceId,
-        sourceType: "deadline",
-        priority: dl.priority,
-        status: "deadline",
-        isAllDay: true,
-        isRecurring: false,
-      });
     }
   }
 

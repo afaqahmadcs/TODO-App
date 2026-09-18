@@ -1,5 +1,6 @@
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import { taskService } from "@/services/taskService";
+import { authService } from "@/services/authService";
 import { Task } from "@/types/task";
 import {
   FocusSession,
@@ -23,8 +24,6 @@ export function formatMinutes(totalMinutes: number): string {
 }
 
 // Initial realistic focus sessions for local/offline fallback matching Google Stitch design
-const LOCAL_STORAGE_FOCUS_KEY = "afaq_taskflow_focus_sessions";
-
 function getInitialFocusSessions(): FocusSession[] {
   const now = new Date();
   const todayStr = now.toISOString().split("T")[0];
@@ -34,7 +33,7 @@ function getInitialFocusSessions(): FocusSession[] {
     // Today sessions (2h 40m = 160m total)
     {
       id: "focus-today-1",
-      userId: "user-afaq",
+      userId: "demo-creator-afaq",
       taskId: "task-1",
       startedAt: `${todayStr}T09:00:00Z`,
       endedAt: `${todayStr}T09:50:00Z`,
@@ -44,7 +43,7 @@ function getInitialFocusSessions(): FocusSession[] {
     },
     {
       id: "focus-today-2",
-      userId: "user-afaq",
+      userId: "demo-creator-afaq",
       taskId: "task-college-proj-1",
       startedAt: `${todayStr}T11:00:00Z`,
       endedAt: `${todayStr}T12:00:00Z`,
@@ -54,7 +53,7 @@ function getInitialFocusSessions(): FocusSession[] {
     },
     {
       id: "focus-today-3",
-      userId: "user-afaq",
+      userId: "demo-creator-afaq",
       taskId: "task-office-shooting-pub",
       startedAt: `${todayStr}T14:00:00Z`,
       endedAt: `${todayStr}T14:50:00Z`,
@@ -64,47 +63,57 @@ function getInitialFocusSessions(): FocusSession[] {
     },
   ];
 
-  // Add 14 more historical sessions over previous 6 days to reach ~16h 40m weekly total
-  for (let i = 1; i <= 6; i++) {
-    const pastDate = new Date(now.getTime() - i * 86400000).toISOString().split("T")[0];
-    sessions.push({
-      id: `focus-past-${i}-a`,
-      userId: "user-afaq",
-      startedAt: `${pastDate}T10:00:00Z`,
-      endedAt: `${pastDate}T11:15:00Z`,
-      durationMinutes: 75,
-      completed: true,
-      createdAt: `${pastDate}T10:00:00Z`,
-    });
-    sessions.push({
-      id: `focus-past-${i}-b`,
-      userId: "user-afaq",
-      startedAt: `${pastDate}T15:00:00Z`,
-      endedAt: `${pastDate}T16:10:00Z`,
-      durationMinutes: 70,
-      completed: true,
-      createdAt: `${pastDate}T15:00:00Z`,
-    });
-  }
-
-  // Add earlier month sessions to reach ~68h 15m (4095 mins)
-  for (let i = 7; i <= 24; i++) {
-    const pastMonthDate = new Date(now.getTime() - i * 86400000).toISOString().split("T")[0];
-    sessions.push({
-      id: `focus-month-${i}`,
-      userId: "user-afaq",
-      startedAt: `${pastMonthDate}T14:00:00Z`,
-      endedAt: `${pastMonthDate}T16:45:00Z`,
-      durationMinutes: 165,
-      completed: true,
-      createdAt: `${pastMonthDate}T14:00:00Z`,
-    });
-  }
-
   return sessions;
 }
 
-let cachedFocusSessions: FocusSession[] = getInitialFocusSessions();
+let currentFocusUserId: string | null = null;
+let cachedFocusSessions: FocusSession[] = [];
+
+async function ensureFocusSessionsLoaded(): Promise<{ userId: string; isAfaq: boolean; sessions: FocusSession[] }> {
+  const user = await authService.getUser();
+  const userId = user?.id || "anonymous";
+  const isAfaq = user?.email?.toLowerCase() === "afaq@taskflow.dev" ||
+                 user?.email?.toLowerCase() === "afaqahmadcs@gmail.com" ||
+                 userId === "demo-creator-afaq";
+
+  if (currentFocusUserId !== userId) {
+    currentFocusUserId = userId;
+    const storageKey = `afaq_taskflow_focus_${userId}`;
+    let loaded: FocusSession[] | null = null;
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (stored) {
+          loaded = JSON.parse(stored);
+        }
+      } catch {}
+    }
+
+    if (loaded) {
+      cachedFocusSessions = loaded;
+    } else if (isAfaq) {
+      cachedFocusSessions = getInitialFocusSessions();
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(cachedFocusSessions));
+        } catch {}
+      }
+    } else {
+      // Clean account for new users: 0 sessions
+      cachedFocusSessions = [];
+    }
+  }
+
+  return { userId, isAfaq, sessions: cachedFocusSessions };
+}
+
+function persistFocusSessions(userId: string) {
+  if (typeof window !== "undefined") {
+    try {
+      localStorage.setItem(`afaq_taskflow_focus_${userId}`, JSON.stringify(cachedFocusSessions));
+    } catch {}
+  }
+}
 
 /**
  * PRODUCTION ANALYTICS SERVICE
@@ -139,17 +148,8 @@ export const analyticsService = {
       }
     }
 
-    // Check browser localStorage if available
-    if (typeof window !== "undefined") {
-      try {
-        const stored = localStorage.getItem(LOCAL_STORAGE_FOCUS_KEY);
-        if (stored) {
-          cachedFocusSessions = JSON.parse(stored);
-        }
-      } catch {}
-    }
-
-    return [...cachedFocusSessions];
+    const { sessions } = await ensureFocusSessionsLoaded();
+    return [...sessions];
   },
 
   /**
@@ -202,10 +202,11 @@ export const analyticsService = {
       }
     }
 
-    // Local fallback
+    // Local fallback (user-scoped)
+    const { userId } = await ensureFocusSessionsLoaded();
     const newSession: FocusSession = {
       id: `focus-${Date.now()}`,
-      userId: "user-afaq",
+      userId: userId,
       taskId,
       startedAt,
       endedAt,
@@ -215,11 +216,7 @@ export const analyticsService = {
     };
 
     cachedFocusSessions.unshift(newSession);
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem(LOCAL_STORAGE_FOCUS_KEY, JSON.stringify(cachedFocusSessions));
-      } catch {}
-    }
+    persistFocusSessions(userId);
 
     return newSession;
   },
@@ -290,7 +287,7 @@ export const analyticsService = {
       thisMonthGoalPercent,
       dailyAverageFormatted: formatMinutes(dailyAverageMinutes),
       activeSession: {
-        title: "CS301 Algorithm Study Block",
+        title: "College Study & Assignment Block",
         durationMinutes: 25,
         remainingMinutes: 18,
       },
@@ -491,7 +488,7 @@ export const analyticsService = {
         id: "college" as const,
         name: "College" as const,
         color: "#10b981",
-        highlight: "CS301 Midterm lab report delivered on-time",
+        highlight: "College coursework assignment delivered on-time",
       },
       {
         id: "web-development" as const,

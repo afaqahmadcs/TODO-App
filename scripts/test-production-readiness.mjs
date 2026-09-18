@@ -321,6 +321,23 @@ runCheck("vercel.json includes security headers and error boundaries exist", () 
 });
 
 // ==============================================================================
+// 25. Multi-User Architecture & Global Template System
+// ==============================================================================
+console.log("\n18. Verifying Multi-User Architecture & Global Templates...");
+runCheck("006 migration and templateService isolate users and provide global templates", () => {
+  assert.ok(existsSync(join(cwd, "src/database/migrations/006_multi_user_templates_and_ownership.sql")), "006 migration exists");
+  assert.ok(existsSync(join(cwd, "src/services/templateService.ts")), "templateService.ts exists");
+  assert.ok(existsSync(join(cwd, "scripts/test-data-isolation.mjs")), "test-data-isolation.mjs exists");
+
+  const migration006 = readFileSync(join(cwd, "src/database/migrations/006_multi_user_templates_and_ownership.sql"), "utf-8");
+  assert.ok(migration006.includes("task_templates"), "Defines task_templates catalog");
+  assert.ok(migration006.includes("handle_new_user()"), "Defines clean onboarding trigger");
+
+  const templateService = readFileSync(join(cwd, "src/services/templateService.ts"), "utf-8");
+  assert.ok(templateService.includes("instantiateTemplate"), "Supports instantiating templates into user tasks");
+});
+
+// ==============================================================================
 // Final Summary
 // ==============================================================================
 console.log("\n================================================================================");

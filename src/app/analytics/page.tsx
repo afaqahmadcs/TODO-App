@@ -800,7 +800,7 @@ export default function AnalyticsPage() {
                 </span>
                 <div>
                   <div className="text-xs font-semibold text-on-surface">
-                    {focusMetrics?.activeSession?.title ?? "CS301 Algorithm Study Block"}
+                    {focusMetrics?.activeSession?.title ?? "College Study & Assignment Block"}
                   </div>
                   <div className="font-mono text-[11px] text-secondary">Active Session • 25:00</div>
                 </div>

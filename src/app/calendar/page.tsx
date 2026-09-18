@@ -21,6 +21,7 @@ import {
 import { taskService } from "@/services/taskService";
 import { recurringTaskService } from "@/services/recurringTaskService";
 import { projectService } from "@/services/projectService";
+import { authService } from "@/services/authService";
 import {
   DEFAULT_TIMEZONE,
   getDatePartsInTimezone,
@@ -124,6 +125,7 @@ export default function CalendarPage() {
   }, []);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isAfaqUser, setIsAfaqUser] = useState(false);
 
   // Fetch initial data
   useEffect(() => {
@@ -132,15 +134,17 @@ export default function CalendarPage() {
       setIsLoading(true);
       try {
         await recurringTaskService.generateUpcomingTasks(14);
-        const [loadedTasks, loadedRules, loadedProjects] = await Promise.all([
+        const [loadedTasks, loadedRules, loadedProjects, afaqFlag] = await Promise.all([
           taskService.getTasks(),
           recurringTaskService.getRules(),
           projectService.getProjects(),
+          authService.isCurrentUserAfaq(),
         ]);
         if (isMounted) {
           setTasks(loadedTasks);
           setRecurringRules(loadedRules);
           setProjects(loadedProjects);
+          setIsAfaqUser(afaqFlag);
         }
       } catch (err) {
         console.error("Failed to load calendar data:", err);
@@ -269,8 +273,9 @@ export default function CalendarPage() {
       projects,
       windowDates: activeWindowDates,
       timezone: DEFAULT_TIMEZONE,
+      isAfaqUser,
     });
-  }, [tasks, recurringRules, projects, activeWindowDates]);
+  }, [tasks, recurringRules, projects, activeWindowDates, isAfaqUser]);
 
   // Apply active filters
   const filteredEvents = useMemo(() => {
@@ -1170,8 +1175,8 @@ export default function CalendarPage() {
                   <div className="flex items-center gap-2 min-w-0">
                     <div className="w-2 h-7 rounded-full bg-secondary shrink-0" />
                     <div className="min-w-0">
-                      <h5 className="text-xs font-bold text-on-surface truncate">CS301 Midterm Exam</h5>
-                      <span className="text-[10px] text-outline font-mono">College • Algorithms</span>
+                      <h5 className="text-xs font-bold text-on-surface truncate">Review Midterm Study Guide</h5>
+                      <span className="text-[10px] text-outline font-mono">College • Academics</span>
                     </div>
                   </div>
                   <span className="font-mono text-xs text-secondary shrink-0">Oct 22</span>
