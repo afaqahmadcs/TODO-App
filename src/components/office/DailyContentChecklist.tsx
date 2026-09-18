@@ -27,14 +27,14 @@ export function DailyContentChecklist({
             <Icon name="checklist" size={18} />
           </span>
           <h2 className="font-headline text-base font-bold text-on-surface">
-            Daily Content Publishing Checklist (7 Steps)
+            Daily Content Publishing Checklist (6 Steps)
           </h2>
           <span className="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono text-[10px]">
-            Standard Workflow
+            Standard Reel Workflow
           </span>
         </div>
         <span className="text-xs text-outline font-mono">
-          Check new content → Select → Edit → Caption → Hashtags → Upload → Verify
+          Prepare/select content → Edit reel → Caption → Hashtags → Upload → Verify upload
         </span>
       </div>
 
@@ -43,8 +43,9 @@ export function DailyContentChecklist({
         {dailyStatuses.map((pageStatus) => {
           const completedCount = pageStatus.steps.filter((s) => s.completed).length;
           const totalCount = pageStatus.steps.length;
-          const pct = Math.round((completedCount / totalCount) * 100);
+          const pct = Math.round((completedCount / Math.max(1, totalCount)) * 100);
           const isFullyDispatched = completedCount === totalCount || pageStatus.isFullyDispatched;
+          const isSuno = pageStatus.pageId === "suno-music";
 
           return (
             <Card
@@ -69,7 +70,7 @@ export function DailyContentChecklist({
                           : "bg-outline"
                       }`}
                     />
-                    <span className="font-headline text-sm font-bold text-on-surface truncate">
+                    <span className="font-headline text-sm font-bold text-on-surface truncate" title={pageStatus.pageTitle}>
                       {pageStatus.pageTitle}
                     </span>
                   </div>
@@ -83,7 +84,7 @@ export function DailyContentChecklist({
                         : "bg-surface-container text-on-surface-variant"
                     }`}
                   >
-                    {isFullyDispatched ? "Dispatched" : completedCount > 0 ? "In Prod" : "Queued"}
+                    {isFullyDispatched ? "✓ Dispatched" : completedCount > 0 ? "In Prod" : "○ Queued"}
                   </span>
                 </div>
 
@@ -92,11 +93,12 @@ export function DailyContentChecklist({
                   <div
                     onClick={() => pageStatus.taskId && onOpenTaskDetail?.(pageStatus.taskId)}
                     className="text-xs font-semibold text-on-surface hover:text-primary transition-colors line-clamp-1 cursor-pointer"
+                    title={pageStatus.taskTitle}
                   >
                     {pageStatus.taskTitle}
                   </div>
                   <div className="flex items-center justify-between text-[10px] font-mono text-outline mt-0.5">
-                    <span>Slot: {pageStatus.scheduledTime || "16:00"}</span>
+                    <span>{isSuno ? "Suno Pipeline" : `Slot: ${pageStatus.scheduledTime || "14:00"}`}</span>
                     <span className="text-secondary">{completedCount} / {totalCount} Done ({pct}%)</span>
                   </div>
 
@@ -111,7 +113,7 @@ export function DailyContentChecklist({
                   </div>
                 </div>
 
-                {/* 7 Interactive Checklist Steps */}
+                {/* Interactive Checklist Steps */}
                 <div className="space-y-1.5">
                   {pageStatus.steps.map((step: DailyChecklistStep) => (
                     <label
@@ -142,10 +144,10 @@ export function DailyContentChecklist({
                 </div>
               </div>
 
-              {/* Bottom Quick Action */}
+              {/* Bottom Action */}
               <div className="mt-3 pt-2.5 border-t border-outline-variant/10 flex items-center justify-between">
                 {isFullyDispatched ? (
-                  <span className="flex items-center gap-1 text-[11px] text-secondary font-mono">
+                  <span className="flex items-center gap-1 text-[11px] text-secondary font-mono font-semibold">
                     <Icon name="verified" size={14} />
                     <span>Live &amp; Verified</span>
                   </span>
@@ -156,7 +158,7 @@ export function DailyContentChecklist({
                     className="text-[11px] font-semibold text-primary hover:text-white flex items-center gap-1 hover:underline transition-colors"
                   >
                     <Icon name="done_all" size={14} />
-                    <span>Complete All 7 Steps</span>
+                    <span>Complete All Steps</span>
                   </button>
                 )}
 
@@ -165,7 +167,7 @@ export function DailyContentChecklist({
                     type="button"
                     onClick={() => onOpenTaskDetail?.(pageStatus.taskId!)}
                     className="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors"
-                    title="View task detail"
+                    title="View task details"
                   >
                     <Icon name="open_in_new" size={14} />
                   </button>

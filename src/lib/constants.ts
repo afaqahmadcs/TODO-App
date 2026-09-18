@@ -61,14 +61,29 @@ export const WORKSPACE_TOOLS: NavItem[] = [
   { id: "notes", label: "Notes & Docs", href: "/notes", icon: "article" },
 ];
 
+export const OFFICE_PAGE_ALIASES: Record<string, string> = {
+  "shooting-page": "shooting-film-video", // Shooting Page
+  "political-affairs": "new-client-page", // Political Affairs
+  "nazia-iqbal-fanz": "nazia-fanz", // Nazia Iqbal Fanz
+  "inaya-kailash": "inaya-kailashi", // Inaya Kailash
+};
+
+export function resolveCanonicalOfficePageId(pageId?: string | null): string {
+  if (!pageId) return "";
+  return OFFICE_PAGE_ALIASES[pageId] || pageId;
+}
+
 export const OFFICE_PAGES: OfficePage[] = [
+  // HIGH PRIORITY — CLIENT REELS (1 to 5)
   {
-    id: "shooting-page",
-    title: "Shooting Page",
-    shortTitle: "Shooting",
+    id: "shooting-film-video",
+    title: "Shooting Film Video",
+    shortTitle: "Shooting Film",
     statusSummary: "Reel uploaded",
     isCompletedToday: true,
     platformTags: ["Reels", "4K"],
+    priority: "high",
+    pageGroup: "client_reels",
   },
   {
     id: "ismail-shahid-fans",
@@ -77,6 +92,18 @@ export const OFFICE_PAGES: OfficePage[] = [
     statusSummary: "Daily clip live",
     isCompletedToday: true,
     platformTags: ["Reels", "Comedy"],
+    priority: "high",
+    pageGroup: "client_reels",
+  },
+  {
+    id: "jahangir-khan",
+    title: "Jahangir Khan",
+    shortTitle: "Jahangir Khan",
+    statusSummary: "Today 4:00 PM",
+    isCompletedToday: false,
+    platformTags: ["Interview", "Reels"],
+    priority: "high",
+    pageGroup: "client_reels",
   },
   {
     id: "zk-production",
@@ -85,39 +112,44 @@ export const OFFICE_PAGES: OfficePage[] = [
     statusSummary: "Color grade in progress",
     isCompletedToday: false,
     platformTags: ["Reels", "Cinematic"],
+    priority: "high",
+    pageGroup: "client_reels",
   },
   {
-    id: "jahangir-khan",
-    title: "Jahangir Khan",
-    shortTitle: "Jahangir Khan",
-    statusSummary: "Today 4:00 PM",
+    id: "new-client-page",
+    title: "New Client Page",
+    shortTitle: "New Client",
+    statusSummary: "Media slot ready",
     isCompletedToday: false,
-    platformTags: ["Interview"],
+    platformTags: ["Reels", "Client"],
+    priority: "high",
+    pageGroup: "client_reels",
+    isEditable: true,
   },
+
+  // MEDIUM PRIORITY — FACEBOOK (6 and 7)
   {
-    id: "inaya-kailash",
-    title: "Inaya Kailash",
-    shortTitle: "Inaya Kailash",
-    statusSummary: "Media pending",
-    isCompletedToday: false,
-    platformTags: ["TikTok", "Reels"],
-  },
-  {
-    id: "political-affairs",
-    title: "Political Affairs",
-    shortTitle: "Political Affairs",
-    statusSummary: "Digest live",
-    isCompletedToday: true,
-    platformTags: ["Shorts", "News"],
-  },
-  {
-    id: "nazia-iqbal-fanz",
-    title: "Nazia Iqbal Fanz",
-    shortTitle: "Nazia Iqbal",
+    id: "nazia-fanz",
+    title: "Nazia Fanz",
+    shortTitle: "Nazia Fanz",
     statusSummary: "Evening 8:00 PM",
     isCompletedToday: false,
-    platformTags: ["Music", "Reels"],
+    platformTags: ["Facebook", "Reels"],
+    priority: "medium",
+    pageGroup: "facebook",
   },
+  {
+    id: "inaya-kailashi",
+    title: "Inaya Kailashi",
+    shortTitle: "Inaya Kailashi",
+    statusSummary: "Media pending",
+    isCompletedToday: false,
+    platformTags: ["Facebook", "Reels"],
+    priority: "medium",
+    pageGroup: "facebook",
+  },
+
+  // MUSIC (8)
   {
     id: "suno-music",
     title: "Suno Music",
@@ -125,6 +157,8 @@ export const OFFICE_PAGES: OfficePage[] = [
     statusSummary: "Cover art rev",
     isCompletedToday: false,
     platformTags: ["Visualizer", "Spotify"],
+    priority: "medium",
+    pageGroup: "music",
   },
 ];
 

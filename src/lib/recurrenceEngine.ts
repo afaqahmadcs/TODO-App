@@ -1,5 +1,5 @@
-import { RecurringRule } from "@/types/recurring";
-import { Task } from "@/types/task";
+import type { RecurringRule } from "@/types/recurring";
+import type { Task } from "@/types/task";
 
 export const DEFAULT_TIMEZONE = "Asia/Karachi";
 

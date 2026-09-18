@@ -95,7 +95,7 @@ export function OfficePageFilterBar({
                   isCompleted ? "bg-secondary" : isInProgress ? "bg-primary" : "bg-outline"
                 }`}
               />
-              <span>{page.title}</span>
+              <span>{detail?.pageTitle || page.title}</span>
 
               {isCompleted ? (
                 <Icon name="check" size={14} className="text-secondary" />

@@ -65,11 +65,23 @@ export function SunoPipelineSpotlight({
               const count = getStageCount(stage);
               const isActive = count > 0;
 
+              const stageLabelMap: Record<string, string> = {
+                VISUAL_CREATION: "Visual Creation",
+                EDITING: "Editing",
+                REVIEW: "Review",
+                EXPORT: "Export",
+                DELIVERED: "Delivered",
+                BRIEF: "Brief",
+                ASSETS: "Assets",
+                DESIGN: "Design",
+              };
+              const displayLabel = stageLabelMap[stage] || stage;
+
               return (
                 <React.Fragment key={stage}>
                   <span
                     className={`px-2.5 py-1 rounded-xl whitespace-nowrap transition-colors ${
-                      stage === "DESIGN"
+                      stage === "DESIGN" || stage === "VISUAL_CREATION"
                         ? "bg-purple-600 text-white font-bold shadow-sm"
                         : stage === "DELIVERED"
                         ? "bg-secondary/15 text-secondary font-semibold"
@@ -78,7 +90,7 @@ export function SunoPipelineSpotlight({
                         : "bg-surface-container text-on-surface-variant"
                     }`}
                   >
-                    {stage} {count > 0 && `(${count})`}
+                    {displayLabel} {count > 0 && `(${count})`}
                   </span>
                   {idx < SUNO_MUSIC_STAGES.length - 1 && (
                     <span className="text-outline text-[12px]">→</span>

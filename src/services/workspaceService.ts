@@ -20,6 +20,9 @@ export interface PageItem {
   active: boolean;
 }
 
+// In-memory store for dynamic page title updates (persisted in offline/fallback mode)
+const dynamicPageOverrides: Record<string, string> = {};
+
 export const workspaceService = {
   /**
    * Fetch all workspaces for the active user, falling back to local defaults if offline.
@@ -91,7 +94,7 @@ export const workspaceService = {
           return data.map((p: PageRow) => ({
             id: p.id,
             workspaceId: p.workspace_id,
-            name: p.name,
+            name: dynamicPageOverrides[p.id] || dynamicPageOverrides[p.name] || p.name,
             description: p.description,
             active: p.active,
           }));
@@ -107,12 +110,58 @@ export const workspaceService = {
       return OFFICE_PAGES.map((p) => ({
         id: p.id,
         workspaceId: "office",
-        name: p.title,
+        name: dynamicPageOverrides[p.id] || p.title,
         description: p.statusSummary,
         active: true,
       }));
     }
 
     return [];
+  },
+
+  /**
+   * Renames an Office page (e.g. renaming "New Client Page" once client name is known).
+   * Persists to Supabase public.pages and updates in-memory registry.
+   * DOES NOT BREAK HISTORICAL TASK OCCURRENCES because tasks reference the stable page ID.
+   */
+  updatePageName: async (pageId: string, newName: string): Promise<boolean> => {
+    if (!pageId || !newName.trim()) return false;
+    const cleanName = newName.trim();
+
+    // Update in-memory registry
+    dynamicPageOverrides[pageId] = cleanName;
+
+    // Also update OFFICE_PAGES constant in memory if matching
+    const matchingConst = OFFICE_PAGES.find(
+      (p) => p.id === pageId || p.title.toLowerCase() === pageId.toLowerCase()
+    );
+    if (matchingConst) {
+      matchingConst.title = cleanName;
+      matchingConst.shortTitle = cleanName.length > 14 ? cleanName.substring(0, 14) : cleanName;
+    }
+
+    if (isSupabaseConfigured()) {
+      try {
+        const { error } = await supabase
+          .from("pages")
+          .update({ name: cleanName, updated_at: new Date().toISOString() })
+          .or(`id.eq.${pageId},name.ilike.%${pageId}%`);
+
+        if (error) {
+          console.warn("[workspaceService] Supabase update page name error:", error);
+        }
+      } catch (err) {
+        console.warn("[workspaceService] Failed to update page name in Supabase:", err);
+      }
+    }
+
+    return true;
+  },
+
+  /**
+   * Get dynamic override for a page title if one exists
+   */
+  getPageTitleOverride: (pageId: string): string | undefined => {
+    return dynamicPageOverrides[pageId];
   },
 };

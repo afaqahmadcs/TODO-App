@@ -10,12 +10,18 @@ export type OfficeWorkflowStage =
   | "PUBLISHED";
 
 export type SunoWorkflowStage =
-  | "BRIEF"
-  | "ASSETS"
-  | "DESIGN"
+  | "VISUAL_CREATION"
+  | "EDITING"
   | "REVIEW"
   | "EXPORT"
-  | "DELIVERED";
+  | "DELIVERED"
+  | "BRIEF"
+  | "ASSETS"
+  | "DESIGN";
+
+export type OfficeHistoryFilter = "today" | "yesterday" | "this_week" | "this_month";
+
+export type OfficePageGroup = "client_reels" | "facebook" | "music";
 
 export type OfficePageStatus = "completed" | "in_progress" | "pending" | "idle";
 
@@ -23,27 +29,35 @@ export interface PageStatusDetail {
   pageId: OfficePageId;
   pageTitle: string;
   status: OfficePageStatus;
-  statusLabel: string; // e.g. "completed", "in progress", "pending"
-  formattedDisplay: string; // e.g. "Shooting Page — completed"
-  summary: string; // e.g. "Reel uploaded", "Color grade in prog"
+  statusLabel: string; // e.g. "completed", "pending"
+  formattedDisplay: string; // e.g. "Shooting Film Video — completed"
+  summary: string;
   totalTasks: number;
   completedTasks: number;
   hasUrgentTask: boolean;
+  priority?: "high" | "medium";
+  pageGroup?: OfficePageGroup;
+  isEditable?: boolean;
 }
 
 export interface OfficeKpiMetrics {
   todayActiveTasks: number;
+  todayTasksCount: number;
   completedCount: number;
-  completionRate: number; // 0 to 100
+  completedTodayCount: number;
   pendingCount: number;
-  inReviewCount: number;
+  pendingTodayCount: number;
   overdueCount: number;
+  highPriorityCount: number;
+  mediumPriorityCount: number;
+  completionRate: number; // 0 to 100
+  inReviewCount: number;
   urgentCount: number;
   urgentNotice?: string;
   productivityScore: number; // 0 to 100
   streakDays: number;
-  dispatchedPagesCount: number; // e.g. 4
-  totalPagesCount: number; // 8
+  dispatchedPagesCount: number;
+  totalPagesCount: number;
 }
 
 export type OfficePlatform = "all" | "reels" | "tiktok" | "shorts";

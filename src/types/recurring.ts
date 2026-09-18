@@ -12,12 +12,16 @@ export type RecurrenceType =
 export type RecurringRuleStatus = "ACTIVE" | "PAUSED" | "EXPIRED";
 
 export type TemplateId =
+  | "CLIENT_DAILY_REEL"
   | "OFFICE_DAILY_CONTENT"
+  | "FACEBOOK_DAILY_CONTENT"
+  | "SUNO_MUSIC_WORKFLOW"
   | "SUNO_MUSIC_VISUAL"
   | "PERSONAL_VLOG"
   | "COLLEGE_STUDY"
   | "WEB_DEV_PRACTICE"
-  | "CUSTOM";
+  | "CUSTOM"
+  | string;
 
 export interface RecurringTaskTemplate {
   id: TemplateId;

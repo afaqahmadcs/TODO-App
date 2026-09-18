@@ -11,14 +11,19 @@ export interface WorkspaceConfig {
 }
 
 export type OfficePageId =
+  | "shooting-film-video"
   | "shooting-page"
   | "ismail-shahid-fans"
   | "zk-production"
   | "jahangir-khan"
-  | "inaya-kailash"
+  | "new-client-page"
   | "political-affairs"
+  | "nazia-fanz"
   | "nazia-iqbal-fanz"
-  | "suno-music";
+  | "inaya-kailashi"
+  | "inaya-kailash"
+  | "suno-music"
+  | string;
 
 export interface OfficePage {
   id: OfficePageId;
@@ -27,6 +32,9 @@ export interface OfficePage {
   statusSummary: string;
   isCompletedToday: boolean;
   platformTags?: string[];
+  priority?: "high" | "medium";
+  pageGroup?: "client_reels" | "facebook" | "music";
+  isEditable?: boolean;
 }
 
 export type OfficeWorkflowStage =

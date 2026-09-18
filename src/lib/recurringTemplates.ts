@@ -1,4 +1,67 @@
-import { RecurringTaskTemplate } from "@/types/recurring";
+import type { RecurringTaskTemplate } from "@/types/recurring";
+
+export const CLIENT_DAILY_REEL: RecurringTaskTemplate = {
+  id: "CLIENT_DAILY_REEL",
+  name: "Upload Reel — Client",
+  description: "Daily working-day client reel upload and verification workflow",
+  workspaceId: "office",
+  priority: "high",
+  dueTime: "14:00",
+  estimatedDurationMin: 45,
+  recurrenceType: "WEEKDAYS",
+  daysOfWeek: [1, 2, 3, 4, 5], // Mon-Fri
+  checklist: [
+    "Prepare/select content",
+    "Edit reel",
+    "Caption",
+    "Hashtags",
+    "Upload",
+    "Verify upload",
+  ],
+  tags: ["office", "client-reels", "high-priority", "reel-dispatch"],
+};
+
+export const FACEBOOK_DAILY_CONTENT: RecurringTaskTemplate = {
+  id: "FACEBOOK_DAILY_CONTENT",
+  name: "Facebook Daily Content",
+  description: "Daily content distribution for medium-priority Facebook fan channels",
+  workspaceId: "office",
+  priority: "medium",
+  dueTime: "18:00",
+  estimatedDurationMin: 35,
+  recurrenceType: "WEEKDAYS",
+  daysOfWeek: [1, 2, 3, 4, 5],
+  checklist: [
+    "Prepare/select content",
+    "Edit reel",
+    "Caption",
+    "Hashtags",
+    "Upload",
+    "Verify upload",
+  ],
+  tags: ["office", "facebook", "medium-priority"],
+};
+
+export const SUNO_MUSIC_WORKFLOW: RecurringTaskTemplate = {
+  id: "SUNO_MUSIC_WORKFLOW",
+  name: "Suno Music Visual Production",
+  description: "Visual Creation → Editing → Review → Export → Delivered visual asset pipeline",
+  workspaceId: "office",
+  officePageId: "suno-music",
+  priority: "medium",
+  dueTime: "15:00",
+  estimatedDurationMin: 60,
+  recurrenceType: "WEEKDAYS",
+  daysOfWeek: [1, 2, 3, 4, 5],
+  checklist: [
+    "Visual Creation",
+    "Editing",
+    "Review",
+    "Export",
+    "Delivered",
+  ],
+  tags: ["suno-music", "visual-production", "music-pipeline"],
+};
 
 export const RECURRING_TEMPLATES: Record<string, RecurringTaskTemplate> = {
   OFFICE_DAILY_CONTENT: {
@@ -6,7 +69,7 @@ export const RECURRING_TEMPLATES: Record<string, RecurringTaskTemplate> = {
     name: "Office Daily Content",
     description: "Daily shooting page and social publishing workflow (Mon-Fri at 1:15 PM)",
     workspaceId: "office",
-    officePageId: "shooting-page",
+    officePageId: "shooting-film-video",
     priority: "high",
     dueTime: "13:15",
     estimatedDurationMin: 45,
@@ -21,7 +84,7 @@ export const RECURRING_TEMPLATES: Record<string, RecurringTaskTemplate> = {
       "Upload",
       "Verify upload",
     ],
-    tags: ["office", "publishing", "shooting-page", "daily-dispatch"],
+    tags: ["office", "publishing", "shooting-film-video", "daily-dispatch"],
   },
 
   SUNO_MUSIC_VISUAL: {
@@ -109,8 +172,14 @@ export const RECURRING_TEMPLATES: Record<string, RecurringTaskTemplate> = {
   },
 };
 
+const EXTRA_TEMPLATES: Record<string, RecurringTaskTemplate> = {
+  CLIENT_DAILY_REEL,
+  FACEBOOK_DAILY_CONTENT,
+  SUNO_MUSIC_WORKFLOW,
+};
+
 export function getTemplateById(id: string): RecurringTaskTemplate | undefined {
-  return RECURRING_TEMPLATES[id];
+  return RECURRING_TEMPLATES[id] || EXTRA_TEMPLATES[id];
 }
 
 export function getAllTemplates(): RecurringTaskTemplate[] {
