@@ -541,6 +541,115 @@ export default function DashboardPage() {
             </div>
           </Card>
 
+          {/* Today's Daily Short Vlog Live Telemetry (Phase 16 Core Requirement) */}
+          <Card variant="low" className="p-5 border border-purple-500/20 bg-gradient-to-r from-purple-500/5 via-transparent to-transparent">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400">
+                  <Icon name="videocam" size={22} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-purple-400 uppercase tracking-wider font-semibold">
+                      Today&apos;s Vlog
+                    </span>
+                    <span className="px-2 py-0.2 rounded-full bg-purple-500/20 text-purple-300 font-mono text-[10px] font-bold">
+                      {telemetry?.vlogTelemetry?.stage || "RECORD"}
+                    </span>
+                  </div>
+                  <h3 className="font-headline text-base font-bold text-on-surface">
+                    {telemetry?.vlogTelemetry?.todayVlogTitle || "Daily Short Vlog"}
+                  </h3>
+                </div>
+              </div>
+
+              <Link
+                href="/personal"
+                className="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-colors self-start sm:self-center"
+              >
+                <span>Open Personal Studio</span>
+                <Icon name="arrow_forward" size={14} />
+              </Link>
+            </div>
+
+            {/* 3 Telemetry Metrics: Recording, Editing, Upload Progress */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Metric 1: Recording */}
+              <div className="p-3 rounded-lg bg-surface-container border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex items-center justify-between text-xs font-mono text-outline mb-1">
+                  <span className="flex items-center gap-1">
+                    <Icon name="fiber_manual_record" size={12} className="text-rose-400" />
+                    Recording
+                  </span>
+                  <span className="text-rose-400 font-semibold">
+                    {telemetry?.vlogTelemetry?.recordingPercentage ?? 100}%
+                  </span>
+                </div>
+                <p className="font-headline text-sm font-semibold text-on-surface">
+                  {telemetry?.vlogTelemetry?.recordingCompleted ?? 3} / {telemetry?.vlogTelemetry?.recordingTotal ?? 3} Captured
+                </p>
+                <div className="w-full h-1 bg-surface-container-high rounded-full overflow-hidden mt-2">
+                  <div
+                    className="h-full bg-rose-500 rounded-full"
+                    style={{ width: `${telemetry?.vlogTelemetry?.recordingPercentage ?? 100}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Metric 2: Editing */}
+              <div className="p-3 rounded-lg bg-surface-container border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex items-center justify-between text-xs font-mono text-outline mb-1">
+                  <span className="flex items-center gap-1">
+                    <Icon name="timeline" size={12} className="text-primary" />
+                    Editing
+                  </span>
+                  <span className="text-primary font-semibold">
+                    {telemetry?.vlogTelemetry?.editingPercentage ?? 67}%
+                  </span>
+                </div>
+                <p className="font-headline text-sm font-semibold text-on-surface">
+                  {telemetry?.vlogTelemetry?.editingCompleted ?? 2} / {telemetry?.vlogTelemetry?.editingTotal ?? 3} Cuts Done
+                </p>
+                <div className="w-full h-1 bg-surface-container-high rounded-full overflow-hidden mt-2">
+                  <div
+                    className="h-full bg-primary rounded-full"
+                    style={{ width: `${telemetry?.vlogTelemetry?.editingPercentage ?? 67}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Metric 3: Upload progress (e.g. 3 / 4 platforms uploaded) */}
+              <div className="p-3 rounded-lg bg-surface-container border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex items-center justify-between text-xs font-mono text-outline mb-1">
+                  <span className="flex items-center gap-1">
+                    <Icon name="cloud_upload" size={12} className="text-secondary" />
+                    Upload Progress
+                  </span>
+                  <span className="text-secondary font-semibold font-mono text-[11px]">
+                    {telemetry?.vlogTelemetry?.uploadProgressLabel || "3 / 4 platforms uploaded"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap mt-1">
+                  {(["Facebook", "YouTube", "Instagram", "TikTok"] as const).map((plat) => {
+                    const isUp = telemetry?.vlogTelemetry?.platforms[plat] ?? (plat !== "TikTok");
+                    return (
+                      <span
+                        key={plat}
+                        className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-medium ${
+                          isUp
+                            ? "bg-secondary/20 text-secondary border border-secondary/30"
+                            : "bg-surface-container-highest text-outline"
+                        }`}
+                      >
+                        {plat.slice(0, 2)} {isUp ? "✓" : "✗"}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </Card>
+
           {/* Priority Tasks Section */}
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">

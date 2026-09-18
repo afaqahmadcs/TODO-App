@@ -99,32 +99,33 @@ const INITIAL_TASKS: Task[] = [
   },
   {
     id: "task-personal-ep42",
-    title: "Record Daily Vlog",
+    title: "Daily Short Vlog",
     description: "Vlog documenting the dual life of morning agency client work followed by coding the Next.js portfolio website navbar and state management.",
     workspaceId: "personal",
     status: "in_progress",
-    stage: "FOOTAGE READY",
+    stage: "UPLOAD",
     priority: "high",
     dueDate: new Date().toISOString().split("T")[0],
-    dueTime: "18:30",
-    estimatedDurationMin: 90,
-    actualDurationMin: 30,
-    tags: ["vlog", "b-roll", "sony-a7iv", "portfolio"],
+    dueTime: "19:30",
+    estimatedDurationMin: 60,
+    actualDurationMin: 45,
+    tags: ["vlog", "b-roll", "sony-a7iv", "portfolio", "daily-vlog"],
     linkedVlogEpisode: "EP #42",
+    recurringRuleId: "rec-rule-daily-short-vlog",
+    isRecurring: true,
     isCompleted: false,
     createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
     updatedAt: new Date().toISOString(),
     thumbnailStatus: "approved",
     thumbnailUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuB2VJD5USG40NPDu6AthW2xx5syMrwq-35JwrcLyFAB1Pj-J_vQuizMI22CyI3P-J6gq-LnDo0MdPhnyzw0_LQ-RInpDCFu3NTR7Exhn3KtBv2VgOElbQeDB-aVV_WxTKA3z_F2M97Ytc3RAnaLRd-tJUG58fFsamTCn02N_4SvFG7SK1eUa_q1xDBkgqOP7OQilmM7yxwPn11PFK0-xE9R97TLVxlqkCQ8Adej0uemSz18KVAZYqWEBA",
     caption: "Balancing agency clients with college & building my dream portfolio from scratch. Day 12 of the web dev journey is live! 🔥 #developer #vlog #productivity",
-    platforms: ["YouTube", "Instagram", "TikTok", "Facebook", "X"],
+    platforms: ["Facebook", "YouTube", "Instagram", "TikTok"],
     publishingStatus: "scheduled",
     distributionStatus: {
-      YouTube: "SCHED 07:00 PM",
-      Instagram: "VERIFIED ✓",
-      TikTok: "DRAFT SAVED",
-      Facebook: "PENDING",
-      X: "COPY APPROVED",
+      Facebook: "UPLOADED",
+      YouTube: "UPLOADED",
+      Instagram: "UPLOADED",
+      TikTok: "PENDING",
     },
     recordingChecklist: [
       { id: "rc-1", title: "Morning desk setup B-roll (Sony A7IV 24mm f1.4)", completed: true },
@@ -152,27 +153,31 @@ const INITIAL_TASKS: Task[] = [
   },
   {
     id: "task-personal-ep41",
-    title: "Upload Vlog",
+    title: "Daily Short Vlog",
     description: "Documenting early morning study routine and graph algorithm lab preparation.",
     workspaceId: "personal",
     status: "published",
     stage: "PUBLISHED",
     priority: "medium",
     dueDate: new Date(Date.now() - 86400000).toISOString().split("T")[0],
-    dueTime: "10:00",
-    tags: ["vlog", "college", "morning"],
+    dueTime: "19:30",
+    tags: ["vlog", "college", "morning", "daily-vlog"],
     linkedVlogEpisode: "EP #41",
+    recurringRuleId: "rec-rule-daily-short-vlog",
+    isRecurring: true,
     isCompleted: true,
     completedAt: new Date(Date.now() - 86400000).toISOString(),
     createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
     updatedAt: new Date(Date.now() - 86400000).toISOString(),
     thumbnailStatus: "approved",
     caption: "Early mornings as a CS major. Balancing code, gym, and coursework. 📚💻",
-    platforms: ["YouTube", "Instagram"],
+    platforms: ["Facebook", "YouTube", "Instagram", "TikTok"],
     publishingStatus: "published",
     distributionStatus: {
-      YouTube: "PUBLISHED (4.2k views)",
-      Instagram: "PUBLISHED (14k plays)",
+      Facebook: "UPLOADED",
+      YouTube: "UPLOADED",
+      Instagram: "UPLOADED",
+      TikTok: "UPLOADED",
     },
     recordingChecklist: [
       { id: "rc-41-1", title: "Sunrise coffee brewing shot", completed: true },
@@ -2083,6 +2088,25 @@ export const taskService = {
     }
 
     task.updatedAt = new Date().toISOString();
+    return { ...task };
+  },
+
+  /**
+   * Phase 16: Vlog Platform Upload Distribution Status (UPLOADED / PENDING)
+   */
+  updateVlogDistributionStatus: async (
+    taskId: string,
+    platform: string,
+    status: string
+  ): Promise<Task | null> => {
+    await ensureLocalTasksLoaded();
+    const task = localTasks.find((t) => t.id === taskId);
+    if (!task) return null;
+
+    if (!task.distributionStatus) task.distributionStatus = {};
+    task.distributionStatus[platform] = status;
+    task.updatedAt = new Date().toISOString();
+    persistLocalTasks();
     return { ...task };
   },
 

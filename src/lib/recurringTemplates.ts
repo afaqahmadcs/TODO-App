@@ -111,24 +111,20 @@ export const RECURRING_TEMPLATES: Record<string, RecurringTaskTemplate> = {
 
   PERSONAL_VLOG: {
     id: "PERSONAL_VLOG",
-    name: "Personal Vlog",
-    description: "Daily vlog B-roll ingest, rough timeline cut, color grading & distribution",
+    name: "Daily Short Vlog",
+    description: "Daily short vlog 3-stage pipeline: Record → Edit → Upload across Facebook, YouTube, Instagram & TikTok",
     workspaceId: "personal",
-    priority: "medium",
+    priority: "high", // default priority, configurable by user
     dueTime: "19:30",
-    estimatedDurationMin: 90,
+    estimatedDurationMin: 60,
     recurrenceType: "EVERY_DAY",
     daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
     checklist: [
-      "Ingest SD card footage & camera B-roll",
-      "Backup raw camera files to secondary SSD",
-      "Rough timeline cut & assemble A-roll speech",
-      "Color grading & sound design (SFX / ambient mix)",
-      "Generate YouTube 4K thumbnail (Photoshop)",
-      "Compose description & optimized SEO tags",
-      "Schedule premiere on YouTube & cross-post to Instagram",
+      "Record: Hook, A-roll & essential B-roll",
+      "Edit: Timeline cut, sound & captions",
+      "Upload: Publish to social platforms",
     ],
-    tags: ["vlog", "youtube", "creator", "daily-vlog"],
+    tags: ["vlog", "personal", "daily-vlog", "short-vlog", "creator"],
   },
 
   COLLEGE_STUDY: {
@@ -172,10 +168,13 @@ export const RECURRING_TEMPLATES: Record<string, RecurringTaskTemplate> = {
   },
 };
 
+export const DAILY_SHORT_VLOG: RecurringTaskTemplate = RECURRING_TEMPLATES.PERSONAL_VLOG;
+
 const EXTRA_TEMPLATES: Record<string, RecurringTaskTemplate> = {
   CLIENT_DAILY_REEL,
   FACEBOOK_DAILY_CONTENT,
   SUNO_MUSIC_WORKFLOW,
+  DAILY_SHORT_VLOG,
 };
 
 export function getTemplateById(id: string): RecurringTaskTemplate | undefined {

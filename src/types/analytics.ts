@@ -137,4 +137,25 @@ export interface DashboardTelemetry {
   };
   workspaces: WorkspaceStats[];
   productivityMetrics: ProductivityMetrics;
+  vlogTelemetry?: {
+    todayVlogTitle: string;
+    todayVlogStatus: string;
+    stage: string;
+    isCompleted: boolean;
+    recordingCompleted: number;
+    recordingTotal: number;
+    recordingPercentage: number;
+    editingCompleted: number;
+    editingTotal: number;
+    editingPercentage: number;
+    platformsUploaded: number;
+    platformsTotal: number;
+    uploadProgressLabel: string; // e.g. "3 / 4 platforms uploaded"
+    platforms: {
+      Facebook: boolean;
+      YouTube: boolean;
+      Instagram: boolean;
+      TikTok: boolean;
+    };
+  };
 }

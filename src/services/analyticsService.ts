@@ -777,6 +777,65 @@ export const analyticsService = {
       productivityScore: scoreBreakdown.overallScore,
     };
 
+    // Vlog Telemetry computation (Today's Vlog, Recording, Editing, Upload progress)
+    const personalTasks = tasks.filter((t) => t.workspaceId === "personal");
+    const todayVlog =
+      personalTasks.find((t) => t.dueDate === todayStr || t.recurrenceInstanceDate === todayStr) ||
+      personalTasks[0];
+
+    let vlogTelemetry: DashboardTelemetry["vlogTelemetry"] = undefined;
+    if (todayVlog) {
+      const recList = todayVlog.recordingChecklist || [];
+      const recComp = recList.filter((i) => i.completed).length;
+      const recTot = Math.max(1, recList.length);
+
+      const editList = todayVlog.editingChecklist || [];
+      const editComp = editList.filter((i) => i.completed).length;
+      const editTot = Math.max(1, editList.length);
+
+      const dist = todayVlog.distributionStatus || {};
+      const platformsList = ["Facebook", "YouTube", "Instagram", "TikTok"] as const;
+      let platformsUploaded = 0;
+      const platformMap = {
+        Facebook: false,
+        YouTube: false,
+        Instagram: false,
+        TikTok: false,
+      };
+
+      for (const p of platformsList) {
+        const st = dist[p];
+        const isUp =
+          st === "UPLOADED" ||
+          st === "VERIFIED ✓" ||
+          st?.startsWith("PUBLISHED") ||
+          st === "LIVE";
+        platformMap[p] = isUp;
+        if (isUp) platformsUploaded++;
+      }
+
+      vlogTelemetry = {
+        todayVlogTitle: todayVlog.title || "Daily Short Vlog",
+        todayVlogStatus: todayVlog.status,
+        stage: (todayVlog.stage || "RECORD").replace("_", " ").toUpperCase(),
+        isCompleted: Boolean(
+          todayVlog.isCompleted ||
+            todayVlog.status === "completed" ||
+            todayVlog.status === "published"
+        ),
+        recordingCompleted: recComp,
+        recordingTotal: recList.length,
+        recordingPercentage: Math.round((recComp / recTot) * 100),
+        editingCompleted: editComp,
+        editingTotal: editList.length,
+        editingPercentage: Math.round((editComp / editTot) * 100),
+        platformsUploaded,
+        platformsTotal: 4,
+        uploadProgressLabel: `${platformsUploaded} / 4 platforms uploaded`,
+        platforms: platformMap,
+      };
+    }
+
     return {
       totalTasks,
       completedTasks,
@@ -792,6 +851,7 @@ export const analyticsService = {
       },
       workspaces,
       productivityMetrics,
+      vlogTelemetry,
     };
   },
 };

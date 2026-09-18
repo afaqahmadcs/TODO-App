@@ -170,6 +170,13 @@ export interface UpdateTaskInput {
   recurrenceInstanceDate?: string;
   isRecurring?: boolean;
   recurringPattern?: string;
+  isCompleted?: boolean;
+  completedAt?: string;
+  platforms?: SocialPlatform[];
+  distributionStatus?: Record<string, string>;
+  recordingChecklist?: ChecklistItem[];
+  editingChecklist?: ChecklistItem[];
+  thumbnailStatus?: ThumbnailStatus;
 }
 
 export interface TemplateSubtask {
