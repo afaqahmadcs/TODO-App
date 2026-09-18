@@ -1,6 +1,9 @@
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 
+export type UserRole = "admin" | "user";
+export type UserAccountStatus = "active" | "inactive" | "suspended";
+
 export interface SocialLinks {
   [key: string]: string | undefined;
   instagram?: string;
@@ -22,6 +25,10 @@ export interface AuthUserProfile {
   timezone?: string;
   website?: string;
   avatarUrl?: string;
+  role: UserRole;
+  status?: UserAccountStatus;
+  lastActiveAt?: string;
+  createdAt?: string;
   socialLinks?: SocialLinks;
 }
 
@@ -44,6 +51,10 @@ const DEMO_USER: AuthUserProfile = {
   timezone: "Asia/Karachi",
   website: "https://afaqahmad.dev",
   avatarUrl: "/assets/avatar.png",
+  role: "admin",
+  status: "active",
+  lastActiveAt: new Date().toISOString(),
+  createdAt: "2026-01-01T00:00:00.000Z",
   socialLinks: {
     instagram: "https://instagram.com/afaqahmad",
     youtube: "https://youtube.com/@afaqahmad",
@@ -65,6 +76,24 @@ function notifyProfileChange(profile: AuthUserProfile) {
     } catch (err) {
       console.error("[authService] Listener error:", err);
     }
+  }
+}
+
+/**
+ * Synchronize lightweight session cookie for Next.js Edge Middleware
+ */
+function syncAuthCookies(user: AuthUserProfile | null) {
+  if (typeof document === "undefined") return;
+  if (user) {
+    const sessionData = {
+      userId: user.id,
+      role: user.role,
+      email: user.email,
+      name: user.name,
+    };
+    document.cookie = `taskflow-session=${encodeURIComponent(JSON.stringify(sessionData))}; path=/; max-age=604800; SameSite=Lax`;
+  } else {
+    document.cookie = "taskflow-session=; path=/; max-age=0; SameSite=Lax";
   }
 }
 
@@ -104,7 +133,7 @@ export const authService = {
           const user = data.user;
 
           // Attempt to fetch extended profile from public.profiles table
-          let dbProfile: Partial<AuthUserProfile> = {};
+          let dbProfile: Partial<AuthUserProfile> & { role?: UserRole; status?: UserAccountStatus; last_active_at?: string; created_at?: string } = {};
           try {
             const { data: profRow } = await supabase
               .from("profiles")
@@ -120,7 +149,11 @@ export const authService = {
                 location: profRow.location || undefined,
                 timezone: profRow.timezone,
                 website: profRow.website || undefined,
-                avatarUrl: profRow.avatar_url || undefined,
+                avatarUrl: profRow.avatar_url ?? undefined,
+                role: (profRow.role as UserRole) || undefined,
+                status: (profRow.status as UserAccountStatus) || undefined,
+                last_active_at: profRow.last_active_at || undefined,
+                created_at: profRow.created_at || undefined,
                 socialLinks: (profRow.social_links as SocialLinks) || undefined,
               };
             }
@@ -133,7 +166,9 @@ export const authService = {
                          user.email?.toLowerCase() === "afaqahmadcs@gmail.com" ||
                          metadata.is_primary_creator === true;
 
-          return {
+          const determinedRole: UserRole = dbProfile.role || (metadata.role as UserRole) || (isAfaq ? "admin" : "user");
+
+          const resolvedProfile: AuthUserProfile = {
             id: user.id,
             email: user.email || "",
             name:
@@ -147,9 +182,16 @@ export const authService = {
             location: dbProfile.location !== undefined ? dbProfile.location : (metadata.location || (isAfaq ? DEMO_USER.location : "")),
             timezone: dbProfile.timezone || metadata.timezone || "Asia/Karachi",
             website: dbProfile.website !== undefined ? dbProfile.website : (metadata.website || (isAfaq ? DEMO_USER.website : "")),
-            avatarUrl: dbProfile.avatarUrl || metadata.avatar_url || (isAfaq ? DEMO_USER.avatarUrl : "/assets/avatar.png"),
+            avatarUrl: dbProfile.avatarUrl !== undefined ? dbProfile.avatarUrl : (metadata.avatar_url ?? (isAfaq ? DEMO_USER.avatarUrl : "")),
+            role: determinedRole,
+            status: dbProfile.status || "active",
+            lastActiveAt: dbProfile.last_active_at || new Date().toISOString(),
+            createdAt: dbProfile.created_at || user.created_at || new Date().toISOString(),
             socialLinks: dbProfile.socialLinks || metadata.social_links || (isAfaq ? DEMO_USER.socialLinks : {}),
           };
+
+          syncAuthCookies(resolvedProfile);
+          return resolvedProfile;
         }
       } catch (err) {
         console.warn("[authService] Failed to fetch Supabase user:", err);
@@ -161,12 +203,23 @@ export const authService = {
       try {
         const stored = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
         if (stored) {
-          return JSON.parse(stored);
+          const parsed = JSON.parse(stored);
+          syncAuthCookies(parsed);
+          return parsed;
         }
       } catch {}
     }
 
+    syncAuthCookies(DEMO_USER);
     return DEMO_USER;
+  },
+
+  /**
+   * Check if current active user has the admin role
+   */
+  isAdmin: async (): Promise<boolean> => {
+    const user = await authService.getUser();
+    return user?.role === "admin";
   },
 
   /**
@@ -190,6 +243,8 @@ export const authService = {
       const merged: AuthUserProfile = {
         ...(current || DEMO_USER),
         ...updates,
+        // Preserve admin role unless explicitly updated by authorized admin
+        role: updates.role || current?.role || "user",
         socialLinks: {
           ...(current?.socialLinks || DEMO_USER.socialLinks),
           ...(updates.socialLinks || {}),
@@ -209,7 +264,7 @@ export const authService = {
                 location: merged.location,
                 timezone: merged.timezone,
                 website: merged.website,
-                avatar_url: merged.avatarUrl,
+                avatar_url: merged.avatarUrl || "",
                 social_links: merged.socialLinks,
               },
             });
@@ -226,7 +281,10 @@ export const authService = {
                 location: merged.location,
                 timezone: merged.timezone,
                 website: merged.website,
-                avatar_url: merged.avatarUrl,
+                avatar_url: merged.avatarUrl || "",
+                role: merged.role,
+                status: merged.status || "active",
+                last_active_at: new Date().toISOString(),
                 social_links: merged.socialLinks,
                 updated_at: new Date().toISOString(),
               });
@@ -242,6 +300,8 @@ export const authService = {
           localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(merged));
         } catch {}
       }
+
+      syncAuthCookies(merged);
 
       // Broadcast update to all live listeners
       notifyProfileChange(merged);
@@ -259,12 +319,12 @@ export const authService = {
   uploadAvatar: async (
     file: File
   ): Promise<{ success: boolean; avatarUrl?: string; error?: string }> => {
-    // 1. Validate file format
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-    if (!allowedTypes.includes(file.type)) {
+    // 1. Validate file format: JPG, JPEG, PNG, WEBP
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+    if (!allowedTypes.includes(file.type.toLowerCase())) {
       return {
         success: false,
-        error: "Invalid file type. Please upload a JPEG, PNG, WebP, or GIF image.",
+        error: "Invalid file type. Supported formats: JPG, JPEG, PNG, and WEBP.",
       };
     }
 
@@ -273,7 +333,7 @@ export const authService = {
     if (file.size > MAX_SIZE) {
       return {
         success: false,
-        error: "Image is too large. Please select a photo under 5MB.",
+        error: "Image is too large. Maximum allowed file size is 5MB.",
       };
     }
 
@@ -324,10 +384,10 @@ export const authService = {
   },
 
   /**
-   * Remove the current avatar photo and restore default
+   * Remove the current avatar photo and restore initials fallback
    */
   removeAvatar: async (): Promise<{ success: boolean }> => {
-    const result = await authService.updateProfile({ avatarUrl: "/assets/avatar.png" });
+    const result = await authService.updateProfile({ avatarUrl: "" });
     return { success: result.success };
   },
 
@@ -364,6 +424,26 @@ export const authService = {
           return { user: null, session: null, error: error.message };
         }
 
+        if (data.user) {
+          // Fetch database profile to set proper cookie role
+          let role: UserRole = "user";
+          try {
+            const { data: prof } = await supabase
+              .from("profiles")
+              .select("role")
+              .eq("id", data.user.id)
+              .maybeSingle();
+            if (prof?.role === "admin") role = "admin";
+          } catch {}
+
+          syncAuthCookies({
+            id: data.user.id,
+            email: data.user.email || email.trim(),
+            name: data.user.user_metadata?.name || email.split("@")[0],
+            role,
+          });
+        }
+
         return { user: data.user, session: data.session, error: null };
       } catch (err: unknown) {
         return {
@@ -387,7 +467,11 @@ export const authService = {
           location: "",
           timezone: "Asia/Karachi",
           website: "",
-          avatarUrl: "/assets/avatar.png",
+          avatarUrl: "",
+          role: "user",
+          status: "active",
+          lastActiveAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
           socialLinks: {},
         };
 
@@ -396,6 +480,7 @@ export const authService = {
         localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(localUser));
       } catch {}
     }
+    syncAuthCookies(localUser);
     notifyProfileChange(localUser);
 
     return {
@@ -413,9 +498,14 @@ export const authService = {
   },
 
   /**
-   * Sign Up with Email, Password, and Name
+   * Sign Up with Email, Password, and Full Name
    */
-  signUp: async (email: string, password: string, fullName?: string): Promise<AuthResult> => {
+  signUp: async (
+    email: string, 
+    password: string, 
+    fullName?: string, 
+    timezone?: string
+  ): Promise<AuthResult> => {
     if (!email || !password) {
       return { user: null, session: null, error: "Email and password are required." };
     }
@@ -423,6 +513,8 @@ export const authService = {
     if (password.length < 6) {
       return { user: null, session: null, error: "Password must be at least 6 characters." };
     }
+
+    const detectedTimezone = timezone || "Asia/Karachi";
 
     if (isSupabaseConfigured()) {
       try {
@@ -434,7 +526,8 @@ export const authService = {
             data: {
               name: fullName?.trim() || email.split("@")[0],
               username: email.split("@")[0],
-              avatar_url: "/assets/avatar.png",
+              avatar_url: "",
+              timezone: detectedTimezone,
             },
             emailRedirectTo: `${siteUrl}/auth/callback`,
           },
@@ -442,6 +535,15 @@ export const authService = {
 
         if (error) {
           return { user: null, session: null, error: error.message };
+        }
+
+        if (data.user) {
+          syncAuthCookies({
+            id: data.user.id,
+            email: data.user.email || email.trim(),
+            name: fullName?.trim() || email.split("@")[0],
+            role: "user",
+          });
         }
 
         return { user: data.user, session: data.session, error: null };
@@ -454,7 +556,7 @@ export const authService = {
       }
     }
 
-    // Offline / demo sign-up
+    // Offline / demo sign-up: Clean user with 0 tasks and 0 copied pages
     const isAfaq = email.trim().toLowerCase() === "afaq@taskflow.dev" || email.trim().toLowerCase() === "afaqahmadcs@gmail.com";
     const localUser: AuthUserProfile = isAfaq
       ? DEMO_USER
@@ -465,9 +567,13 @@ export const authService = {
           username: email.split("@")[0] || "user",
           bio: "",
           location: "",
-          timezone: "Asia/Karachi",
+          timezone: detectedTimezone,
           website: "",
-          avatarUrl: "/assets/avatar.png",
+          avatarUrl: "",
+          role: "user",
+          status: "active",
+          lastActiveAt: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
           socialLinks: {},
         };
 
@@ -476,6 +582,7 @@ export const authService = {
         localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(localUser));
       } catch {}
     }
+    syncAuthCookies(localUser);
     notifyProfileChange(localUser);
 
     return {
@@ -511,6 +618,7 @@ export const authService = {
       } catch {}
     }
 
+    syncAuthCookies(null);
     return { error: null };
   },
 
@@ -524,7 +632,7 @@ export const authService = {
       try {
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
         const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-          redirectTo: `${siteUrl}/auth/callback?type=recovery`,
+          redirectTo: `${siteUrl}/reset-password`,
         });
         if (error) return { success: false, error: error.message };
         return { success: true };
@@ -540,13 +648,42 @@ export const authService = {
   },
 
   /**
+   * Update password (e.g. from /reset-password screen)
+   */
+  updatePassword: async (newPassword: string): Promise<{ success: boolean; error?: string | null }> => {
+    if (!newPassword || newPassword.length < 6) {
+      return { success: false, error: "Password must be at least 6 characters." };
+    }
+
+    if (isSupabaseConfigured()) {
+      try {
+        const { error } = await supabase.auth.updateUser({ password: newPassword });
+        if (error) return { success: false, error: error.message };
+        return { success: true };
+      } catch (err: unknown) {
+        return {
+          success: false,
+          error: err instanceof Error ? err.message : "Failed to update password.",
+        };
+      }
+    }
+
+    return { success: true };
+  },
+
+  /**
    * Subscribe to auth state changes
    */
   onAuthStateChange: (
     callback: (event: AuthChangeEvent, session: Session | null) => void
   ) => {
     if (isSupabaseConfigured()) {
-      const { data } = supabase.auth.onAuthStateChange(callback);
+      const { data } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_OUT") {
+          syncAuthCookies(null);
+        }
+        callback(event, session);
+      });
       return data.subscription;
     }
 

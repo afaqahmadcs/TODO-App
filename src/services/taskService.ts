@@ -1194,7 +1194,14 @@ export const taskService = {
    * Get filtered, sorted list of tasks
    */
   getTasks: async (filters?: TaskFilterOptions): Promise<Task[]> => {
-    const todayStr = new Date().toISOString().split("T")[0];
+    const userProfile = await authService.getUser();
+    const tz = userProfile?.timezone || "Asia/Karachi";
+    let todayStr: string;
+    try {
+      todayStr = new Intl.DateTimeFormat("en-CA", { timeZone: tz }).format(new Date());
+    } catch {
+      todayStr = new Date().toISOString().split("T")[0];
+    }
 
     if (isSupabaseConfigured()) {
       try {

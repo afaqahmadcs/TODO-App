@@ -13,6 +13,7 @@ import { Task } from "@/types/task";
 import { DashboardTelemetry } from "@/types/analytics";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { authService, AuthUserProfile } from "@/services/authService";
+import { Avatar } from "@/components/ui/Avatar";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -190,28 +191,38 @@ export default function DashboardPage() {
     <PageContainer>
       {/* Top Welcome Header Section */}
       <section className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <h1 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-bold text-on-surface tracking-tight">
-              {greeting}, {firstName}
-            </h1>
-            <span className="text-2xl animate-pulse">👋</span>
+        <div className="flex items-center gap-3.5">
+          <Avatar
+            size="lg"
+            src={userProfile?.avatarUrl}
+            name={userProfile?.name || "User"}
+            alt={userProfile?.name || "User"}
+            statusDot="online"
+            className="w-12 h-12 sm:w-14 sm:h-14 ring-2 ring-primary-container/30"
+          />
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <h1 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-bold text-on-surface tracking-tight">
+                {greeting}, {firstName}
+              </h1>
+              <span className="text-2xl animate-pulse">👋</span>
+            </div>
+            <p className="text-sm text-on-surface-variant flex items-center flex-wrap gap-2">
+              <span>{formattedDate}</span>
+              <span className="inline-block w-1 h-1 rounded-full bg-outline" />
+              {urgentCount > 0 ? (
+                <span className="text-error font-medium flex items-center gap-1">
+                  <Icon name="priority_high" size={16} />
+                  You have {urgentCount} urgent item{urgentCount > 1 ? "s" : ""} needing attention today
+                </span>
+              ) : (
+                <span className="text-emerald-400 font-medium flex items-center gap-1">
+                  <Icon name="check_circle" size={16} />
+                  All priority workflows on schedule
+                </span>
+              )}
+            </p>
           </div>
-          <p className="text-sm text-on-surface-variant flex items-center flex-wrap gap-2">
-            <span>{formattedDate}</span>
-            <span className="inline-block w-1 h-1 rounded-full bg-outline" />
-            {urgentCount > 0 ? (
-              <span className="text-error font-medium flex items-center gap-1">
-                <Icon name="priority_high" size={16} />
-                You have {urgentCount} urgent item{urgentCount > 1 ? "s" : ""} needing attention today
-              </span>
-            ) : (
-              <span className="text-emerald-400 font-medium flex items-center gap-1">
-                <Icon name="check_circle" size={16} />
-                All priority workflows on schedule
-              </span>
-            )}
-          </p>
         </div>
 
         {/* Quick Action Controls */}

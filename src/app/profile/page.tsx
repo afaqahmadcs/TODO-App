@@ -207,8 +207,9 @@ export default function ProfilePage() {
                 <div className="relative rounded-2xl overflow-hidden ring-4 ring-primary-container/30 shadow-2xl">
                   <Avatar
                     size="lg"
-                    src={profile?.avatarUrl || "/assets/avatar.png"}
-                    alt={profile?.name || "User Avatar"}
+                    src={profile?.avatarUrl}
+                    name={profile?.name || "User"}
+                    alt={profile?.name || "User"}
                     className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover"
                   />
                   {isUploading && (
@@ -237,13 +238,13 @@ export default function ProfilePage() {
                     <Icon name="upload" size={13} />
                     <span>Change</span>
                   </button>
-                  {profile?.avatarUrl && profile.avatarUrl !== "/assets/avatar.png" && (
+                  {profile?.avatarUrl && profile.avatarUrl.trim().length > 0 && (
                     <button
                       type="button"
                       onClick={handleRemoveAvatar}
                       disabled={isUploading}
                       className="px-2.5 py-1 text-xs font-medium rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 flex items-center gap-1 transition-colors"
-                      title="Reset to default avatar"
+                      title="Reset to initials"
                     >
                       <Icon name="delete" size={13} />
                       <span>Remove</span>
@@ -258,9 +259,15 @@ export default function ProfilePage() {
                   <h1 className="text-2xl sm:text-3xl font-bold font-headline text-on-surface tracking-tight">
                     {profile?.name || "Afaq Ahmad"}
                   </h1>
-                  <span className="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary text-xs font-mono font-semibold border border-primary-container/30">
-                    Pro Creator
-                  </span>
+                  {profile?.role === "admin" ? (
+                    <span className="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary text-xs font-mono font-semibold border border-primary-container/30">
+                      Admin Owner
+                    </span>
+                  ) : (
+                    <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-mono border border-outline-variant/20">
+                      Standard User
+                    </span>
+                  )}
                 </div>
 
                 <p className="text-sm font-mono text-outline font-medium">
@@ -586,7 +593,19 @@ export default function ProfilePage() {
                   </span>
                 </div>
                 <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-500/20 text-emerald-400">
-                  Active
+                  {profile?.status ? profile.status.toUpperCase() : "ACTIVE"}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between p-2.5 rounded-lg bg-surface-container">
+                <div>
+                  <span className="font-semibold text-on-surface text-xs block">Access Role</span>
+                  <span className="text-xs font-mono text-outline">
+                    {profile?.role === "admin" ? "System Administrator (Owner)" : "Standard User"}
+                  </span>
+                </div>
+                <span className={`px-2 py-0.5 rounded text-[11px] font-mono ${profile?.role === "admin" ? "bg-primary-container/20 text-primary font-bold" : "bg-surface-container-high text-on-surface-variant"}`}>
+                  {profile?.role ? profile.role.toUpperCase() : "USER"}
                 </span>
               </div>
 

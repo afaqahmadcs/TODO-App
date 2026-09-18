@@ -29,6 +29,9 @@ export interface Database {
           email: string;
           avatar_url: string | null;
           timezone: string;
+          role?: "admin" | "user";
+          status?: "active" | "inactive" | "suspended";
+          last_active_at?: string;
           username?: string | null;
           bio?: string | null;
           location?: string | null;
@@ -43,6 +46,9 @@ export interface Database {
           email: string;
           avatar_url?: string | null;
           timezone?: string;
+          role?: "admin" | "user";
+          status?: "active" | "inactive" | "suspended";
+          last_active_at?: string;
           username?: string | null;
           bio?: string | null;
           location?: string | null;
@@ -57,6 +63,9 @@ export interface Database {
           email?: string;
           avatar_url?: string | null;
           timezone?: string;
+          role?: "admin" | "user";
+          status?: "active" | "inactive" | "suspended";
+          last_active_at?: string;
           username?: string | null;
           bio?: string | null;
           location?: string | null;
@@ -585,7 +594,14 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_admin_metrics: {
+        Args: Record<PropertyKey, never>;
+        Returns: Json;
+      };
+      is_admin: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
     };
     Enums: {
       workspace_type: WorkspaceType;

@@ -19,6 +19,7 @@ import {
 } from "@/lib/recurrenceEngine";
 import { getAllTemplates, getTemplateById } from "@/lib/recurringTemplates";
 import { taskService } from "./taskService";
+import { authService } from "./authService";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase/client";
 
 const today = getDatePartsInTimezone(new Date(), DEFAULT_TIMEZONE).dateString;
@@ -321,7 +322,8 @@ export const recurringTaskService = {
    */
   createRule: async (input: CreateRecurringRuleInput): Promise<RecurringRule> => {
     const newId = `rec-rule-${Date.now()}`;
-    const tz = input.timezone || DEFAULT_TIMEZONE;
+    const userProfile = await authService.getUser();
+    const tz = input.timezone || userProfile?.timezone || DEFAULT_TIMEZONE;
     const startDate = input.startDate || getDatePartsInTimezone(new Date(), tz).dateString;
 
     // Prefill from template if templateId provided

@@ -226,8 +226,9 @@ export default function SettingsPage() {
             <div className="flex items-center gap-4">
               <Avatar
                 size="lg"
-                src={currentUser?.avatarUrl || "/assets/avatar.png"}
-                alt={currentUser?.name || "Afaq Ahmad"}
+                src={currentUser?.avatarUrl}
+                name={currentUser?.name || "User"}
+                alt={currentUser?.name || "User"}
                 statusDot="online"
               />
               <div className="space-y-1">

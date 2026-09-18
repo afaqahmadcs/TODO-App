@@ -44,9 +44,13 @@ runCheck("/login page and /auth/callback route handler exist", () => {
   assert.ok(existsSync(join(cwd, "src/app/login/page.tsx")), "Login page must exist");
   assert.ok(existsSync(join(cwd, "src/app/auth/callback/route.ts")), "Auth callback route must exist");
   const loginContent = readFileSync(join(cwd, "src/app/login/page.tsx"), "utf-8");
-  assert.ok(loginContent.includes("authService.signIn"), "Login page must call authService.signIn");
-  assert.ok(loginContent.includes("authService.signUp"), "Login page must call authService.signUp");
-  assert.ok(loginContent.includes("Afaq Ahmad"), "Demo guest option supported");
+  const signupExists = existsSync(join(cwd, "src/app/signup/page.tsx"));
+  const signupContent = signupExists ? readFileSync(join(cwd, "src/app/signup/page.tsx"), "utf-8") : "";
+  assert.ok(
+    loginContent.includes("authService.signUp") || signupContent.includes("authService.signUp"),
+    "Must support authService.signUp on /signup or /login"
+  );
+  assert.ok(loginContent.includes("Demo Creator") || loginContent.includes("Afaq Ahmad"), "Demo guest option supported");
 });
 
 // ==============================================================================

@@ -70,66 +70,63 @@ export const Sidebar: React.FC<SidebarProps> = ({
             />
             {!isCollapsed && (
               <div className="flex flex-col min-w-0">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-headline text-sm font-bold text-on-surface tracking-tight truncate">
-                    Afaq TaskFlow
-                  </span>
-                  <span className="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container font-mono text-[10px] font-semibold uppercase leading-none">
-                    PRO
-                  </span>
-                </div>
-                <span className="text-[11px] text-on-surface-variant font-medium">
-                  Workspace Engine
+                <span className="font-headline font-bold text-sm text-on-surface tracking-tight truncate">
+                  Afaq TaskFlow
+                </span>
+                <span className="text-[10px] text-outline font-mono uppercase tracking-wider">
+                  Productivity OS
                 </span>
               </div>
             )}
           </Link>
 
-          {/* Desktop/Tablet Collapse Toggle */}
+          {/* Collapse Button (Only on large screens) */}
           {!isCollapsed && onToggleCollapse && (
             <button
               type="button"
               onClick={onToggleCollapse}
               aria-label="Collapse Sidebar"
-              className="p-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors hidden lg:flex"
+              className="p-1 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors"
             >
               <Icon name="chevron_left" size={18} />
             </button>
           )}
         </div>
 
-        {/* Section 1: Overview & Views */}
-        <div className="space-y-1 mb-5">
+        {/* Section 1: Main Overview Navigation */}
+        <div className="space-y-1 mb-6">
           {!isCollapsed && (
             <div className="px-space-sm py-1 font-mono text-[11px] text-outline uppercase tracking-wider font-semibold">
-              Overview & Views
+              Overview
             </div>
           )}
           <nav className="space-y-0.5">
-            {MAIN_NAV_ITEMS.map((item) => (
-              <NavigationItem
-                key={item.id}
-                label={item.label}
-                href={item.href}
-                icon={item.icon}
-                badge={item.id === "tasks" && pendingCount !== null ? String(pendingCount) : item.badge}
-                isCollapsed={isCollapsed}
-              />
-            ))}
+            {MAIN_NAV_ITEMS.map((item) => {
+              const badge =
+                item.href === "/tasks" && pendingCount !== null && pendingCount > 0
+                  ? String(pendingCount)
+                  : undefined;
+              return (
+                <NavigationItem
+                  key={item.id}
+                  label={item.label}
+                  href={item.href}
+                  icon={item.icon}
+                  badge={badge}
+                  isCollapsed={isCollapsed}
+                />
+              );
+            })}
           </nav>
         </div>
 
-        <div className="h-px bg-surface-container-highest mx-space-sm my-2" />
-
-        {/* Section 2: Workspaces */}
-        <div className="mb-5">
+        {/* Section 2: Workspaces List */}
+        <div className="space-y-1 mb-6">
           <WorkspaceNavigation isCollapsed={isCollapsed} />
         </div>
 
-        <div className="h-px bg-surface-container-highest mx-space-sm my-2" />
-
         {/* Section 3: Workspace Tools */}
-        <div className="space-y-1">
+        <div className="space-y-1 mb-6">
           {!isCollapsed && (
             <div className="px-space-sm py-1 font-mono text-[11px] text-outline uppercase tracking-wider font-semibold">
               Workspace Tools
@@ -147,6 +144,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
             ))}
           </nav>
         </div>
+
+        {/* Section 4: Admin Console (Only visible if user has admin role) */}
+        {userProfile?.role === "admin" && (
+          <div className="space-y-1 mb-4">
+            {!isCollapsed && (
+              <div className="px-space-sm py-1 font-mono text-[11px] text-primary uppercase tracking-wider font-semibold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                Administration
+              </div>
+            )}
+            <nav className="space-y-0.5">
+              <NavigationItem
+                label="Admin Console"
+                href="/admin"
+                icon="shield"
+                isCollapsed={isCollapsed}
+              />
+            </nav>
+          </div>
+        )}
       </div>
 
       {/* Footer Profile & Settings Container */}
@@ -170,22 +187,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
         >
           <Link
             href="/profile"
-            title={isCollapsed ? `${userProfile?.name || "Afaq Ahmad"} (Profile)` : undefined}
+            title={isCollapsed ? `${userProfile?.name || "User"} (Profile)` : undefined}
             className="flex items-center gap-2.5 min-w-0 flex-1 p-1 rounded-lg hover:bg-surface-container-highest/60 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container/40"
           >
             <Avatar
               size="sm"
-              src={userProfile?.avatarUrl || "/assets/avatar.png"}
-              alt={userProfile?.name || "Afaq Ahmad"}
+              src={userProfile?.avatarUrl}
+              name={userProfile?.name || "User"}
+              alt={userProfile?.name || "User"}
               statusDot="online"
             />
             {!isCollapsed && (
               <div className="flex flex-col min-w-0 text-left">
-                <span className="text-xs font-semibold text-on-surface truncate group-hover:text-primary transition-colors">
-                  {userProfile?.name || "Afaq Ahmad"}
-                </span>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs font-semibold text-on-surface truncate group-hover:text-primary transition-colors">
+                    {userProfile?.name || "User"}
+                  </span>
+                  {userProfile?.role === "admin" && (
+                    <span className="text-[9px] font-mono text-primary font-bold px-1 rounded bg-primary-container/20">
+                      ADM
+                    </span>
+                  )}
+                </div>
                 <span className="text-[10px] text-on-surface-variant truncate">
-                  @{userProfile?.username || "afaqahmad"}
+                  @{userProfile?.username || "user"}
                 </span>
               </div>
             )}
